@@ -1,4 +1,5 @@
 {
-  "project_name": "Hello World",
-  "project_namespace": "{{ cookiecutter.project_name|lower|replace(' ', '_') }}",
+  "project_name": "Change Me",
+  "project_dashed": "{{ cookiecutter.project_name|lower|replace(' ', '-') }}",
+  "project_namespace": "{{ cookiecutter.project_name|lower|replace(' ', '') }}"
 }

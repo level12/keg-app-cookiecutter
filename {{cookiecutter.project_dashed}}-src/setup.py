@@ -12,8 +12,8 @@ setup(
     name='{{cookiecutter.project_name}}',
     version=VERSION,
     description='<short description>',
-    author='<author>',
-    author_email='<author email>',
+    author='{{cookiecutter.developer_name}}',
+    author_email='{{cookiecutter.developer_email}}',
     url='',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
@@ -31,6 +31,6 @@ setup(
     ],
     entry_points='''
         [console_scripts]
-        {{cookiecutter.project_namespace}} = {{cookiecutter.project_namespace}}.cli:cli_entry
+        {{cookiecutter.project_namespace}} = {{cookiecutter.project_namespace}}:cli_entry
     ''',
 )
