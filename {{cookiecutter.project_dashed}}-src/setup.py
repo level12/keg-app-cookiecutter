@@ -31,6 +31,6 @@ setup(
     ],
     entry_points='''
         [console_scripts]
-        {{cookiecutter.project_namespace}} = {{cookiecutter.project_namespace}}:cli_entry
+        {{cookiecutter.project_namespace}} = {{cookiecutter.project_namespace}}.cli:cli_entry
     ''',
 )

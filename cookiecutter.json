@@ -1,5 +1,6 @@
 {
-  "project_name": "Change Me",
+  "project_name": "Keg Hello World",
   "project_dashed": "{{ cookiecutter.project_name|lower|replace(' ', '-') }}",
-  "project_namespace": "{{ cookiecutter.project_name|lower|replace(' ', '') }}"
+  "project_namespace": "{{ cookiecutter.project_name|lower|replace(' ', '') }}",
+  "project_class": "{{ cookiecutter.project_name|replace(' ', '') }}"
 }
