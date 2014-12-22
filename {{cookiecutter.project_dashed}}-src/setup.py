@@ -9,7 +9,7 @@ CHANGELOG = open(osp.join(cdir, 'changelog.rst')).read()
 VERSION = open(osp.join(cdir, '{{cookiecutter.project_namespace}}', 'version.txt')).read().strip()
 
 setup(
-    name='{{cookiecutter.project_name}}',
+    name='{{cookiecutter.project_class}}',
     version=VERSION,
     description='<short description>',
     author='{{cookiecutter.developer_name}}',
