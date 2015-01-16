@@ -8,7 +8,7 @@ from {{cookiecutter.project_namespace}}.app import {{cookiecutter.project_class}
 
 
 def cli_entry():
-    {{cookiecutter.project_class}}.runcli()
+    {{cookiecutter.project_class}}.cli_run()
 
 
 @{{cookiecutter.project_class}}.command('hello', help='say hello')
