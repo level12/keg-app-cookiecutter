@@ -1,3 +1,2 @@
 Flask-WebTest
 pytest
-ScriptTest
