@@ -6,11 +6,13 @@ from setuptools import setup
 cdir = os.path.abspath(os.path.dirname(__file__))
 README = open(osp.join(cdir, 'readme.rst')).read()
 CHANGELOG = open(osp.join(cdir, 'changelog.rst')).read()
-VERSION = open(osp.join(cdir, '{{cookiecutter.project_namespace}}', 'version.txt')).read().strip()
+
+version_globals = {}
+execfile(osp.join(cdir, '{{cookiecutter.project_namespace}}', 'version.py'), version_globals)
 
 setup(
     name='{{cookiecutter.project_class}}',
-    version=VERSION,
+    version=version_globals['VERSION'],
     description='<short description>',
     author='{{cookiecutter.developer_name}}',
     author_email='{{cookiecutter.developer_email}}',
