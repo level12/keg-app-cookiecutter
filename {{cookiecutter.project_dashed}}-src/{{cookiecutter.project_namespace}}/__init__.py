@@ -1,8 +1,7 @@
-from __future__ import print_function
-from os import path as osp
+from __future__ import absolute_import
+from __future__ import unicode_literals
 
-_cdir = osp.abspath(osp.dirname(__file__))
-VERSION = open(osp.join(_cdir, 'version.txt')).read().strip()
+from {{cookiecutter.project_namespace}}.version import VERSION
 
 
 def cli_entry():
