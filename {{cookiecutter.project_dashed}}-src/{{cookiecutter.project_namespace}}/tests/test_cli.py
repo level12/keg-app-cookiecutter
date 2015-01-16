@@ -1,29 +1,20 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
-from pathlib import Path
-from scripttest import TestFileEnvironment
+from keg.testing import CLIBase
 
-_output_dir = Path(__file__).parent.joinpath('.scriptest-output').__str__()
-
-
-class CLIBase(object):
-
-    @classmethod
-    def setup_class(cls):
-        # todo: allow configuration of the environment to test with
-        cls.env = TestFileEnvironment(_output_dir)
-
-    def run(self, *args):
-        return self.env.run('{{cookiecutter.project_namespace}}', '--profile', 'Test', *args)
+# important to import from .cli so that the commands get attached
+from {{cookiecutter.project_namespace}}.cli import {{cookiecutter.project_class}}
 
 
 class TestCLI(CLIBase):
+    app_cls = {{cookiecutter.project_class}}
+    cmd_name = 'hello'
 
     def test_hello(self):
-        result = self.run('hello')
-        assert 'Hello World from {{cookiecutter.project_name}}!\n' == result.stdout
+        result = self.invoke()
+        assert 'Hello World from {{cookiecutter.project_name}}!\n' == result.output
 
-        result = self.run('hello', '--name', 'Foo')
-        assert 'Hello Foo from {{cookiecutter.project_name}}!\n' == result.stdout
+        result = self.invoke('--name', 'Foo')
+        assert 'Hello Foo from {{cookiecutter.project_name}}!\n' == result.output
 
