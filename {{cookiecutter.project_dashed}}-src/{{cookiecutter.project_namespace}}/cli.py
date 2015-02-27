@@ -11,7 +11,7 @@ def cli_entry():
     {{cookiecutter.project_class}}.cli_run()
 
 
-@{{cookiecutter.project_class}}.command('hello', help='say hello')
+@{{cookiecutter.project_class}}.command('hello', short_help='Example command: say hello.')
 @click.option('--name', default='World', help='The person to greet.')
 def hello_world(name):
     print('Hello {} from {{cookiecutter.project_name}}!'.format(name))

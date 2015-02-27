@@ -17,4 +17,4 @@ It's recommended that you install the latest version of cookiecutter at the user
 Once cookiecutter is installed, you can use this cookiecutter like::
 
     cd ~/projects
-    cookiecutter ~/path/to/kegcc/repo
+    cookiecutter ~/path/to/kegcc-src

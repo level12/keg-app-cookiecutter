@@ -22,4 +22,3 @@ class TestPublic(ViewBase):
     def test_ping(self):
         resp = self.ta.get('/ping')
         assert resp.text == '{{cookiecutter.project_namespace}} ok'
-

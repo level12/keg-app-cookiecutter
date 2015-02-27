@@ -17,4 +17,3 @@ class TestCLI(CLIBase):
 
         result = self.invoke('--name', 'Foo')
         assert 'Hello Foo from {{cookiecutter.project_name}}!\n' == result.output
-
