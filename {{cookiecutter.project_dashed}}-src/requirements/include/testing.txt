@@ -1,0 +1,8 @@
+coveralls
+flake8
+flask-webtest
+mock
+pyquery
+pytest
+pytest-cov
+tox

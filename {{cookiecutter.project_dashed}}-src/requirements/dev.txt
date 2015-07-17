@@ -1,7 +1,0 @@
--r all.txt
--r testing.txt
-
-tox
-flake8
-pep8-naming
-flake8-print

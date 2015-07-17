@@ -14,7 +14,7 @@ def cli_entry():
 @{{cookiecutter.project_class}}.command('hello', short_help='Example command: say hello.')
 @click.option('--name', default='World', help='The person to greet.')
 def hello_world(name):
-    print('Hello {} from {{cookiecutter.project_name}}!'.format(name))
+    click.echo('Hello {} from {{cookiecutter.project_name}}!'.format(name))
 
 if __name__ == '__main__':
     cli_entry()

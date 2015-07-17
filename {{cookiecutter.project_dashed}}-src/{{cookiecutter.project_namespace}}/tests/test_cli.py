@@ -3,8 +3,7 @@ from __future__ import unicode_literals
 
 from keg.testing import CLIBase
 
-# important to import from .cli so that the commands get attached
-from {{cookiecutter.project_namespace}}.cli import {{cookiecutter.project_class}}
+from {{cookiecutter.project_namespace}}.app import {{cookiecutter.project_class}}
 
 
 class TestCLI(CLIBase):

@@ -1,0 +1,13 @@
+# Tell Shippable to cache our minion.  This will save time on the before_install steps but because
+# of how we setup tox, all Python dependencies should be installed fresh from the wheelhouse.  If
+# you ever want to reset the cache, use "[reset_minion]" in your commit message.
+language: python
+env:
+  - TOXENV=postgres-prep,py27,shippable-results,coveralls
+  - TOXENV=flake8
+install:
+  - pip install --use-wheel --no-index --find-links=requirements/wheelhouse tox coveralls
+script:
+  - tox
+after_failure:
+  - python slack-notify.py --slack-url "/services/T02DAMQ4M/B064M417F/bEIoNVZCJsI5nOLyKTLxjqJ5" --message failure

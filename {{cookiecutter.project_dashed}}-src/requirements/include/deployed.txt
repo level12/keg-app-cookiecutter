@@ -1,0 +1,5 @@
+supervisor
+
+# Supervisor event listener, sends us emails if the processes crash.
+# Configured in the celeryd ansible role.
+superlance
