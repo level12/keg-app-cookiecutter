@@ -1,5 +1,9 @@
-syntax: glob
 *.komodo*
 *.pyc
 *.egg-info
 {{cookiecutter.project_namespace}}-config.py
+ansible/vaultpass.txt
+*.coverage
+.tox
+/coverage.xml
+.pytests.xml

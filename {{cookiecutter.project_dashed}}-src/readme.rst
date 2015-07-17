@@ -1,23 +1,41 @@
-<short summary>
+.. default-role:: code
 
-{{cookiecutter.project_name}}'s Goal
-------------------------------------
+{{cookiecutter.project_name}}'s Readme
+######################################
 
-<fill in>
+Project Setup Checklist
+=======================
 
-Plans
------------
+* `wheelhouse build`
+* `tox`
+* setup git hooks from /scripts
+* create project on
 
-<fill in>
+    * GitHub
+    * Coveralls: then add repo token to tox.ini
+    * Shippable
 
-Questions & Comments
----------------------
+        * your account has to have an integration with our dockerhub account (creds in LP)
+        * pull image from: level12/shippable-python
+        * HUB: the dockerhub integration you setup in your account
 
-Please visit: <mailing list or something>
+    * Appveyor
+    * Sentry
 
-Current Status
----------------
+* Setup Slack integrations for
 
-Very Alpha, expect changes.
+    * Shippable
+    * Appveyor
+    * Sentry
+
+* Git init, commit, push
+* Verify
+
+    ** CI builds pass
+    ** Coverage is pushed
+    ** Verify deliberate exception (/exception) shows up in Sentry
+    ** Failed builds show up in Slack
+
+* Update this readme
 
 
