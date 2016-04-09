@@ -3,6 +3,12 @@
 {{cookiecutter.project_name}}'s Readme
 ######################################
 
+.. image:: https://circleci.com/gh/{{cookiecutter.gh_repo_path}}.svg?&style=shield&circle-token={{cookiecutter.circle_badge_token}}
+    :target: https://circleci.com/gh/{{cookiecutter.gh_repo_path}}
+
+.. image:: https://codecov.io/github/{{cookiecutter.gh_repo_path}}/coverage.svg?branch=master&token={{cookiecutter.codecov_badge_token}}
+    :target: https://codecov.io/github/{{cookiecutter.gh_repo_path}}?branch=master
+
 Project Setup Checklist
 =======================
 
@@ -12,19 +18,14 @@ Project Setup Checklist
 * create project on
 
     * GitHub
-    * Coveralls: then add repo token to tox.ini
-    * Shippable
-
-        * your account has to have an integration with our dockerhub account (creds in LP)
-        * pull image from: level12/shippable-python
-        * HUB: the dockerhub integration you setup in your account
-
-    * Appveyor
+    * CodeCov: then add repo token to tox.ini
+    * CircleCI
+    * Appveyor?
     * Sentry
 
 * Setup Slack integrations for
 
-    * Shippable
+    * CircleCI
     * Appveyor
     * Sentry
 
