@@ -1,0 +1,8 @@
+#!/bin/bash
+CCSRC_PATH=$(dirname $(readlink -f $0))
+
+export PYTHONWARNINGS=ignore::UserWarning
+watchmedo shell-command \
+    --recursive \
+    --command=$CCSRC_PATH/cookie-run-demo \
+    $CCSRC_PATH/{{cookiecutter.project_dashed}}-src

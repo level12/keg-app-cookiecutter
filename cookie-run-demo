@@ -1,0 +1,7 @@
+#!/bin/bash
+CCSRC_PATH=$(dirname $(readlink -f $0))
+PROJECTS_PATH=~/projects/
+
+cookiecutter $CCSRC_PATH --no-input --overwrite-if-exists -o $PROJECTS_PATH \
+    --config-file $CCSRC_PATH/cookiecutter.config
+echo "kegcc-demo-src updated"
