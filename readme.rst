@@ -1,23 +1,12 @@
-PyProject CookieCutter
-######################
+Keg CookieCutter
+################
 
-This cookiecutter is a template for starting a python project.
+This cookiecutter is an enhancement to the default branch of this repo (pyproject).  It builds
+on the pyproject cookie cutter to give a good starting point for Keg.
 
-Other Flavors
-===============
-
-This repo was designed so that other "flavors" of basic python projects could be based off this
-intial template.  Since cookiecutter doesn't support multiple templates, it makes sense at this
-time to use mercurial branching to facilitate this.
-
-Flavor branches should merge just about everything from the pyproject "up" into their branches but
-changes in the flavor branches should never get merged back into this default branch.
-
-Current "Flavors"
------------------
-
-* Keg
-
+This repo should merge just about everything from pyproject but the changes in this branch
+should never be pushed back to the default branch.
+>>>>>>> keg
 
 Usage
 =====
@@ -29,4 +18,4 @@ It's recommended that you install the latest version of cookiecutter at the user
 Once cookiecutter is installed, you can use this cookiecutter like::
 
     cd ~/projects
-    cookiecutter ~/path/to/this/repo
+    cookiecutter ~/path/to/kegcc-src

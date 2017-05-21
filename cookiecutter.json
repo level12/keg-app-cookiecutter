@@ -1,5 +1,16 @@
 {
-  "project_name": "Hello World",
+  "project_name": "Keg Hello World",
   "project_dashed": "{{ cookiecutter.project_name|lower|replace(' ', '-') }}",
-  "project_namespace": "{{ cookiecutter.project_name|lower|replace(' ', '') }}"
+  "project_namespace": "{{ cookiecutter.project_name|lower|replace(' ', '') }}",
+  "project_class": "{{ cookiecutter.project_name|replace(' ', '') }}",
+  "python_version": "3.5",
+  "python_tox": "py{{cookiecutter.python_version|replace('.', '') }}",
+  "python_executable": "python{{cookiecutter.python_version}}",
+  "developer_name": "",
+  "developer_email": "",
+  "gh_repo_path": "",
+  "gh_repo_name": "",
+  "circle_badge_token": "",
+  "codecov_api_token": "",
+  "codecov_badge_token": ""
 }

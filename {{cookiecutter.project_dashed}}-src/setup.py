@@ -7,11 +7,14 @@ cdir = os.path.abspath(os.path.dirname(__file__))
 README = open(osp.join(cdir, 'readme.rst')).read()
 CHANGELOG = open(osp.join(cdir, 'changelog.rst')).read()
 
+version_fpath = osp.join(cdir, '{{cookiecutter.project_namespace}}', 'version.py')
 version_globals = {}
-execfile(osp.join(cdir, '{{cookiecutter.project_namespace}}', 'version.py'), version_globals)
+with open(version_fpath) as fo:
+    exec(fo.read(), version_globals)
+
 
 setup(
-    name='{{cookiecutter.project_name}}',
+    name='{{cookiecutter.project_class}}',
     version=version_globals['VERSION'],
     description='<short description>',
     author='{{cookiecutter.developer_name}}',
@@ -33,6 +36,6 @@ setup(
     ],
     entry_points='''
         [console_scripts]
-        {{cookiecutter.project_namespace}} = {{cookiecutter.project_namespace}}:cli_entry
+        {{cookiecutter.project_namespace}} = {{cookiecutter.project_namespace}}.cli:cli_entry
     ''',
 )
