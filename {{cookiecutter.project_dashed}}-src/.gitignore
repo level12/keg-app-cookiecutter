@@ -7,3 +7,4 @@ ansible/vaultpass.txt
 .tox
 /coverage.xml
 .pytests.xml
+htmlcov
