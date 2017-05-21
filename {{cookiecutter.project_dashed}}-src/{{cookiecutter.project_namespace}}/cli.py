@@ -16,5 +16,6 @@ def cli_entry():
 def hello_world(name):
     click.echo('Hello {} from {{cookiecutter.project_name}}!'.format(name))
 
+
 if __name__ == '__main__':
     cli_entry()
