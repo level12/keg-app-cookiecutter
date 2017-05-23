@@ -1,3 +1,5 @@
+.. default-role:: code
+
 Keg CookieCutter
 ################
 
@@ -9,15 +11,15 @@ You will need to do the following before you use this cookiecutter:
 * Create a repo for the project on GitHub
 * CircleCI
 
-    * Projects -> Add Project
-    * Project Settings -> API Permissions -> Create Status Token
-    * Add token as `circle_badge_token` in `cookicutter.json`
+  * Projects -> Add Project
+  * Project Settings -> API Permissions -> Create Status Token
+  * Add token as `circle_badge_token` in `cookicutter.json`
 
 * Codecov
 
-    * Add new repository
-    * Add "Upload Token" as `codecov_api_token` in `cookicutter.json`
-    * Settings -> Badge -> copy token to `codecov_badge_token` in `cookicutter.json`
+  * Add new repository
+  * Add "Upload Token" as `codecov_api_token` in `cookicutter.json`
+  * Settings -> Badge -> copy token to `codecov_badge_token` in `cookicutter.json`
 
 * Update all values in `cookiecutter.json`
 
