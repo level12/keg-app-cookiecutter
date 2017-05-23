@@ -1,0 +1,39 @@
+
+use_pvt_dns: false
+
+project_ident: {{ cookiecutter.project_namespace }}
+
+app_db_host: "{{ cookiecutter.database_pvt_host }}"
+{% raw %}
+app_db_user: "{{project_ident_env}}"
+app_db_name: "{{project_ident_env}}"
+
+app_bin: "{{pyapp3_venv_bin_dpath}}/{{project_ident}}"
+app_error_notifications: devteam@level12.io
+
+app_rabbitmq_vhost: "{{project_ident_env}}"
+app_rabbitmq_user: "{{project_ident_env}}"
+
+app_celery_dir: '{{ project_home_dpath }}/celery'
+app_celery_pid_fpath: /tmp/{{ project_ident }}_celery.pid
+
+nginx_vhost_name: "{{project_ident}}"
+nginx_vhost_enable_static_route: false
+nginx_vhost_www_only: false
+nginx_vhost_enable_ssl: true
+nginx_vhost_ssl_cert_fpaths:
+    - /etc/ssl/certs/level12biz.crt
+    - /etc/ssl/certs/level12biz-bundle.crt
+nginx_vhost_ssl_cert_key_fpath: /etc/ssl/private/level12biz.key
+
+pyapp3_app_type: wsgi
+pyapp3_python_version: 3.5
+pyapp3_settings_dest_fpath: "{{ pyapp3_source_dpath }}/{{project_ident}}-config.py"
+pyapp3_settings_src_fpath: "files/{{project_ident}}-config.py"
+{% endraw %}
+pyapp3_repo_url: "ssh://git@github.com/{{cookiecutter.gh_repo_path}}"
+pyapp3_wsgi_extras_all:
+  - "# Note about disable file wrapper: https://level12.atlassian.net/wiki/pages/viewpage.action?pageId=75981397"
+  - "wsgi-disable-file-wrapper=true"
+  - "# Any files created by the app user should be read/write for app user & user both."
+  - "umask=002"
