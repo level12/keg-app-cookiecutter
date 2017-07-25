@@ -1,21 +1,15 @@
-{% raw %}
-nix04 ansible_ssh_host="{{ 'nix04-pvt.level12.net' if use_pvt_dns else 'nix04.level12.net' }}"
-owl ansible_ssh_host="{{ 'owl.pvt.level12.net' if use_pvt_dns else 'owl.level12.net' }}"
-{% endraw %}
-
 [webservers]
-nix04
-owl
+admiral
+bank
 
 [beta]
-nix04
+bank
 
 [prod]
-# we want this to run on a Xenial server
-owl
+admiral
 
 [old-webservers]
 # In a real project, you would not have the same servers here.  But the point of this app is
 # to excercise the Ansible roles, so we setup and remove from the same servers for this app.
-owl
-nix04
+admiral
+bank

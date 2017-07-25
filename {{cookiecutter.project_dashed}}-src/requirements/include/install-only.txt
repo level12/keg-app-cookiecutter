@@ -2,4 +2,5 @@
 # so they can be included only when installing.  There should be symmetry between this file and
 # build-only.txt.
 
+Keg
 # KegElements

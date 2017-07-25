@@ -13,5 +13,4 @@ pyapp3_wsgi_extras_beta:
   -
 
 pyapp3_wsgi_extras: "{{ pyapp3_wsgi_extras_all + pyapp3_wsgi_extras_beta }}"
-ansible_service_mgr: upstart
 {% endraw %}
