@@ -3,7 +3,7 @@
 Keg CookieCutter
 ################
 
-Preperation
+Preparation
 ===========
 
 You will need to do the following before you use this cookiecutter:
