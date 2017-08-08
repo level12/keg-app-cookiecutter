@@ -7,3 +7,7 @@ class DefaultProfile(object):
     # in your settings, leave this enabled and setup a keyring.  See the app's keyring related
     # commands for help.
     KEG_KEYRING_ENABLE = True
+
+
+class TestProfile(object):
+    KEG_KEYRING_ENABLE = False

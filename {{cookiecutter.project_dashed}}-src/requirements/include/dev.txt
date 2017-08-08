@@ -1,2 +1,6 @@
+# For keyring support on Linux, needed for tests to pass
+dbus-python; sys_platform == 'linux'
+keyring
+
 restview
 requests[security]
