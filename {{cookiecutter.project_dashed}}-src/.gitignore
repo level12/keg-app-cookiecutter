@@ -8,3 +8,5 @@ ansible/vaultpass.txt
 /coverage.xml
 .pytests.xml
 htmlcov
+# Visual Studio Code clutter
+tags
