@@ -1,0 +1,8 @@
+#!/bin/bash
+CCSRC_PATH=$(dirname $(readlink -f $0))
+PROJECTS_PATH=/tmp/
+
+cookiecutter $CCSRC_PATH --no-input --overwrite-if-exists -o $PROJECTS_PATH \
+    --config-file $CCSRC_PATH/cookiecutter-ci.config
+
+echo "keg-app-ci-src updated"
