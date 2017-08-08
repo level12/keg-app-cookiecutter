@@ -1,5 +1,5 @@
 
-class Default(object):
+class DefaultProfile(object):
     """
         These values will apply to all configuration profiles.
     """
