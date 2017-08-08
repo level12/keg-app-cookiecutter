@@ -1,6 +1,3 @@
-from __future__ import absolute_import
-from __future__ import unicode_literals
-
 from keg.testing import CLIBase
 
 from {{cookiecutter.project_namespace}}.app import {{cookiecutter.project_class}}

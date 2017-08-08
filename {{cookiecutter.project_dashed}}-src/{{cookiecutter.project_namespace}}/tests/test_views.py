@@ -1,6 +1,3 @@
-from __future__ import absolute_import
-from __future__ import unicode_literals
-
 import flask
 from flask.ext.webtest import TestApp
 
