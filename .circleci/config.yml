@@ -3,6 +3,10 @@ jobs:
     build:
         docker:
             - image: circleci/python:3.5.3
+            - image: postgres:9.6
+              environment:
+                  POSTGRES_USER: postgres
+                  POSTGRES_PASSWORD: password
         steps:
             - checkout
             - run: sudo pip install tox cookiecutter wheelhouse
