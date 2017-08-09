@@ -1,4 +1,4 @@
-# For keyring support on Linux, needed for tests to pass
+# For keyring support on Linux
 dbus-python; sys_platform == 'linux'
 keyring
 
