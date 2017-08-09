@@ -1,5 +1,5 @@
 import flask
-from flask.ext.webtest import TestApp
+from flask.ext import webtest
 
 
 class ViewBase(object):
@@ -7,7 +7,7 @@ class ViewBase(object):
     @classmethod
     def setup_class(cls):
         # anonymous user
-        cls.ta = TestApp(flask.current_app)
+        cls.ta = webtest.TestApp(flask.current_app)
 
 
 class TestPublic(ViewBase):
