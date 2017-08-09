@@ -2,6 +2,7 @@ flake8
 flask-webtest
 KegElements
 mock
+psycopg2
 pyquery
 pytest
 pytest-cov

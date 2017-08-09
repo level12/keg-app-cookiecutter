@@ -11,3 +11,6 @@ class DefaultProfile(object):
 
 class TestProfile(object):
     KEG_KEYRING_ENABLE = False
+    # These settings reflect what is needed in CI.  For local development, use
+    # {{cookiecutter.project_namespace}}-config.py to override.
+    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:password@localhost/postgres'

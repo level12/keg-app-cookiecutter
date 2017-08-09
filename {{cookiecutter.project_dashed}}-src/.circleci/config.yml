@@ -3,6 +3,10 @@ jobs:
     build:
         docker:
             - image: circleci/python:{{cookiecutter.python_version}}
+            - image: postgres:9.6
+              environment:
+                  POSTGRES_USER: postgres
+                  POSTGRES_PASSWORD: password
         steps:
             - checkout
 
@@ -13,16 +17,16 @@ jobs:
             - run:
                 name: install tox from the wheelhouse
                 command: >
-                    sudo python3.5 -m pip install --upgrade --force-reinstall --quiet
+                    sudo {{cookiecutter.python_executable}} -m pip install --upgrade --force-reinstall --quiet
                     --use-wheel --no-index --find-links=requirements/wheelhouse
                     tox
 
             - run:
                 name: version checks
                 command: |
-                    python --version
-                    pip --version
-                    virtualenv --version
+                    {{cookiecutter.python_executable}} --version
+                    {{cookiecutter.python_executable}} -m pip --version
+                    {{cookiecutter.python_executable}} -m venv --version
                     tox --version
 
             - run:
