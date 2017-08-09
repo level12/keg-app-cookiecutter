@@ -1,8 +1,8 @@
 #!/bin/bash
 CCSRC_PATH=$(dirname $(readlink -f $0))
-PROJECTS_PATH=~/projects/
+PROJECTS_PATH=~/projects
 
-#rm -r $PROJECTS_PATH/keg-demo-src
+rm -r $PROJECTS_PATH/keg-demo-src
 
 cookiecutter $CCSRC_PATH --no-input --overwrite-if-exists -o $PROJECTS_PATH \
     --config-file $CCSRC_PATH/cookiecutter.config
