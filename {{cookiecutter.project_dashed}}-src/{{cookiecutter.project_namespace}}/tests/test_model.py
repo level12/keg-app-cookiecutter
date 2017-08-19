@@ -30,3 +30,17 @@ class TestComment(ModelBase):
         with pytest.raises(IntegrityError) as excinfo:
             ents.Comment.testing_create(blog=blog, author_name='foo')
         assert 'violates unique constraint "uc_comments_unique_author"' in str(excinfo.value)
+
+
+class TestUser(ModelBase):
+    orm_cls = ents.User
+    constraint_tests = [
+        # column name, is FK?, is required?
+        ('is_verified', False, True),
+        ('is_enabled', False, True),
+        ('email', False, True),
+        ('password', False, True),
+        ('token', False, False),
+        ('token_created_utc', False, False),
+        ('name', False, True),
+    ]

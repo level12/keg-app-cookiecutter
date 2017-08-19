@@ -19,3 +19,10 @@ class TestPublic(ViewBase):
     def test_ping(self):
         resp = self.ta.get('/ping')
         assert resp.text == '{{cookiecutter.project_namespace}} ok'
+
+    def test_hello(self):
+        resp = self.ta.get('/hello')
+        assert 'Hello World!' in resp
+
+        resp = self.ta.get('/hello/foo')
+        assert 'Hello foo!' in resp

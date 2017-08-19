@@ -1,15 +1,20 @@
 from keg.testing import CLIBase
 
 from {{cookiecutter.project_namespace}}.app import {{cookiecutter.project_class}}
+from {{cookiecutter.project_namespace}}.model import entities as ents
 
 
 class TestCLI(CLIBase):
-    app_cls = {{cookiecutter.project_class}}
-    cmd_name = 'hello'
+
+    def setup(self):
+        ents.User.delete_cascaded()
 
     def test_hello(self):
-        result = self.invoke()
+        result = self.invoke('hello')
         assert 'Hello World from {{cookiecutter.project_name}}!\n' == result.output
 
-        result = self.invoke('--name', 'Foo')
+        result = self.invoke('hello', '--name', 'Foo')
         assert 'Hello Foo from {{cookiecutter.project_name}}!\n' == result.output
+
+    def test_add_user(self):
+        result = self.invoke('auth', 'create-user', 'foo@bar.com', 'Foo Bar')
