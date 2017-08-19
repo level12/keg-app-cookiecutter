@@ -2,14 +2,14 @@ version: 2
 jobs:
     build:
         docker:
-            - image: circleci/python:3.5.3
+            - image: level12/python-test-multi
             - image: postgres:9.6
               environment:
                   POSTGRES_USER: postgres
                   POSTGRES_PASSWORD: password
         steps:
             - checkout
-            - run: sudo pip install tox cookiecutter wheelhouse
+            - run: sudo python3.5 -m pip install tox cookiecutter wheelhouse
             - run:
                 name: version checks
                 command: |
@@ -26,7 +26,7 @@ jobs:
                 working_directory: /tmp/keg-app-ci-src
                 command: |
                     wheelhouse build
-                    python3 -m venv keg-app-ci
+                    virtualenv --python python3.5 keg-app-ci
                     . keg-app-ci/bin/activate
                     wheelhouse install -- -r requirements/dev-env.txt
 
