@@ -1,6 +1,8 @@
+alembic
 flake8
+flask-bootstrap
 flask-webtest
-KegElements
+git+https://github.com/level12/keg-auth.git#egg=KegAuth
 mock
 psycopg2
 pyquery

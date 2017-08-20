@@ -2,6 +2,7 @@ import logging
 
 from keg.db import db
 from keg_elements.db.mixins import DefaultColsMixin, MethodsMixin
+from keg_auth import UserMixin
 import sqlalchemy as sa
 import sqlalchemy.orm as saorm
 from sqlalchemy_utils import ArrowType, EmailType
@@ -47,3 +48,10 @@ class Comment(db.Model, EntityMixin):
         if 'blog' not in kwargs and 'blog_id' not in kwargs:
             kwargs['blog'] = Blog.testing_create(_commit=False)
         return super().testing_create(**kwargs)
+
+
+class User(db.Model, UserMixin, EntityMixin):
+    """ Make sure EntityMixin is after UserMixin or testing_create() is wrong.  """
+    __tablename__ = 'users'
+
+    name = sa.Column(sa.Unicode(250), nullable=False)
