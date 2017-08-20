@@ -1,6 +1,5 @@
 from keg.testing import CLIBase
 
-from {{cookiecutter.project_namespace}}.app import {{cookiecutter.project_class}}
 from {{cookiecutter.project_namespace}}.model import entities as ents
 
 
@@ -17,4 +16,5 @@ class TestCLI(CLIBase):
         assert 'Hello Foo from {{cookiecutter.project_name}}!\n' == result.output
 
     def test_add_user(self):
-        result = self.invoke('auth', 'create-user', 'foo@bar.com', 'Foo Bar')
+        self.invoke('auth', 'create-user', 'foo@bar.com', 'Foo Bar')
+        assert ents.User.query.count() == 1

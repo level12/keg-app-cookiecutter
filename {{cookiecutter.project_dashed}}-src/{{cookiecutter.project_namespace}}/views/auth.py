@@ -1,10 +1,6 @@
 import logging
 
-from blazeutils.strings import case_cw2dash
-import flask
 from keg_auth import AuthenticatedView, make_blueprint
-
-import {{cookiecutter.project_namespace}}.model.entities as ents
 
 log = logging.getLogger(__name__)
 

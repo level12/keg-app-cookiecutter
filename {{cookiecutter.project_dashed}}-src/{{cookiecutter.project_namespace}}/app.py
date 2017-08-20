@@ -1,11 +1,9 @@
 from flask_bootstrap import Bootstrap
-import flask_login
 from flask_mail import Mail
 from keg import Keg
 import keg_auth
 from flask_wtf.csrf import CSRFProtect
 
-import {{cookiecutter.project_namespace}}.model.entities as ents
 from {{cookiecutter.project_namespace}}.views import blueprints
 
 csrf = CSRFProtect()
