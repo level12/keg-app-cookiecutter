@@ -40,3 +40,17 @@ Project Setup Checklist
 * Update this readme
 
 
+Celery
+=================
+
+The celery worker can be run with::
+
+    ./scripts/celery-worker
+
+View your queues and stuff using flower (`pip install flower`)::
+
+    celery flower --app racebetter.celery.worker
+
+Purging the queues::
+
+    ./scripts/celery-purge

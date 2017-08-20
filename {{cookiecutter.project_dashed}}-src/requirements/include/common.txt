@@ -1,4 +1,5 @@
 alembic
+celery
 flake8
 flask-bootstrap
 flask-webtest

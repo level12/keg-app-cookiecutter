@@ -28,3 +28,8 @@ class TestProfile(object):
 
     # silence warnings
     KEG_KEYRING_ENABLE = False
+
+    CELERY = {
+        # This should be for the docker container setup in the CircleCI config.
+        'broker_url': 'amqp://guest@localhost:5672//',
+    }

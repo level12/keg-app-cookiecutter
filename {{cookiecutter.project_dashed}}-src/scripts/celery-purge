@@ -1,0 +1,3 @@
+#!/bin/sh
+
+celery purge --app {{cookiecutter.project_namespace}}.celery.worker

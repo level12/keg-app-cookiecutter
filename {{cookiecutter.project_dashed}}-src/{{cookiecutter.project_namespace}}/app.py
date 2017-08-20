@@ -50,5 +50,5 @@ class {{cookiecutter.project_class}}(Keg):
         mail_ext.init_app(self)
         Bootstrap(self)
 
-        if self.config.get('SENTRY_DSN', None):
+        if self.config.get('SENTRY_DSN'):
             sentry.init_app(self)

@@ -1,0 +1,3 @@
+#!/bin/sh
+
+celery worker --app {{cookiecutter.project_namespace}}.celery.worker --autoscale=15,5
