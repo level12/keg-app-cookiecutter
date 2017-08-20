@@ -8,4 +8,5 @@ psycopg2
 pyquery
 pytest
 pytest-cov
+raven
 tox

@@ -3,11 +3,13 @@ from flask_mail import Mail
 from keg import Keg
 import keg_auth
 from flask_wtf.csrf import CSRFProtect
+from raven.contrib.flask import Sentry
 
 from {{cookiecutter.project_namespace}}.views import blueprints
 
 csrf = CSRFProtect()
 mail_ext = Mail()
+sentry = Sentry()
 
 
 class AuthManager(keg_auth.AuthManager):
@@ -47,3 +49,6 @@ class {{cookiecutter.project_class}}(Keg):
         csrf.init_app(self)
         mail_ext.init_app(self)
         Bootstrap(self)
+
+        if self.config.get('SENTRY_DSN', None):
+            sentry.init_app(self)
