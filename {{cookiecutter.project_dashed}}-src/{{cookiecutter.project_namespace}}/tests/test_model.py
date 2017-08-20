@@ -1,27 +1,29 @@
+from keg_elements.testing import (
+    ColumnCheck,
+    EntityBase,
+)
 import pytest
 from sqlalchemy.exc import IntegrityError
 
-from {{cookiecutter.project_namespace}}.libs.testing import ModelBase
 import {{cookiecutter.project_namespace}}.model.entities as ents
 
 
-class TestBlog(ModelBase):
-    orm_cls = ents.Blog
-    constraint_tests = [
-        # column name, is FK?, is required?
-        ('title', False, True),
-        ('posted_utc', False, True),
+class TestBlog(EntityBase):
+    entity_cls = ents.Blog
+    column_checks = [
+        ColumnCheck('title', unique=True),
+        ColumnCheck('posted_utc'),
     ]
 
 
-class TestComment(ModelBase):
-    orm_cls = ents.Comment
-    constraint_tests = [
-        # column name, is FK?, is required?
-        ('blog_id', True, True),
-        ('author_name', False, True),
-        ('author_email', False, False),
-        ('comment', False, True),
+class TestComment(EntityBase):
+    entity_cls = ents.Comment
+    column_checks = [
+        ColumnCheck('blog_id', fk='blogs.id'),
+        ColumnCheck('author_name'),
+        ColumnCheck('author_email', required=False),
+        ColumnCheck('comment'),
+
     ]
 
     def test_unique_author(self):
@@ -32,15 +34,14 @@ class TestComment(ModelBase):
         assert 'violates unique constraint "uc_comments_unique_author"' in str(excinfo.value)
 
 
-class TestUser(ModelBase):
-    orm_cls = ents.User
-    constraint_tests = [
-        # column name, is FK?, is required?
-        ('is_verified', False, True),
-        ('is_enabled', False, True),
-        ('email', False, True),
-        ('password', False, True),
-        ('token', False, False),
-        ('token_created_utc', False, False),
-        ('name', False, True),
+class TestUser(EntityBase):
+    entity_cls = ents.User
+    column_checks = [
+        ColumnCheck('is_verified'),
+        ColumnCheck('is_enabled'),
+        ColumnCheck('email', unique=True),
+        ColumnCheck('password'),
+        ColumnCheck('token', required=False),
+        ColumnCheck('token_created_utc', required=False),
+        ColumnCheck('name'),
     ]
