@@ -13,8 +13,6 @@ class DefaultProfile(object):
     # Used in at least KegAuth email subject lines
     SITE_ABBR = '{{cookiecutter.project_name}}'
 
-    MAIL_DEFAULT_SENDER = '{{cookiecutter.developer_email}}'
-
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
@@ -28,6 +26,9 @@ class TestProfile(object):
 
     # silence warnings
     KEG_KEYRING_ENABLE = False
+
+    # Mail related tests need to have this set, even though actual email is not generated.
+    MAIL_DEFAULT_SENDER = '{{cookiecutter.developer_email}}'
 
     CELERY = {
         # This should be for the docker container setup in the CircleCI config.

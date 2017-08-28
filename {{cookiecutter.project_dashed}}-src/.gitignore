@@ -1,12 +1,10 @@
-*.komodo*
 *.pyc
 *.egg-info
-{{cookiecutter.project_namespace}}-config.py
-ansible/vaultpass.txt
+/{{cookiecutter.project_namespace}}-config.py
 *.coverage
-.tox
+/.tox
 /coverage.xml
-.pytests.xml
-htmlcov
+/.pytests.xml
+/htmlcov
 # Visual Studio Code clutter
 tags
