@@ -1,14 +1,45 @@
-{% raw %}
+
 - name: web app deploy
   hosts: webservers
   gather_facts: true
   become: false
   vars_files:
-    - "{{ lookup('env','ANSIBLE_ROLES_PATH') }}/includes/vars.yml"
+    - "{{"{{"}} lookup('env','ANSIBLE_ROLES_PATH') }}/includes/vars.yml"
     - secretvars.yaml
+  vars:
+    first_run: false
+    app_cli_bin: "{{"{{"}} pyapp3_venv_bin_dpath }}/{{cookiecutter.project_namespace}}"
+{% raw %}
   remote_user: "{{project_user}}"
   tags:
     - web
   roles:
     - { role: pyapp3, pyapp3_op: deploy, tags: pyapp3-role}
+  tasks:
+    - name: Create initial database schema
+      shell: "{{ app_cli_bin }} develop db init"
+      args:
+        chdir: "{{ pyapp3_source_dpath }}"
+      when: first_run
+      tags: db
+
+    - name: Alembic stamp as head
+      shell: "{{ pyapp3_venv_bin_dpath }}/alembic stamp head"
+      args:
+        chdir: "{{ pyapp3_source_dpath }}"
+      when: first_run
+      tags: db
+
+    - name: Run any database migrations
+      shell: "{{ pyapp3_venv_bin_dpath }}/alembic upgrade head"
+      args:
+        chdir: "{{ pyapp3_source_dpath }}"
+      tags: db
+
+    - name: Setup periodic cron job
+      cron:
+        name: run celery ping/log command every minute
+        minute: "*"
+        job: "{{ app_cli_bin }} --quiet celery ping"
+      tags: cron
 {% endraw %}

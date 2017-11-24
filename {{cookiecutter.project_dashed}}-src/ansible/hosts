@@ -1,15 +1,18 @@
+sierra-beta ansible_ssh_host=sierra.level12.net
+sierra-prod ansible_ssh_host=sierra.level12.net
+
 [webservers]
 admiral
 bank
 
 [beta]
 bank
+sierra-beta
 
 [prod]
 admiral
+sierra-prod
 
-[old-webservers]
-# In a real project, you would not have the same servers here.  But the point of this app is
-# to excercise the Ansible roles, so we setup and remove from the same servers for this app.
-admiral
-bank
+[dbservers]
+sierra-prod
+sierra-beta

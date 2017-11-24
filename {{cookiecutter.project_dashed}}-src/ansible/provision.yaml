@@ -13,4 +13,43 @@
     - web
   roles:
     - { role: pyapp3, pyapp3_op: provision, tags: pyapp3-role}
+
+  tasks:
+    - name: create rabbitmq vhost
+      rabbitmq_vhost: name={{app_rabbitmq_vhost}} state=present
+      tags:
+        - rabbitmq
+        - app
+
+    - name: create rabbitmq user
+      rabbitmq_user:
+        user={{app_rabbitmq_user}}
+        password={{app_rabbitmq_pass}}
+        vhost={{app_rabbitmq_vhost}}
+        configure_priv=.*
+        read_priv=.*
+        write_priv=.*
+        state=present
+        force=yes
+      tags:
+        - rabbitmq
+        - app
+
+
+- name: database provisioning
+  hosts: dbservers
+  sudo_user: postgres
+  vars_files:
+    - secretvars.yaml
+  tags:
+    - db
+  tasks:
+    - name: ensure user exists
+      postgresql_user: name={{app_db_user}} password={{app_db_pass}}
+
+    - name: ensure database is created, set owner to user
+      postgresql_db: name={{app_db_name}} owner={{app_db_user}}
+
+    - name: give user ownership of public schema
+      command: "psql {{app_db_name}} -c 'alter schema public owner to \"{{app_db_user}}\"'"
 {% endraw %}

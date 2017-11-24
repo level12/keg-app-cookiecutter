@@ -38,13 +38,31 @@ nginx_vhost_ssl_cert_key_fpath: /etc/ssl/private/level12biz.key
 
 pyapp3_app_type: wsgi
 # If you change this, make sure you change the pip version used in wheelhouse.ini.
-pyapp3_python_version: 3.6
+pyapp3_python_version: 3.5
 pyapp3_settings_dest_fpath: "{{ pyapp3_source_dpath }}/{{project_ident}}-config.py"
 pyapp3_settings_src_fpath: "files/{{project_ident}}-config.py"
 {% endraw %}
 pyapp3_repo_url: "ssh://git@github.com/{{cookiecutter.gh_repo_path}}"
+{% raw %}
 pyapp3_wsgi_extras_all:
   - "# Note about disable file wrapper: https://level12.atlassian.net/wiki/pages/viewpage.action?pageId=75981397"
   - "wsgi-disable-file-wrapper=true"
   - "# Any files created by the app user should be read/write for app user & user both."
   - "umask=002"
+
+  # Setup the celery processes
+  # Signal 15 is SIGTERM which is what Celery expects for a warm shutdown. That
+  # means that Celery will gracefully shutdown and then uWSGI will restart it.
+  # We could use SIGHUP here but that isn't a good idea in production.
+  - >
+    attach-daemon2 =
+    command={{ pyapp3_venv_bin_dpath }}/celery worker
+    --app={{project_ident}}.celery.worker
+    --pidfile={{ app_celery_pid_fpath }}
+    --workdir={{ project_home_dpath }}
+    --hostname=celery.%h,
+    pidfile={{ app_celery_pid_fpath }},
+    freq=2,
+    reloadsignal=15,
+    stopsignal=15
+{% endraw %}
