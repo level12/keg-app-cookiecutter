@@ -6,5 +6,7 @@
 /coverage.xml
 /.pytests.xml
 /htmlcov
+
 # Visual Studio Code clutter
+.vscode
 tags
