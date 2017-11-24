@@ -7,7 +7,7 @@ cfg = Config('alembic.ini')
 scripts = ScriptDirectory.from_config(cfg)
 current_heads = scripts.get_revisions(scripts.get_heads())
 
-if len(current_heads) != 1:
+if len(current_heads) > 1:
     print("WARNING!!! Multiple migration heads found ({})".format(len(current_heads)))
     print("This issue will cause the deployment to fail. To resolve this issue, ensure that only "
           "one head is present in the alembic tree by properly setting the down revision. \n")
