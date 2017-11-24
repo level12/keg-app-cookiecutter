@@ -1,0 +1,11 @@
+#!/bin/bash
+
+CCSRC_PATH=$(dirname $(readlink -f $0))
+PROJECTS_PATH=~/projects
+KEG_DEMO_SRC=$PROJECTS_PATH/keg-demo-src
+
+find $KEG_DEMO_SRC \
+    -not -path "*/.tox/*" \
+    -not -path "*/requirements/wheelhouse/*" \
+    -not -path "*/.git/*" \
+    -delete

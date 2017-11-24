@@ -1,13 +1,9 @@
 #!/bin/bash
 CCSRC_PATH=$(dirname $(readlink -f $0))
 PROJECTS_PATH=~/projects
-KEG_DEMO_SRC=$PROJECTS_PATH/keg-demo-src
-KEG_DEMO_REPO=$PROJECTS_PATH/keg-demo-repo
-COPY_SCRIPT=$KEG_DEMO_REPO/copy-src-here
+CLEAN_SCRIPT=$CCSRC_PATH/clean-demo
 
-rm -r $KEG_DEMO_SRC
-
+$CLEAN_SCRIPT
 cookiecutter $CCSRC_PATH --no-input --overwrite-if-exists -o $PROJECTS_PATH \
-    --config-file $CCSRC_PATH/cookiecutter-demo.config && $COPY_SCRIPT
-
-echo "keg-demo-src updated"
+    --config-file $CCSRC_PATH/cookiecutter-demo.config \
+&& echo "keg-demo-src updated"
