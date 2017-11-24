@@ -34,8 +34,7 @@ Project Setup Checklist
 
     ** CI builds pass
     ** Coverage is pushed
-    ** Verify deliberate exception (/exception) shows up in Sentry
-    ** Failed builds show up in Slack
+    ** Failed CI builds show up in a Slack channel
 
 * Update this readme
 
@@ -54,3 +53,41 @@ View your queues and stuff using flower (`pip install flower`)::
 Purging the queues::
 
     ./scripts/celery-purge
+
+Deploy
+==================
+
+All commands are given for beta, change to `-l prod` for production.
+
+A user with sudo permissions on the server must run the provision::
+
+    ansible-playbook -l beta provision.yaml
+
+You can verify the provision by browsing to (something like)::
+
+    https://yourapp-beta.level12.biz
+
+Assuming that is successful, you should then deploy::
+
+    # For the first run, create the database from the model
+    ansible-playbook -l beta deploy.yaml --extra-vars=first_run=true
+
+    # Subsequent deploys will use Alembic migrations
+    ansible-playbook -l beta deploy.yaml
+
+You can verify the deploy by:
+
+* Browsing to: https://yourapp-beta.level12.biz/ping-db
+* Browsing to: https://yourapp-beta.level12.biz/exception-test
+
+  * Verify this shows up in Sentry
+
+* Verify the app's logging messages through Celery, which cron should be running once a minute.
+  You can run manually with: `{{cookiecutter.project_namespace}} log` and `{{cookiecutter.project_namespace}} celery ping`.
+
+  * Look on the server in ~/syslogs/app.log for the app's log messages
+  * Look at logzio, the messages should have shipped there as well through rsyslog
+
+* Setup an alert in Logz.io for the "ping-pong" log message to arrive 5 times in 10 minutes.  This
+  ensures both that Celery is running and that log messages are shipping correctly.
+
