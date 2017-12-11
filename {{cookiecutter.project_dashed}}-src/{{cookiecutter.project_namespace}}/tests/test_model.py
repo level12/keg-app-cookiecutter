@@ -31,7 +31,10 @@ class TestComment(EntityBase):
         ents.Comment.testing_create(blog=blog, author_name='foo')
         with pytest.raises(IntegrityError) as excinfo:
             ents.Comment.testing_create(blog=blog, author_name='foo')
-        assert 'violates unique constraint "uc_comments_unique_author"' in str(excinfo.value)
+
+        # postgresql
+        assert 'violates unique constraint "uc_comments_unique_author"' in str(excinfo.value) \
+            or 'UNIQUE constraint failed' in str(excinfo.value)
 
 
 class TestUser(EntityBase):

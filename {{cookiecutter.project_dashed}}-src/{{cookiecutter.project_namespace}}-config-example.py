@@ -6,6 +6,11 @@ class DevProfile(object):
     # Secret key for Flask -- CHANGE THIS!
     SECRET_KEY = 'abc123'
 
+    # Examples:
+    #   Socket based, no pass: postgresql://USER@:5433/{{cookiecutter.project_namespace}}
+    #   TCP/IP based: postgresql://USER:PASS@localhost/{{cookiecutter.project_namespace}}
+    SQLALCHEMY_DATABASE_URI = 'sqlite:////tmp/{{cookiecutter.project_namespace}}.db'
+
     # TODO: are these needed?  If so, add comment for where they are used.
     DEVELOPER_NAME = '{{cookiecutter.developer_name}}'
     DEVELOPER_EMAIL = '{{cookiecutter.developer_email}}'
@@ -22,7 +27,7 @@ class DevProfile(object):
 
 
 class TestProfile(object):
-    SQLALCHEMY_DATABASE_URI = 'postgresql://user:pass@localhost/test'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:////tmp/{{cookiecutter.project_namespace}}-test.db'
 
     # Make tests faster
     PASSLIB_CRYPTCONTEXT_KWARGS = dict(schemes=['plaintext'])

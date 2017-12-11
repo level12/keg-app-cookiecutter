@@ -8,4 +8,6 @@ find $KEG_DEMO_SRC \
     -not -path "*/.tox/*" \
     -not -path "*/requirements/wheelhouse/*" \
     -not -path "*/.git/*" \
+    -not -path "*/kegdemo-config.py" \
+    -not -path "*/*.egg-info/*" \
     -delete
