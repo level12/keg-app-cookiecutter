@@ -1,0 +1,7 @@
+- name: restart {{cookiecutter.project_namespace}} service
+  hosts: webservers
+  become: true
+  tasks:
+    - service:
+        name: {{cookiecutter.project_namespace}}
+        state: restarted
