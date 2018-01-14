@@ -31,4 +31,9 @@ class PingDB(BaseView):
         # We are happy if this doesn't throw an exception.  Nothing to test b/c we aren't sure
         # there will be a user record.
         db.engine.execute('select id from users limit 1').fetchall()
+
+        # Log aggregator (e.g. Loggly) can alert on this as a "heartbeat" for the app assuming
+        # something like Cronitor is hitting this URL repeatedly to monitor uptime.
+        log.info('ping-db ok')
+
         return '{} ok'.format(flask.current_app.name)
