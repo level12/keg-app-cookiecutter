@@ -11,6 +11,9 @@ class DeployedProfile(object):
     SENTRY_DSN = '{{app_sentry_dsn}}'
 
     KEG_KEYRING_ENABLE = False
+
+    # Turn log messages into a JSON string that syslog and/or log aggregators like Loggly will
+    # parse.
     KEG_LOG_SYSLOG_JSON = True
 
     MAIL_DEFAULT_SENDER = 'devteam@level12.io'
