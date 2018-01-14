@@ -20,7 +20,15 @@ def add_handler(**kwargs):
 #
 # You must set the {{cookiecutter.project_class.upper()}}_CONFIG_PROFILE environment variable in
 # order for this to work.  See project's readme for an example.
-_app = {{cookiecutter.project_class}}().init()
+
+# Config specific to WSGI workers
+uwsgi_config = {
+    # Don't log to stdout or uwsgi picks it up and that gets sent to syslog too resulting in double
+    # the log volume with no benefit.
+    'KEG_LOG_STREAM_ENABLED': False
+}
+
+_app = {{cookiecutter.project_class}}().init(config=uwsgi_config)
 _app.app_context().push()
 
 if _app.config.get('SENTRY_DSN'):
