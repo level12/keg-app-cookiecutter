@@ -10,3 +10,4 @@
 # from the wheelhouse.  Instead, they are installed directly by some other mechanism.
 codecov  # installed by tox using `deps`
 tox  # installed by pip directly in Dockerfile
+git+https://github.com/level12/flake8-level12.git
