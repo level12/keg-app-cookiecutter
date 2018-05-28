@@ -1,5 +1,9 @@
 #!/bin/bash
+# Just a shortcut for running cookiecutter against this project's CC and outputing in a projects
+# directory.
+
 CCSRC_PATH=$(dirname $(readlink -f $0))
 PROJECTS_PATH=~/projects/
 
 cookiecutter $CCSRC_PATH --no-input --overwrite-if-exists -o $PROJECTS_PATH
+ cookiecutter-ci.config

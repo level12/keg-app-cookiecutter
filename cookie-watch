@@ -1,4 +1,6 @@
 #!/bin/bash
+# Watches the CC directory and runs cookie-run-demo on any file changes.
+
 CCSRC_PATH=$(dirname $(readlink -f $0))
 
 export PYTHONWARNINGS=ignore::UserWarning
