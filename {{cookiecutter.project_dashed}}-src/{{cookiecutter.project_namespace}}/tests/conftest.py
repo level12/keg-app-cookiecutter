@@ -5,6 +5,9 @@ import {{cookiecutter.project_namespace}}.celery.testing as ct
 # important to import from .cli so that the commands get attached
 from {{cookiecutter.project_namespace}}.cli import {{cookiecutter.project_class}}
 
+# You can uncomment this if you end up with asserts in libraries outside tests.
+# pytest.register_assert_rewrite('{{cookiecutter.project_namespace}}.libs.testing')
+
 
 def pytest_configure(config):
     {{cookiecutter.project_class}}.testing_prep()
