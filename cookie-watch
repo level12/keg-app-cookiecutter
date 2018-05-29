@@ -4,6 +4,7 @@
 CCSRC_PATH=$(dirname $(readlink -f $0))
 
 export PYTHONWARNINGS=ignore::UserWarning
+# watchmedo comes from https://pypi.org/project/watchdog/
 watchmedo shell-command \
     --recursive \
     --command=$CCSRC_PATH/cookie-run-demo \
