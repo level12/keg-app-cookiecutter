@@ -10,7 +10,7 @@ jobs:
                   POSTGRES_PASSWORD: password
         steps:
             - checkout
-            - run: sudo python3.5 -m pip install tox cookiecutter wheelhouse
+            - run: sudo python3.5 -m pip install tox cookiecutter pipenv==11.10.0
             - run:
                 name: version checks
                 command: |
@@ -18,22 +18,12 @@ jobs:
                     virtualenv --version
                     tox --version
                     cookiecutter --version
+                    pipenv --version
             - run:
                 name: run cookiecutter
                 command: ./cookie-run-ci
 
             - run:
-                name: build & install app requirements
-                working_directory: /tmp/keg-app-ci-src
-                command: |
-                    wheelhouse build
-                    virtualenv --python python3.5 keg-app-ci
-                    . keg-app-ci/bin/activate
-                    wheelhouse install -- -r requirements/dev-env.txt
-
-            - run:
                 name: run the tests
                 working_directory: /tmp/keg-app-ci-src
-                command: |
-                    . keg-app-ci/bin/activate
-                    tox
+                command: tox
