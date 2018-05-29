@@ -18,7 +18,7 @@ jobs:
             - run:
                 name: install testing helpers needed at OS level
                 command: >
-                    sudo {{cookiecutter.python_executable}} -m pip install tox pipenv
+                    sudo {{cookiecutter.python_executable}} -m pip install tox pipenv==11.10.0
 
             - run:
                 name: version checks
