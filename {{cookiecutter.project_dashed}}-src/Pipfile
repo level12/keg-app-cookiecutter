@@ -1,0 +1,28 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+
+[dev-packages]
+restview = "*"
+
+[packages]
+# Pin this until Keg fixes compatibility issues.
+flask = "<1.0"
+KegAuth = {git = "https://github.com/level12/keg-auth.git"}
+alembic = "*"
+celery = "*"
+"flake8" = "*"
+flake8-level12 = {git = "https://github.com/level12/flake8-level12.git"}
+flask-bootstrap = "*"
+flask-webtest = "*"
+mock = "*"
+"psycopg2-binary" = "*"
+pyquery = "*"
+pytest = "*"
+pytest-cov = "*"
+raven = "*"
+tox = "*"
+
+[requires]
+python_version = "3.6"

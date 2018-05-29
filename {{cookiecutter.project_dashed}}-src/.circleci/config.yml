@@ -16,17 +16,16 @@ jobs:
                 command: ls -al
 
             - run:
-                name: install tox from the wheelhouse
+                name: install testing helpers needed at OS level
                 command: >
-                    sudo {{cookiecutter.python_executable}} -m pip install --upgrade --force-reinstall --quiet
-                    --use-wheel --no-index --find-links=requirements/wheelhouse
-                    tox
+                    sudo {{cookiecutter.python_executable}} -m pip install tox pipenv
 
             - run:
                 name: version checks
                 command: |
                     {{cookiecutter.python_executable}} --version
                     tox --version
+                    pipenv --version
 
             - run:
                 name: run tox

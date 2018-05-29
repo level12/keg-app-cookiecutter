@@ -1,6 +1,0 @@
-# For keyring support on Linux
-dbus-python; sys_platform == 'linux'
-keyring
-
-restview
-requests[security]

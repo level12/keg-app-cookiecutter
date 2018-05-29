@@ -1,3 +1,0 @@
--r include/build-only.txt
--r include/common.txt
--r include/dev.txt
