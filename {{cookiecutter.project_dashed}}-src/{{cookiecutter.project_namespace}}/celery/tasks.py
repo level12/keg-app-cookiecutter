@@ -1,6 +1,6 @@
 import logging
 
-from {{cookiecutter.project_namespace}}.celery import celery_app as app
+from {{cookiecutter.project_namespace}}.celery.app import celery_app as app
 
 log = logging.getLogger(__name__)
 

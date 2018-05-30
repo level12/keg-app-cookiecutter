@@ -9,7 +9,7 @@ class DevProfile(object):
     # Examples:
     #   Socket based, no pass: postgresql://USER@:5433/{{cookiecutter.project_namespace}}
     #   TCP/IP based: postgresql://USER:PASS@localhost/{{cookiecutter.project_namespace}}
-    SQLALCHEMY_DATABASE_URI = 'sqlite:////tmp/{{cookiecutter.project_namespace}}.db'
+    SQLALCHEMY_DATABASE_URI = '{{cookiecutter.sa_db_uri_prefix.rstrip("/")}}/{{cookiecutter.project_namespace}}'
 
     # TODO: are these needed?  If so, add comment for where they are used.
     DEVELOPER_NAME = '{{cookiecutter.developer_name}}'
@@ -27,7 +27,7 @@ class DevProfile(object):
 
 
 class TestProfile(object):
-    SQLALCHEMY_DATABASE_URI = 'sqlite:////tmp/{{cookiecutter.project_namespace}}-test.db'
+    SQLALCHEMY_DATABASE_URI = '{{cookiecutter.sa_db_uri_prefix.rstrip("/")}}/test'
 
     # Make tests faster
     PASSLIB_CRYPTCONTEXT_KWARGS = dict(schemes=['plaintext'])
@@ -45,3 +45,10 @@ class TestProfile(object):
         # running in development and happen to run tests at the same time.
         'task_default_queue': '__tests__',
     }
+
+    # When using `py.test --db-restore ...` this setting tells us what the backup files names look
+    # like.  See {{cookiecutter.project_namespace}}.libs.db.testing_db_restore() for more details.
+    # Use ./ansible/db-backup.yaml to create these files and view the readme for more information.
+    # DB_RESTORE_SQL_FPATH = '/tmp/{{cookiecutter.project_namespace}}-prod-{}.sql'
+    # DB_RESTORE_SQL_FPATH = '/tmp/{{cookiecutter.project_namespace}}-beta-{}.sql'
+    DB_RESTORE_SQL_FPATH = '/tmp/test-{}.sql'

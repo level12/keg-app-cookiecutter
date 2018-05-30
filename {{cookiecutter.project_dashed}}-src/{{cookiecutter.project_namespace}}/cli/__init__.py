@@ -3,7 +3,10 @@ import logging
 import click
 
 from {{cookiecutter.project_namespace}}.app import {{cookiecutter.project_class}}
-import {{cookiecutter.project_namespace}}.celery.tasks as celery_tasks
+
+# These imports are to get cli sub-modules loaded.
+from ..cli import celery  # noqa
+from ..cli import db  # noqa
 
 log = logging.getLogger(__name__)
 
@@ -23,21 +26,6 @@ def logcmd():
     log.info('info log message')
     log.warning('warning log message')
     log.error('error log message')
-
-
-@{{cookiecutter.project_class}}.cli.group()
-def celery():
-    """ Celery related commands. """
-
-
-@celery.command('ping')
-def celery_ping():
-    celery_tasks.ping.delay()
-
-
-@celery.command('error')
-def celery_error():
-    celery_tasks.error.delay()
 
 
 if __name__ == '__main__':

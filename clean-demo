@@ -12,6 +12,7 @@ KEG_DEMO_SRC=$PROJECTS_PATH/keg-demo-src
 find $KEG_DEMO_SRC \
     -not -path "*/.tox/*" \
     -not -path "*/.git/*" \
-    -not -path "*/kegdemo-config.py" \
+    -not -path "$KEG_DEMO_SRC/kegdemo-config.py" \
     -not -path "*/*.egg-info/*" \
+    -not -path "*/Pipfile.lock" \
     -delete

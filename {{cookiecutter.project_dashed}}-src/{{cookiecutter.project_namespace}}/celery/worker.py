@@ -1,12 +1,11 @@
+from celery import Task as TaskBase
 from celery.signals import setup_logging
 from raven.contrib.celery import register_signal
 
-from {{cookiecutter.project_namespace}}.app import (
-    {{cookiecutter.project_class}},
-    sentry
-)
+from {{cookiecutter.project_namespace}}.app import {{cookiecutter.project_class}}
 # By using the name "celery" `celery worker` will find the instance.
-from {{cookiecutter.project_namespace}}.celery import celery_app as celery  # noqa
+from {{cookiecutter.project_namespace}}.celery.app import celery_app as celery  # noqa
+from {{cookiecutter.project_namespace}}.extensions import sentry
 
 
 @setup_logging.connect
@@ -15,12 +14,6 @@ def add_handler(**kwargs):
     pass
 
 
-# Assuming this module will only ever be called by `celery worker` and we therefore need to setup
-# our application b/c it's not been done yet.
-#
-# You must set the {{cookiecutter.project_class.upper()}}_CONFIG_PROFILE environment variable in
-# order for this to work.  See project's readme for an example.
-
 # Config specific to WSGI workers
 uwsgi_config = {
     # Don't log to stdout or uwsgi picks it up and that gets sent to syslog too resulting in double
@@ -28,9 +21,41 @@ uwsgi_config = {
     'KEG_LOG_STREAM_ENABLED': False
 }
 
+# Assuming this module will only ever be called by `celery worker` and we therefore need to setup
+# our application b/c it's not been done yet.
+#
+# You must set the {{cookiecutter.project_class.upper()}}_CONFIG_PROFILE environment variable in
+# order for this to work.  See project's readme for an example.
 _app = {{cookiecutter.project_class}}().init(config=uwsgi_config)
-_app.app_context().push()
 
 if _app.config.get('SENTRY_DSN'):
     # hook into the Celery error handler
     register_signal(sentry.client)
+
+
+class ContextTask(TaskBase):
+    """
+        We need to wrap the execution of each Celery task in a Flask app context in order for
+        flask.current_app and similiar to work.
+    """
+    # Abstract tells Celery not to register this task in the task registry.
+    abstract = True
+
+    def __call__(self, *args, **kwargs):
+        with _app.app_context():
+            return super().__call__(*args, **kwargs)
+
+
+# It might seem like this assignment happens too late to be effective.  By the time this assignment
+# takes place, the tasks in racebetter.celery.tasks have already been setup.  However, it seems
+# that Celery uses a proxy object for task registration which will defer the creation of the task
+# classes until they are used.  From celery.app.base.Celery.task docstring:
+#
+#       App Binding: For custom apps the task decorator will return
+#       a proxy object, so that the act of creating the task is not
+#       performed until the task is used or the task registry is accessed.
+#
+#       If you're depending on binding to be deferred, then you must
+#       not access any attributes on the returned object until the
+#       application is fully set up (finalized).
+celery.Task = ContextTask

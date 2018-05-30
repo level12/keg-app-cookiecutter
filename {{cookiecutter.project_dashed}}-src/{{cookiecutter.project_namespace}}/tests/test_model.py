@@ -47,4 +47,5 @@ class TestUser(EntityBase):
         ColumnCheck('token', required=False),
         ColumnCheck('token_created_utc', required=False),
         ColumnCheck('name'),
+        ColumnCheck('settings', required=False),
     ]

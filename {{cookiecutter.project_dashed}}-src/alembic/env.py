@@ -1,10 +1,13 @@
 from alembic import context
+import keg
 from keg.db import db
 
 from {{cookiecutter.project_namespace}}.app import {{cookiecutter.project_class}}
 
-
-app = {{cookiecutter.project_class}}().init()
+if keg.current_app:
+    app = keg.current_app
+else:
+    app = {{cookiecutter.project_class}}().init()
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

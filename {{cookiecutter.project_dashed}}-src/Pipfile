@@ -22,6 +22,7 @@ pyquery = "*"
 pytest = "*"
 pytest-cov = "*"
 raven = "*"
+simplejson = "*"
 tox = "*"
 
 [requires]

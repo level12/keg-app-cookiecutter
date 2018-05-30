@@ -4,6 +4,7 @@ from keg.db import db
 from keg_elements.db.mixins import DefaultColsMixin, MethodsMixin
 from keg_auth import UserMixin
 import sqlalchemy as sa
+from sqlalchemy.dialects.postgresql import JSONB
 import sqlalchemy.orm as saorm
 from sqlalchemy_utils import ArrowType, EmailType
 
@@ -55,3 +56,4 @@ class User(db.Model, UserMixin, EntityMixin):
     __tablename__ = 'users'
 
     name = sa.Column(sa.Unicode(250), nullable=False)
+    settings = sa.Column(JSONB)

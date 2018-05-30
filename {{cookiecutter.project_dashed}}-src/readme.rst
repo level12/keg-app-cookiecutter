@@ -91,3 +91,60 @@ You can verify the deploy by:
 * Setup an alert in Logz.io for the "ping-pong" log message to arrive 5 times in 10 minutes.  This
   ensures both that Celery is running and that log messages are shipping correctly.
 
+
+Database Backup, Restore, and Migration Tests
+---------------------------------------------
+
+Backups
+~~~~~~~
+
+::
+
+    # Schema and alembic table only
+    .../ansible$ ansible-playbook -l prod db-backup.yaml -t sql
+
+    # Complete backup with data
+    .../ansible$ ansible-playbook -l prod db-backup.yaml -t full
+
+    # Find the backups on your local machine
+    $ ls -lh /tmp/{{cookiecutter.project_namespace}}-*
+
+Files will be generated on the remote server, downloaded to `/tmp`, and then deleted from the
+server.
+
+
+Restore
+~~~~~~~
+
+::
+
+    # Restore SQL files - schema, alembic table if it exists, but no data
+    $ {{cookiecutter.project_namespace}} db-restore /tmp/{{cookiecutter.project_namespace}}-*.sql
+    INFO - {{cookiecutter.project_namespace}}.libs.db - Restoring /tmp/{{cookiecutter.project_namespace}}-schema.sql to None:5433/{{cookiecutter.project_namespace}}
+    restore finished
+
+    # Or, full restore with data
+    $ {{cookiecutter.project_namespace}} db-restore /tmp/{{cookiecutter.project_namespace}}-full.bak
+    INFO - {{cookiecutter.project_namespace}}.libs.db - Restoring /tmp/{{cookiecutter.project_namespace}}-full.bak to None:5433/{{cookiecutter.project_namespace}}
+    restore finished
+
+
+Migration Tests
+~~~~~~~~~~~~~~~
+
+By default, when tests run, the db schema is cleared out at the beginning of the test run and
+we use SQLAlchemy to create all DB objects before starting the tests.  This is convenient for most
+development tests, but won't catch errors in DB migrations because they aren't being applied in
+the testing process.
+
+So, we would like a way to run tests on top of a DB that has been prepared by restoring & applying
+Alembic migrations.  We have some pytest integration which does most of that work for us::
+
+    $ py.test --db-restore {{cookiecutter.project_namespace}}
+
+That will:
+
+1. Restore the tests database using the files specified by DB_RESTORE_SQL_FPATH (see config example).
+2. Run `alembic upgrade head` for the tests database.
+3. Skip the DB init Keg would normally do during testing (since we get our schema from the restore + migration).
+4. py.test continues as it otherwise would.
