@@ -8,9 +8,9 @@ class DefaultProfile(object):
     # commands for help.
     KEG_KEYRING_ENABLE = True
 
-    # Used in at least KegAuth email templates
+    # Used in at least email templates
     SITE_NAME = '{{cookiecutter.project_name}}'
-    # Used in at least KegAuth email subject lines
+    # Used in at least email subject lines
     SITE_ABBR = '{{cookiecutter.project_name}}'
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False

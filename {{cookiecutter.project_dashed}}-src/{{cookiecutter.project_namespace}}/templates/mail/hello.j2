@@ -1,0 +1,11 @@
+{% raw %}
+{% extends 'mail/multi-part-mail.j2' %}
+
+{% block subject %}
+    Hello There!
+{% endblock %}
+
+{% block markdown %}
+    Hello *{{name}}*!
+{% endblock %}
+{% endraw %}

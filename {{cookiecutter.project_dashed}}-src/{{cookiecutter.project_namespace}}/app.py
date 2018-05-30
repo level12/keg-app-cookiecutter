@@ -22,7 +22,7 @@ class {{cookiecutter.project_class}}(Keg):
     def on_init_complete(self):
         extensions.auth_manager.init_app(self)
         extensions.csrf.init_app(self)
-        extensions.flask_mail.init_app(self)
+        extensions.mail.init_app(self)
         extensions.bootstrap.init_app(self)
 
         if self.config.get('SENTRY_DSN'):

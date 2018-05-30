@@ -15,6 +15,7 @@ celery = "*"
 "flake8" = "*"
 flake8-level12 = {git = "https://github.com/level12/flake8-level12.git"}
 flask-bootstrap = "*"
+Flask-Mail = "*"
 flask-webtest = "*"
 mock = "*"
 "psycopg2-binary" = "*"
