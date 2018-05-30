@@ -12,14 +12,11 @@
 Project Setup Checklist
 =======================
 
-* `wheelhouse build`
 * `tox`
 * setup git hooks from /scripts
 * create project on
 
     * GitHub
-    * CodeCov: then add repo token to tox.ini
-    * CircleCI
     * Appveyor?
     * Sentry
 

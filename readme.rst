@@ -3,6 +3,12 @@
 Keg CookieCutter
 ################
 
+.. image:: https://circleci.com/gh/level12/keg-app-cookiecutter.svg?style=svg&circle-token=5e00606556338515932f8552ad44f0f2fdbe14ea
+    :target: https://circleci.com/gh/level12/keg-app-cookiecutter
+
+Also see `KegDemo's <https://github.com/level12/keg-demo/>`_ badges/status.
+
+
 Preparation
 ===========
 

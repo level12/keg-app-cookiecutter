@@ -6,6 +6,7 @@
 /coverage.xml
 /.pytests.xml
 /htmlcov
+.pytest_cache
 
 # Visual Studio Code clutter
 .vscode
