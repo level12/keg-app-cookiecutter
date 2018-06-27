@@ -53,7 +53,7 @@ In order to QA the output of this project, I run the cookiecutter and apply it t
     # One-time run
     ~/projects/keg-app-cc-src$ ./cookie-run-demo
 
-    # Watch cookiecutter files and run when they chanve
+    # Watch cookiecutter files and run when they change
     ~/projects/keg-app-cc-src$ ./cookie-watch
 
 These have a hard coded path in them for my (RLS) project's directory.  If someone else wants to

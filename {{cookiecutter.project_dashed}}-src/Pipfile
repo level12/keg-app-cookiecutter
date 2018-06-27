@@ -9,7 +9,7 @@ restview = "*"
 [packages]
 # Pin this until Keg fixes compatibility issues.
 flask = "<1.0"
-KegAuth = {git = "https://github.com/level12/keg-auth.git"}
+KegAuth = {git = "https://github.com/level12/keg-auth.git", ref = "10-permissions"}
 alembic = "*"
 celery = "*"
 "flake8" = "*"
@@ -25,6 +25,7 @@ pytest-cov = "*"
 raven = "*"
 simplejson = "*"
 tox = "*"
+xlwt = "*"
 
 [requires]
 python_version = "{{cookiecutter.python_version}}"
