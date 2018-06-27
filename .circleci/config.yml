@@ -10,7 +10,7 @@ jobs:
                   POSTGRES_PASSWORD: password
         steps:
             - checkout
-            - run: sudo python3.5 -m pip install tox cookiecutter pipenv==11.10.0
+            - run: python3.5 -m pip install tox cookiecutter pipenv==11.10.0
             - run:
                 name: version checks
                 command: |
