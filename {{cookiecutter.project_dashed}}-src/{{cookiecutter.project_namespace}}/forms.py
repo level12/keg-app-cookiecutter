@@ -10,7 +10,7 @@ class Blog(ModelForm):
         only = ['title', 'posted_utc']
 
 
-def user_form(allow_superuser, endpoint, fields=['name', 'email', 'is_enabled']):
+def user_form(allow_superuser, endpoint, fields=['name', 'is_enabled']):
     User = user_form_base(allow_superuser, endpoint, fields=fields)
     User.field_order = ('name', ) + User.field_order
     return User
