@@ -1,4 +1,4 @@
-from keg_auth import Node, Route
+from keg_auth import NavItem, NavURL
 
 
 def init_navigation(app):
@@ -6,18 +6,18 @@ def init_navigation(app):
     # by auth status
     app.auth_manager.add_navigation_menu(
         'main',
-        Node(
-            Node('Home', Route('public.home')),
-            Node(
+        NavItem(
+            NavItem('Home', NavURL('public.home')),
+            NavItem(
                 'Pages',
-                Node('Hello', Route('public.hello')),
-                Node('Protected', Route('private.protected_example')),
+                NavItem('Hello', NavURL('public.hello')),
+                NavItem('Protected', NavURL('private.protected_example')),
             ),
-            Node(
+            NavItem(
                 'Management',
-                Node('Bundles', Route('auth.bundle:list')),
-                Node('Groups', Route('auth.group:list')),
-                Node('Users', Route('auth.user:list')),
+                NavItem('Bundles', NavURL('auth.bundle:list')),
+                NavItem('Groups', NavURL('auth.group:list')),
+                NavItem('Users', NavURL('auth.user:list')),
             ),
         )
     )

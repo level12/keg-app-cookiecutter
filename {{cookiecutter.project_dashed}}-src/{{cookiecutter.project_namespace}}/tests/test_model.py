@@ -45,8 +45,6 @@ class TestUser(EntityBase):
         ColumnCheck('session_key', unique=True),
         ColumnCheck('email', unique=True),
         ColumnCheck('password', required=False),
-        ColumnCheck('token', required=False),
-        ColumnCheck('token_created_utc', required=False),
         ColumnCheck('name'),
         ColumnCheck('settings', required=False),
     ]

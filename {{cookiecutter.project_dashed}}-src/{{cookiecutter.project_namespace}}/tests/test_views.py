@@ -1,6 +1,6 @@
 import flask
 from flask.ext import webtest
-from keg_auth.testing import ViewTestBase as AuthViewBase, login_client_with_permissions
+from keg_auth.testing import ViewTestBase as AuthViewBase, AuthTestApp
 
 from {{cookiecutter.project_namespace}}.model import entities
 
@@ -50,7 +50,8 @@ class TestPermissionExample(AuthViewBase):
         assert resp.text == 'permission-example'
 
     def test_get_with_unauthorized_user(self):
-        client, _ = login_client_with_permissions()
+        user = entities.User.testing_create()
+        client = AuthTestApp(flask.current_app, user=user)
         client.get('/permission-example', status=403)
 
     def test_get_without_user(self):

@@ -26,7 +26,7 @@ class TestCLI(CLIBase):
         assert ents.User.query.filter_by(is_superuser=True).count() == 0
 
     def test_add_superuser(self):
-        self.invoke('auth', 'create-superuser', 'foo@bar.com', 'Foo Bar')
+        self.invoke('auth', 'create-user', '--as-superuser', 'foo@bar.com', 'Foo Bar')
         assert ents.User.query.count() == 1
         assert ents.User.query.filter_by(is_superuser=True).count() == 1
 
