@@ -23,7 +23,6 @@ class TestComment(EntityBase):
         ColumnCheck('author_name'),
         ColumnCheck('author_email', required=False),
         ColumnCheck('comment'),
-
     ]
 
     def test_unique_author(self):
@@ -42,10 +41,10 @@ class TestUser(EntityBase):
     column_checks = [
         ColumnCheck('is_verified'),
         ColumnCheck('is_enabled'),
+        ColumnCheck('is_superuser'),
+        ColumnCheck('session_key', unique=True),
         ColumnCheck('email', unique=True),
-        ColumnCheck('password'),
-        ColumnCheck('token', required=False),
-        ColumnCheck('token_created_utc', required=False),
+        ColumnCheck('password', required=False),
         ColumnCheck('name'),
         ColumnCheck('settings', required=False),
     ]

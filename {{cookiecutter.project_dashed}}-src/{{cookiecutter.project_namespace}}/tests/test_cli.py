@@ -1,3 +1,5 @@
+from time import sleep
+
 from keg.testing import CLIBase
 import mock
 
@@ -21,6 +23,12 @@ class TestCLI(CLIBase):
     def test_add_user(self):
         self.invoke('auth', 'create-user', 'foo@bar.com', 'Foo Bar')
         assert ents.User.query.count() == 1
+        assert ents.User.query.filter_by(is_superuser=True).count() == 0
+
+    def test_add_superuser(self):
+        self.invoke('auth', 'create-user', '--as-superuser', 'foo@bar.com', 'Foo Bar')
+        assert ents.User.query.count() == 1
+        assert ents.User.query.filter_by(is_superuser=True).count() == 1
 
 
 class TestCelerySetup:
@@ -36,6 +44,9 @@ class TestCelerySetup:
 
         # Wait for the task to complete in a different thread.
         task_tracker.wait_for('{{cookiecutter.project_namespace}}.celery.tasks.ping')
+        # Cleanup is sometimes not complete at this point, need to sleep a minimal amount more
+        sleep(0.3)
+
         m_db.session.remove.assert_called_once_with()
 
     @mock.patch('{{cookiecutter.project_namespace}}.celery.app.db', autospec=True, spec_set=True)
@@ -47,6 +58,9 @@ class TestCelerySetup:
         # Wait for the task to complete in a different thread.
         task_tracker.wait_for('{{cookiecutter.project_namespace}}.celery.tasks.error',
                               throw_failure=False)
+        # Cleanup is sometimes not complete at this point, need to sleep a minimal amount more
+        sleep(0.3)
+
         m_db.session.remove.assert_called_once_with()
 
 

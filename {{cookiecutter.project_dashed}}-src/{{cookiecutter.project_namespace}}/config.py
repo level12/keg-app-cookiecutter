@@ -13,6 +13,12 @@ class DefaultProfile(object):
     # Used in at least email subject lines
     SITE_ABBR = '{{cookiecutter.project_name}}'
 
+    # Used at least by Keg Auth templates to know what to extend
+    BASE_TEMPLATE = 'base-page.html'
+
+    # Used by Keg Auth CLI to determine what arguments to require for create-user
+    KEGAUTH_CLI_USER_ARGS = ['name', 'email']
+
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 

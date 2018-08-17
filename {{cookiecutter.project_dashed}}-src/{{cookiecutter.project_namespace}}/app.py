@@ -2,7 +2,7 @@ import flask.json
 from keg import Keg
 import keg.db
 
-from {{cookiecutter.project_namespace}} import extensions
+from {{cookiecutter.project_namespace}} import extensions, grids, navigation
 from {{cookiecutter.project_namespace}}.libs.db import testing_db_restore
 import {{cookiecutter.project_namespace}}.libs.json as _app_json
 from {{cookiecutter.project_namespace}}.views import blueprints
@@ -27,6 +27,11 @@ class {{cookiecutter.project_class}}(Keg):
 
         if self.config.get('SENTRY_DSN'):
             extensions.sentry.init_app(self)
+
+        navigation.init_navigation(self)
+
+        grids.Grid.manager.init_db(keg.db.db)
+        grids.Grid.manager.init_app(self)
 
 
 class DatabaseManager(keg.db.DatabaseManager):

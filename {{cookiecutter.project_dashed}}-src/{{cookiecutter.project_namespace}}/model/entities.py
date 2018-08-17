@@ -2,12 +2,13 @@ import logging
 
 from keg.db import db
 from keg_elements.db.mixins import DefaultColsMixin, MethodsMixin
-from keg_auth import UserMixin
+import keg_auth
 import sqlalchemy as sa
 from sqlalchemy.dialects.postgresql import JSONB
 import sqlalchemy.orm as saorm
 from sqlalchemy_utils import ArrowType, EmailType
 
+from {{cookiecutter.project_namespace}}.extensions import auth_entity_registry
 
 log = logging.getLogger(__name__)
 
@@ -51,9 +52,28 @@ class Comment(db.Model, EntityMixin):
         return super().testing_create(**kwargs)
 
 
-class User(db.Model, UserMixin, EntityMixin):
+@auth_entity_registry.register_user
+class User(db.Model, keg_auth.UserEmailMixin, keg_auth.UserMixin, EntityMixin):
     """ Make sure EntityMixin is after UserMixin or testing_create() is wrong.  """
     __tablename__ = 'users'
 
     name = sa.Column(sa.Unicode(250), nullable=False)
     settings = sa.Column(JSONB)
+
+
+@auth_entity_registry.register_permission
+class Permission(db.Model, keg_auth.PermissionMixin, EntityMixin):
+    __tablename__ = 'permissions'
+
+    def __repr__(self):
+        return '<Permission id={} token={}>'.format(self.id, self.token)
+
+
+@auth_entity_registry.register_bundle
+class Bundle(db.Model, keg_auth.BundleMixin, EntityMixin):
+    __tablename__ = 'bundles'
+
+
+@auth_entity_registry.register_group
+class Group(db.Model, keg_auth.GroupMixin, EntityMixin):
+    __tablename__ = 'groups'
