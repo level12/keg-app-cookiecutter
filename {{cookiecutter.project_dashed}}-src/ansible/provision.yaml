@@ -12,7 +12,15 @@
   tags:
     - web
   roles:
-    - { role: pyapp3, pyapp3_op: provision, tags: pyapp3-role}
+    - role: letsencrypt
+      letsencrypt_op: provision
+      letsencrypt_domains: "{{ nginx_vhost_ssl_domains }}"
+      tags:
+        - letsencrypt-role
+
+    - role: pyapp3
+      pyapp3_op: provision
+      tags: pyapp3-role
 
   tasks:
     - name: create rabbitmq vhost

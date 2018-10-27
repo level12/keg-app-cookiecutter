@@ -31,10 +31,11 @@ nginx_vhost_name: "{{project_ident}}"
 nginx_vhost_enable_static_route: false
 nginx_vhost_www_only: false
 nginx_vhost_enable_ssl: true
-nginx_vhost_ssl_cert_fpaths:
-    - /etc/ssl/certs/level12biz.crt
-    - /etc/ssl/certs/level12biz-bundle.crt
-nginx_vhost_ssl_cert_key_fpath: /etc/ssl/private/level12biz.key
+nginx_vhost_ssl_cert_pre_bundled: true
+nginx_vhost_ssl_cert_bundled_fpath: /etc/letsencrypt/live/{{ nginx_vhost_server_name }}/fullchain.pem
+nginx_vhost_ssl_cert_key_fpath: /etc/letsencrypt/live/{{ nginx_vhost_server_name }}/privkey.pem
+
+
 
 pyapp3_app_type: wsgi
 # If you change this, make sure you change the pip version used in wheelhouse.ini.
