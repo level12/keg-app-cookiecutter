@@ -39,3 +39,6 @@ celery_app = Celery(
     '{{cookiecutter.project_namespace}}',
     include=['{{cookiecutter.project_namespace}}.celery.tasks']
 )
+
+# Quickly fail if RabbitMQ can't be reached so tests/scripts don't hang.
+celery_app.conf['broker_transport_options'] = {"max_retries": 1,}

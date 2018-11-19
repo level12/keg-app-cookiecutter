@@ -43,7 +43,12 @@ class TaskTracker:
                 assert ents.DbRecord.count == 1
     """
     def __init__(self):
-        self.reset()
+        # Don't call reset here, even though the variable assignment is the same.  A reset
+        # in the constructor causes the connection to RabbitMQ to be established before
+        # it has application-level configuration applied, which means we aren't connecting to the
+        # RabbitMQ server we think we are.
+        self.task_results = {}
+        self.slept = 0
 
     def reset(self):
         self.task_results = {}
