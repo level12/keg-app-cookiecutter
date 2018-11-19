@@ -41,4 +41,4 @@ celery_app = Celery(
 )
 
 # Quickly fail if RabbitMQ can't be reached so tests/scripts don't hang.
-celery_app.conf['broker_transport_options'] = {"max_retries": 1,}
+celery_app.conf['broker_transport_options'] = {"max_retries": 1}
