@@ -1,5 +1,5 @@
 import flask
-from flask.ext import webtest
+import flask_webtest as webtest
 from keg_auth.testing import ViewTestBase as AuthViewBase, AuthTestApp
 
 from {{cookiecutter.project_namespace}}.model import entities
