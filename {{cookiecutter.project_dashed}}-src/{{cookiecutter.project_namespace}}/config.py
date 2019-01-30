@@ -21,6 +21,8 @@ class DefaultProfile(object):
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+    SENTRY_USER_ATTRS = ['email', 'name']
+
 
 class TestProfile(object):
     # These settings reflect what is needed in CI.  For local development, use

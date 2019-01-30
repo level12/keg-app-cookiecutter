@@ -1,7 +1,7 @@
-
 use_pvt_dns: false
 
 project_ident: {{ cookiecutter.project_namespace }}
+project_ident_env: {{ cookiecutter.project_namespace }}-{{ '{{' }} app_environment {{'}}'}}
 
 app_db_host: "{{ cookiecutter.database_pvt_host }}"
 {% raw %}

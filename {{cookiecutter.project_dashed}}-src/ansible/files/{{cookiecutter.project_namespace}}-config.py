@@ -9,6 +9,7 @@ class DeployedProfile(object):
         '@{{app_db_host}}/{{app_db_name}}'
 
     SENTRY_DSN = '{{app_sentry_dsn}}'
+    SENTRY_ENVIRONMENT = '{{ app_environment }}'
 
     KEG_KEYRING_ENABLE = False
 

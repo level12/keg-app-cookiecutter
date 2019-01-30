@@ -1,4 +1,4 @@
-project_ident_env: {{ cookiecutter.project_namespace }}-beta
+app_environment: BETA
 
 {% raw %}
 app_sentry_dsn: "{{ app_sentry_dsn_beta }}"
