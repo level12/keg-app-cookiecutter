@@ -1,3 +1,4 @@
+import flask
 
 class DefaultProfile(object):
     """
@@ -20,6 +21,12 @@ class DefaultProfile(object):
     KEGAUTH_CLI_USER_ARGS = ['name', 'email']
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+    # For PGSQL applications, it might be good to uncomment this
+    # KEG_DB_ENGINE_OPTIONS = {
+    #     'json_serializer': flask.json.dumps,
+    #     'json_deserializer': flask.json.loads,
+    # }
 
     SENTRY_USER_ATTRS = ['email', 'name']
 
