@@ -49,3 +49,8 @@ class TestProfile(object):
         # This should be for the docker container setup in the CircleCI config.
         'broker_url': 'amqp://guest@localhost:5672//',
     }
+
+    KEG_DB_ENGINE_OPTIONS = {
+        'json_serializer': flask.json.dumps,
+        'json_deserializer': flask.json.loads,
+    }
