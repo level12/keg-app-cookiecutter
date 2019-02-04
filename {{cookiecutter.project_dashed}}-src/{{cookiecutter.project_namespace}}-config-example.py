@@ -17,6 +17,8 @@ class DevProfile(object):
 
     MAIL_DEFAULT_SENDER = '{{cookiecutter.developer_email}}'
 
+    KEG_LOG_SYSLOG_ENABLED = False
+
     # Needed by at least KegAuth for sending emails from the command line
     SERVER_NAME = 'localhost:5000'
 
