@@ -11,12 +11,17 @@ import {{cookiecutter.project_namespace}}.libs.db as libs_db
 # pytest.register_assert_rewrite('{{cookiecutter.project_namespace}}.libs.testing')
 
 
-def pytest_configure(config):
-    {{cookiecutter.project_class}}.testing_prep(
-        TESTING_DB_RESTORE=config.getoption('db_restore'),
-        SQLALCHEMY_ECHO=config.getoption('db_echo'),
+@pytest.fixture(scope='session', autouse=True)
+def app_instance(pytestconfig):
+    return {{cookiecutter.project_class}}.testing_prep(
+        TESTING_DB_RESTORE=pytestconfig.getoption('db_restore'),
+        SQLALCHEMY_ECHO=pytestconfig.getoption('db_echo'),
     )
 
+@pytest.fixture(scope='session', autouse=True)
+def app(app_instance):
+    with app_instance.app_context():
+        yield
 
 @pytest.fixture(scope='session')
 def celery_config():
