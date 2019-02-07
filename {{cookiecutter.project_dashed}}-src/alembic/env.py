@@ -7,14 +7,7 @@ from {{cookiecutter.project_namespace}}.app import {{cookiecutter.project_class}
 if keg.current_app:
     app = keg.current_app
 else:
-    app = {{cookiecutter.project_class}}()
-
-    # Get the configuration and ensure that Keg's database has been initialized. We don't run the
-    # full ``app.init()`` here because some plugins touch the database as they are setup and in some
-    # cases, those tables wont exist if we haven't run the migrations which is what we are trying to
-    # do.
-    app.init_config(None, False, None)
-    app.init_db()
+    app = {{cookiecutter.project_class}}().init()
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
