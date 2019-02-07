@@ -9,6 +9,7 @@ restview = "*"
 [packages]
 # Pin this until Keg fixes compatibility issues.
 flask = "<1.0"
+keyring = "*"
 KegAuth = {git = "https://github.com/level12/keg-auth.git"}
 alembic = "*"
 celery = "*"
