@@ -2,11 +2,17 @@ import logging
 
 import flask
 from keg.web import BaseView
-from keg_auth import CrudView, requires_user, requires_permissions
+from keg_auth import (
+    CrudView,
+    requires_permissions,
+    requires_user,
+)
 
-from {{cookiecutter.project_namespace}} import forms
-from {{cookiecutter.project_namespace}} import grids
-from {{cookiecutter.project_namespace}}.model import entities
+from {{cookiecutter.project_namespace}} import (
+    forms,
+    grids,
+)
+from {{cookiecutter.project_namespace}}.model import entities as ents
 
 log = logging.getLogger(__name__)
 
@@ -41,6 +47,6 @@ class Blog(CrudView):
     blueprint = private_bp
     url = '/blog-posts'
     object_name = 'Blog Post'
-    orm_cls = entities.Blog
+    orm_cls = ents.Blog
     grid_cls = grids.Blog
     form_cls = forms.Blog
