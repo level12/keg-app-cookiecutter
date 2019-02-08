@@ -1,3 +1,4 @@
+import time
 import logging
 
 from {{cookiecutter.project_namespace}}.celery.app import celery_app as app
@@ -13,3 +14,4 @@ def error():
 @app.task
 def ping():
     log.info('ping-pong')
+    return time.time()

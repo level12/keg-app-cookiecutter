@@ -25,6 +25,8 @@ class DevProfile(object):
     CELERY = {
         # Local rabbitmq server
         'broker_url': 'amqp://guest@localhost:5672//',
+
+        'result_backend': 'rpc://'
     }
 
 
@@ -46,6 +48,7 @@ class TestProfile(object):
         # Celery integration tests should use a different queue in case we have Celery workers
         # running in development and happen to run tests at the same time.
         'task_default_queue': '__tests__',
+        'result_backend': 'rpc://',
     }
 
     # When using `py.test --db-restore ...` this setting tells us what the backup files names look
