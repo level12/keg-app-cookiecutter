@@ -1,0 +1,32 @@
+.alert-danger {
+    color:#a94442;
+    background-color:#f2dede;
+    border-color:#ebccd1
+}
+
+.datagrid .records {
+    width: 100%
+}
+
+.datagrid .edit-link, .datagrid .delete-link {
+    transition: all .2s ease-in-out;
+    display: inline-block;
+    margin: 0 .2em;
+    font-size: 14px;
+}
+
+.datagrid .edit-link:before {
+    content: "\f040";
+    font-family: "FontAwesome";
+}
+
+.datagrid .delete-link:before {
+    content: "\f014";
+    font-family: "FontAwesome";
+    color: red;
+}
+
+.datagrid .delete-link:hover, .datagrid .edit-link:hover {
+    text-decoration: none;
+    transform: scale(1.5);
+}

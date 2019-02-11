@@ -41,6 +41,14 @@ Once cookiecutter is installed, you can use this cookiecutter like::
 
     cookiecutter <KEG-CC-DIR> --no-input --overwrite-if-exists -o <CREATE-PROJ-IN-DIR>
 
+
+Icons
+=====
+
+Webgrid, by default, use Font-Awesome 4.X for fonts. Those fonts require custom
+fonts that you must include in the `static/fonts/..` directory. We do not ship
+those files with this repo for licensing reasons.
+
 Development
 ===========
 
