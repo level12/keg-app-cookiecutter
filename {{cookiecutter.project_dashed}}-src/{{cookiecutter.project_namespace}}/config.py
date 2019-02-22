@@ -50,7 +50,7 @@ class TestProfile(object):
         'broker_url': 'amqp://guest@localhost:5672//',
     }
 
-    KEG_DB_ENGINE_OPTIONS = {
-        'json_serializer': flask.json.dumps,
-        'json_deserializer': flask.json.loads,
-    }
+    # KEG_DB_ENGINE_OPTIONS = {
+    #     'json_serializer': flask.json.dumps,
+    #     'json_deserializer': flask.json.loads,
+    # }
