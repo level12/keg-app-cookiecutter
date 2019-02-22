@@ -29,7 +29,6 @@ class HealthCheck(BaseView):
     blueprint = public_bp
 
     def get(self):
-        start = time.time()
         # We are happy if this doesn't throw an exception.  Nothing to test b/c we aren't sure
         # there will be a user record.
         db.engine.execute('select id from users limit 1').fetchall()
@@ -38,12 +37,6 @@ class HealthCheck(BaseView):
         # something like Cronitor is hitting this URL repeatedly to monitor uptime.
         log.info('ping-db ok')
 
-        end = ctasks.ping.apply_async().wait()
+        ctasks.ping.apply_async()
 
-        # If we are below a second round trip time to the DB and celery, we are good
-        if 0 < (end - start) < 1:
-            status = 'ok'
-        else:
-            status = 'bad'
-
-        return '{} {}'.format(flask.current_app.name, status)
+        return '{} ok'.format(flask.current_app.name)
