@@ -1,5 +1,6 @@
 import flask
 
+
 class DefaultProfile(object):
     """
         These values will apply to all configuration profiles.
@@ -50,7 +51,9 @@ class TestProfile(object):
         'broker_url': 'amqp://guest@localhost:5672//',
     }
 
-    # KEG_DB_ENGINE_OPTIONS = {
-    #     'json_serializer': flask.json.dumps,
-    #     'json_deserializer': flask.json.loads,
-    # }
+    # This is uncommented here, but not above, for CI purposes. If you don't need this, you can
+    # uncomment it out
+    KEG_DB_ENGINE_OPTIONS = {
+        'json_serializer': flask.json.dumps,
+        'json_deserializer': flask.json.loads,
+    }
