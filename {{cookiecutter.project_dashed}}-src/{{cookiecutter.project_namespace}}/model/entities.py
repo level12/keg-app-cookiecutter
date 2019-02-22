@@ -13,7 +13,7 @@ from {{cookiecutter.project_namespace}}.extensions import auth_entity_registry
 log = logging.getLogger(__name__)
 
 # Default cascade setting for parent/child relationships.  Should get set on parent side.
-# Docs: http://l12.io/sa-parent-child-relationship-config
+# Docs: https://l12.io/sa-parent-child-relationship-config
 _rel_cascade = 'all, delete-orphan'
 
 
