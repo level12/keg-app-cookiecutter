@@ -43,7 +43,7 @@ class TestProfile(object):
     KEG_KEYRING_ENABLE = False
 
     # Mail related tests need to have this set, even though actual email is not generated.
-    MAIL_DEFAULT_SENDER = 'test@test.com'
+    MAIL_DEFAULT_SENDER = 'devteam+i-better-not-get-email-from-these-tests@level12.io'
 
     CELERY = {
         # This should be for the docker container setup in the CircleCI config.
