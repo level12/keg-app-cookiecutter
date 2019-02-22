@@ -1,4 +1,3 @@
-import flask.json
 from keg import Keg
 import keg.db
 

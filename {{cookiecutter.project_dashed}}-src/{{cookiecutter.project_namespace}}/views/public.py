@@ -1,9 +1,10 @@
-import time
 import logging
 
 import flask
 from keg.db import db
 from keg.web import BaseView, rule
+
+from {{cookiecutter.project_namespace}}.celery import tasks as ctasks
 
 public_bp = flask.Blueprint('public', __name__,)
 log = logging.getLogger(__name__)
