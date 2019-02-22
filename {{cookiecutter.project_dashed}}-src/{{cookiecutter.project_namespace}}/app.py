@@ -5,6 +5,7 @@ from {{cookiecutter.project_namespace}} import extensions, grids, navigation
 from {{cookiecutter.project_namespace}}.libs.db import testing_db_restore
 import {{cookiecutter.project_namespace}}.libs.json as _app_json
 from {{cookiecutter.project_namespace}}.views import blueprints
+from {{cookiecutter.project_namespace}}.grids import Grid
 
 
 class {{cookiecutter.project_class}}(Keg):
@@ -20,6 +21,7 @@ class {{cookiecutter.project_class}}(Keg):
 
     def on_init_complete(self):
         extensions.auth_manager.init_app(self)
+        extensions.auth_manager.grid_cls = Grid
         extensions.csrf.init_app(self)
         extensions.mail.init_app(self)
         extensions.bootstrap.init_app(self)
