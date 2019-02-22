@@ -3,14 +3,16 @@ use_pvt_dns: false
 project_ident: {{ cookiecutter.project_namespace }}
 project_ident_env: {{ cookiecutter.project_namespace }}-{{ '{{' }} app_environment {{'}}'}}
 
-app_db_host: "{{ cookiecutter.database_pvt_host }}"
 {% raw %}
+app_db_host: "{{ lookup('dig', 'sierra.pvt.level12.net')}}"
+
 # Host and ip setup
 network_domain: level12.net
-host_fqdn: "{{inventory_hostname}}.{{network_domain}}"
-host_ip: "{{ lookup('pipe', 'dig +short ' + host_fqdn) }}"
-host_fqdn_pvt: "{{inventory_hostname}}.pvt.{{network_domain}}"
-host_ip_pvt: "{{ lookup('pipe', 'dig +short ' + host_fqdn_pvt) }}"
+server_dns_name: "{{ inventory_hostname.split('-')|first }}"
+host_fqdn: "{{ server_dns_name }}.{{network_domain}}"
+host_ip: "{{ lookup('dig', host_fqdn) }}"
+host_fqdn_pvt: "{{ server_dns_name }}.pvt.{{network_domain}}"
+host_ip_pvt: "{{ lookup('dig', host_fqdn_pvt) }}"
 
 ansible_ssh_host: "{{ host_fqdn_pvt if use_pvt_dns else host_fqdn }}"
 ansible_service_mgr: systemd
@@ -39,7 +41,7 @@ nginx_vhost_ssl_cert_key_fpath: /etc/letsencrypt/live/{{ nginx_vhost_server_name
 
 pyapp3_app_type: wsgi
 # If you change this, make sure you change the pip version used in wheelhouse.ini.
-pyapp3_python_version: 3.5
+pyapp3_python_version: 3.6
 pyapp3_settings_dest_fpath: "{{ pyapp3_source_dpath }}/{{project_ident}}-config.py"
 pyapp3_settings_src_fpath: "files/{{project_ident}}-config.py"
 {% endraw %}

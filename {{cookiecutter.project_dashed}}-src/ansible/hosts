@@ -2,7 +2,7 @@ sierra-beta ansible_ssh_host=sierra.level12.net
 sierra-prod ansible_ssh_host=sierra.level12.net
 
 [webservers]
-admiral
+vault
 bank
 
 [beta]
@@ -10,7 +10,7 @@ bank
 sierra-beta
 
 [prod]
-admiral
+vault
 sierra-prod
 
 [dbservers]

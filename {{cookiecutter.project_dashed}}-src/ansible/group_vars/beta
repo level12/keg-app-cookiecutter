@@ -1,4 +1,4 @@
-app_environment: BETA
+app_environment: beta
 
 {% raw %}
 app_sentry_dsn: "{{ app_sentry_dsn_beta }}"
