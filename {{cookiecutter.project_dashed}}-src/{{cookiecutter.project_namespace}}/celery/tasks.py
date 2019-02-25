@@ -1,4 +1,3 @@
-import time
 import logging
 import requests
 
@@ -15,7 +14,6 @@ def error():
 @app.task
 def ping():
     log.info('ping-pong')
-    return time.time()
 
 
 @app.task(bind=True, max_retries=10)
