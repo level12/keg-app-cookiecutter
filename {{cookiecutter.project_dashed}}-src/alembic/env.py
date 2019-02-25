@@ -1,8 +1,11 @@
 from alembic import context
 import keg
 from keg.db import db
+from keg_auth.model import KAPasswordType
+from sqlalchemy_utils import ArrowType, EmailType
 
 from {{cookiecutter.project_namespace}}.app import {{cookiecutter.project_class}}
+
 
 if keg.current_app:
     app = keg.current_app
@@ -18,6 +21,24 @@ config = context.config
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
 target_metadata = db.metadata
+
+
+def render_item(type_, obj, autogen_context):
+    """Apply custom rendering for selected items."""
+
+    if type_ == 'type':
+        elif isinstance(obj, ArrowType):
+            autogen_context.imports.add('import sqlalchemy_utils as utils')
+            return 'utils.ArrowType()'
+        elif isinstance(obj, EmailType):
+            autogen_context.imports.add('import sqlalchemy_utils as utils')
+            return 'utils.EmailType()'
+        elif isinstance(obj, KAPasswordType):
+            autogen_context.imports.add('from keg_auth.model import KAPasswordType')
+            return 'KAPasswordType()'
+
+    # default rendering for other objects
+    return False
 
 
 def run_migrations_offline():
