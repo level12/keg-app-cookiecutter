@@ -1,5 +1,6 @@
 import time
 import logging
+import requests
 
 from {{cookiecutter.project_namespace}}.celery.app import celery_app as app
 
