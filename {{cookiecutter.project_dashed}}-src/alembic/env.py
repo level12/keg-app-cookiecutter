@@ -27,7 +27,7 @@ def render_item(type_, obj, autogen_context):
     """Apply custom rendering for selected items."""
 
     if type_ == 'type':
-        elif isinstance(obj, ArrowType):
+        if isinstance(obj, ArrowType):
             autogen_context.imports.add('import sqlalchemy_utils as utils')
             return 'utils.ArrowType()'
         elif isinstance(obj, EmailType):
