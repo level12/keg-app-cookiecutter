@@ -19,6 +19,7 @@ class DeployedProfile(object):
 
     MAIL_DEFAULT_SENDER = 'devteam@level12.io'
 
+    CELERY_ALIVE_URL = '{{ app_celery_alive_url }}'
     CELERY = {
         'broker_url': 'amqp://{{ app_rabbitmq_user }}:{{ app_rabbitmq_pass }}@localhost:5672/'
             '{{ app_rabbitmq_vhost }}',

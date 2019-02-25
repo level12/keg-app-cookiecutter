@@ -32,12 +32,15 @@ class HealthCheck(BaseView):
     def get(self):
         # We are happy if this doesn't throw an exception.  Nothing to test b/c we aren't sure
         # there will be a user record.
-        db.engine.execute('select id from users limit 1').fetchall()
+        rows = db.engine.execute('select id from users limit 1').fetchall()
 
         # Log aggregator (e.g. Loggly) can alert on this as a "heartbeat" for the app assuming
         # something like Cronitor is hitting this URL repeatedly to monitor uptime.
         log.info('ping-db ok')
 
-        ctasks.ping.apply_async()
+        alive_url = flask.current_app.config['CELERY_ALIVE_URL']
 
+        ctasks.ping_url.apply_async((alive_url,), priority=10)
+
+        assert len(rows) == 1
         return '{} ok'.format(flask.current_app.name)
