@@ -4,7 +4,7 @@ project_ident: {{ cookiecutter.project_namespace }}
 project_ident_env: {{ cookiecutter.project_namespace }}-{{ '{{' }} app_environment {{'}}'}}
 
 {% raw %}
-app_db_host: "{{ lookup('dig', 'sierra.pvt.level12.net')}}"
+app_db_host: "{{ lookup('dig', '+short', 'sierra.pvt.level12.net', '@ns1.linode.com')}}"
 
 # Host and ip setup
 network_domain: level12.net
