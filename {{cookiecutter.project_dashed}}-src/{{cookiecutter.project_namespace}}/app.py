@@ -5,7 +5,6 @@ from {{cookiecutter.project_namespace}} import extensions, grids, navigation
 from {{cookiecutter.project_namespace}}.libs.db import testing_db_restore
 import {{cookiecutter.project_namespace}}.libs.json as _app_json
 from {{cookiecutter.project_namespace}}.views import blueprints
-from {{cookiecutter.project_namespace}}.grids import Grid
 
 
 class {{cookiecutter.project_class}}(Keg):

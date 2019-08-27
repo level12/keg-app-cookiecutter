@@ -9,7 +9,7 @@ from keg_auth import AuthManager, AuthMailManager, AuthEntityRegistry
 from keg_elements.sentry import SentryClient
 from raven.contrib.flask import Sentry
 
-from {{cookiecutter.project_namespace}}.grids import Grid
+from {{cookiecutter.project_namespace}}.libs.grids import Grid
 
 permissions = (
     'app-permission',
