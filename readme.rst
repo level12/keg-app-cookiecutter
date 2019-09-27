@@ -45,14 +45,13 @@ Once cookiecutter is installed, you can use this cookiecutter like::
 Icons
 =====
 
-Webgrid, by default, use Font-Awesome 4.X for fonts. Those fonts require custom
-fonts that you must include in the `static/fonts/..` directory. We do not ship
-those files with this repo for licensing reasons.
+Webgrid, by default, use Font-Awesome 5 Free for fonts. The font is loaded by the template
+from the Font-Awesome server. We do not ship those files with this repo for licensing reasons.
 
 Development
 ===========
 
-* Dependencies: managed with pipenv
+* Dependencies: managed with pip-tools
 * Readme preview: `restview readme.rst`
 
 In order to QA the output of this project, I run the cookiecutter and apply it to

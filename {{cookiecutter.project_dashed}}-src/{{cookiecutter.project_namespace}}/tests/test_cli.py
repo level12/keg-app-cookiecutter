@@ -1,7 +1,7 @@
 from time import sleep
+from unittest import mock
 
 from keg.testing import CLIBase
-import mock
 
 import {{cookiecutter.project_namespace}}.celery.tasks as tasks
 from {{cookiecutter.project_namespace}}.celery.testing import task_tracker

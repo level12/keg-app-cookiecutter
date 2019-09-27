@@ -26,6 +26,11 @@ Project Setup Checklist
     * Appveyor
     * Sentry
 
+* Build requirements files::
+
+    cd requirements
+    make
+
 * Git init, commit, push
 * Verify
 
