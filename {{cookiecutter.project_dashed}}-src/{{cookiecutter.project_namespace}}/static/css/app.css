@@ -16,17 +16,52 @@
 }
 
 .datagrid .edit-link:before {
-    content: "\f040";
-    font-family: "FontAwesome";
+    content: "\f303";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
 }
 
 .datagrid .delete-link:before {
-    content: "\f014";
-    font-family: "FontAwesome";
+    content: "\f1f8";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
     color: red;
 }
 
 .datagrid .delete-link:hover, .datagrid .edit-link:hover {
     text-decoration: none;
     transform: scale(1.5);
+}
+
+#navigation {
+    border-right: 3px solid #8dc63f;
+    margin-top: 20px;
+}
+
+#navigation li {
+  list-style-type: none;
+}
+
+#navigation li.nav-current {
+  background-color: #eeeeee;
+}
+
+#navigation li a {
+  background-color: transparent;
+  display: block;
+  position: relative;
+  padding: 10px 15px;
+  text-decoration: none;
+}
+
+#navigation li a:hover {
+  background-color: #eeeeee;
+  display: block;
+  position: relative;
+  padding: 10px 15px;
+  color: #23527c;
+}
+
+#navigation li a i.fas {
+  padding-right: 0.4em;
 }
