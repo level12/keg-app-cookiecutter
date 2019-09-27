@@ -10,7 +10,7 @@ jobs:
                   POSTGRES_PASSWORD: password
         steps:
             - checkout
-            - run: python3.7 -m pip install tox cookiecutter
+            - run: python3.7 -m pip install tox cookiecutter pip-tools
             - run:
                 name: version checks
                 command: |
@@ -21,6 +21,11 @@ jobs:
             - run:
                 name: run cookiecutter
                 command: ./cookie-run-ci
+
+            - run:
+                name: build requirements files
+                working_directory: /tmp/keg-app-ci-src/requirements
+                command: make
 
             - run:
                 name: run the tests
