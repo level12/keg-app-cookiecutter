@@ -40,6 +40,41 @@ Project Setup Checklist
 
 * Update this readme
 
+Secrets
+=========
+
+All sensitive information should be stored in LastPass: {{cookiecutter.lastpass_secrets_folder}}
+
+Secrets are pulled in from from LastPass using the `lpass cli`_ binary for both development usage
+and ansible.  Make sure you have the binary installed to a location on your PATH.  The first time
+you use the lpass binary, it will pop up a dialogue asking for you LastPass password.
+
+.. _lpass cli: https://github.com/lastpass/lastpass-cli
+
+Quickstart
+==========
+
+#. Clone the repo
+
+#. `docker-compose up -d` or you will have to have the same services available without Docker.
+
+#. Copy the file `{{cookiecutter.project_namespace}}-config-example.py` at the root of this project to
+   `{{cookiecutter.project_namespace}}-config.py`. Adjust settings as needed for your local dev environment.
+
+#. Run `tox` and verify the tests pass.  Read the tox file to learn how this project sets up
+   dependencies and runs tests.
+
+#. Create and activate a virtualenv with the version of Python tox is testing with.
+
+#. We use pip-tools to manage Python dependencies in this project.  Add dependencies to the
+   list in `requirements/common.in`, run `make` in the `requirements` folder, and `pip-sync`
+   the result.
+
+#. You will have to install the project separately with `pip install -e .`
+
+#. Set up the database tables with `{{cookiecutter.project_namespace}} develop db init`
+
+#. Run the app with `{{cookiecutter.project_namespace}} develop run` and `./scripts/celery-worker`.
 
 Celery
 =================
@@ -50,7 +85,7 @@ The celery worker can be run with::
 
 View your queues and stuff using flower (`pip install flower`)::
 
-    celery flower --app racebetter.celery.worker
+    celery flower --app {{cookiecutter.project_namespace}}.celery.worker
 
 Purging the queues::
 

@@ -1,0 +1,25 @@
+# Docker Notes
+# ============
+# - `docker-compose up`: bring up containers
+# - `docker-compose up -d`: same, but run in background/daemon mode
+# - `docker-compose down`: bring down containers started with `-d`
+# - `docker ps`: show running containers
+# - `docker ps -a`: show all containers
+# - `docker-compose exec <container name> /bin/bash`: get shell in app container
+# - `docker images`
+# - `docker rmi <image name>`
+# - `docker stop $(docker ps -aq)`: stop all running containers
+# - `docker rm $(docker ps -a -q)`: remove all stopped containers
+
+version: '2'
+services:
+  {{ cookiecutter.project_dashed }}-pg:
+      image: postgres:9.6-alpine
+      container_name: {{ cookiecutter.project_dashed }}-pg
+      ports:
+        - '127.0.0.1:12432:5432'
+  {{ cookiecutter.project_dashed }}-rabbitmq:
+      image: rabbitmq:3.7-alpine
+      container_name: {{ cookiecutter.project_dashed }}-rabbitmq
+      ports:
+        - '127.0.0.1:12672:5672'

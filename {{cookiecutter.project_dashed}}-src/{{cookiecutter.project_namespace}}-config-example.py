@@ -23,7 +23,7 @@ class DevProfile(object):
     # Needed by at least KegAuth for sending emails from the command line
     SERVER_NAME = 'localhost:5000'
 
-    CELERY = celery_config(broker_url='amqp://guest@localhost:5672//')
+    CELERY = celery_config(broker_url='amqp://guest@localhost:12672//')
 
 
 class TestProfile(object):
@@ -38,7 +38,7 @@ class TestProfile(object):
     # Mail related tests need to have this set, even though actual email is not generated.
     MAIL_DEFAULT_SENDER = '{{cookiecutter.developer_email}}'
 
-    CELERY = celery_config(broker_url='amqp://guest@localhost:5672//', queue_name='__tests__')
+    CELERY = celery_config(broker_url='amqp://guest@localhost:12672//', queue_name='__tests__')
 
     # When using `py.test --db-restore ...` this setting tells us what the backup files names look
     # like.  See {{cookiecutter.project_namespace}}.libs.db.testing_db_restore() for more details.

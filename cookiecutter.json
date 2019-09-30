@@ -7,7 +7,7 @@
   "python_tox": "py{{cookiecutter.python_version|replace('.', '') }}",
   "python_executable": "python{{cookiecutter.python_version}}",
   "db_url_env_name": "{{ cookiecutter.project_namespace|upper }}_DB_URL",
-  "sa_db_uri_prefix": "postgresql://postgres:password@localhost/",
+  "sa_db_uri_prefix": "postgresql://postgres@localhost:12432/",
   "developer_name": "",
   "developer_email": "",
   "gh_repo_path": "",
