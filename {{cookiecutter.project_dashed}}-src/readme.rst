@@ -79,7 +79,7 @@ Assuming that is successful, you should then deploy::
 
 You can verify the deploy by:
 
-* Browsing to: https://yourapp-beta.level12.biz/ping-db
+* Browsing to: https://yourapp-beta.level12.biz/health-check
 * Browsing to: https://yourapp-beta.level12.biz/exception-test
 
   * Verify this shows up in Sentry
@@ -90,8 +90,10 @@ You can verify the deploy by:
   * Look on the server in ~/syslogs/app.log for the app's log messages
   * Look at logzio, the messages should have shipped there as well through rsyslog
 
-* Setup an alert in Logz.io for the "ping-pong" log message to arrive 5 times in 10 minutes.  This
-  ensures both that Celery is running and that log messages are shipping correctly.
+* Setup health-check and Celery alive monitors on the Cronitor dashboard. This
+  ensures both that the uwsgi service is alive and Celery is running.
+
+  * Example monitors are on Cronitor under KegDemo
 
 
 Database Backup, Restore, and Migration Tests
