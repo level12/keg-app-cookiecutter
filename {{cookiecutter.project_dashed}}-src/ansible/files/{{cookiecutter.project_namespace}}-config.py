@@ -18,6 +18,7 @@ class DeployedProfile(object):
     KEG_LOG_SYSLOG_JSON = True
 
     MAIL_DEFAULT_SENDER = 'devteam@level12.io'
+    MAIL_DEBUG = False
 
     CELERY_ALIVE_URL = '{{ app_celery_alive_url }}'
     CELERY = {

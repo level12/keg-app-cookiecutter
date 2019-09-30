@@ -23,11 +23,11 @@ class DefaultProfile(object):
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-    # For PGSQL applications, it might be good to uncomment this
-    # KEG_DB_ENGINE_OPTIONS = {
-    #     'json_serializer': flask.json.dumps,
-    #     'json_deserializer': flask.json.loads,
-    # }
+    # For PGSQL applications, can be removed for other db platforms
+    KEG_DB_ENGINE_OPTIONS = {
+        'json_serializer': flask.json.dumps,
+        'json_deserializer': flask.json.loads,
+    }
 
     SENTRY_USER_ATTRS = ['email', 'name']
 
@@ -49,11 +49,4 @@ class TestProfile(object):
     CELERY = {
         # This should be for the docker container setup in the CircleCI config.
         'broker_url': 'amqp://guest@localhost:5672//',
-    }
-
-    # This is uncommented here, but not above, for CI purposes. If you don't need this, you can
-    # uncomment it out
-    KEG_DB_ENGINE_OPTIONS = {
-        'json_serializer': flask.json.dumps,
-        'json_deserializer': flask.json.loads,
     }

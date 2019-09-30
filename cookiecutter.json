@@ -17,5 +17,6 @@
   "codecov_badge_token": "",
   "database_pvt_host": "sierra.pvt.level12.net",
   "beta_celery_alive_url": "",
-  "prod_celery_alive_url": ""
+  "prod_celery_alive_url": "",
+  "lastpass_secrets_folder": ""
 }

@@ -2,16 +2,9 @@
 - name: web app provision
   hosts: webservers
   become: yes
-  gather_facts: yes
+  gather_facts: no
   vars_files:
     - "{{ lookup('env','ANSIBLE_ROLES_PATH') }}/includes/vars.yml"
-    - secretvars.yaml
-  vars:
-    project_user_authorized_keys:
-      - "{{ssh_public_keys.rsyring}}"
-      - "{{ssh_public_keys.nharmon}}"
-      - "{{ssh_public_keys.mlewellyn}}"
-      - "{{ssh_public_keys.nzaccardi}}"
   tags:
     - web
   roles:
@@ -50,10 +43,8 @@
 - name: database provisioning
   hosts: dbservers
   become: yes
-  gather_facts: yes
+  gather_facts: no
   become_user: postgres
-  vars_files:
-    - secretvars.yaml
   tags:
     - db
   tasks:

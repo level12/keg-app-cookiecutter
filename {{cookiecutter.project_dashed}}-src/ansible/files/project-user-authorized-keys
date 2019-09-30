@@ -1,0 +1,6 @@
+{% raw %}
+{{ssh_public_keys.rsyring}}
+{{ssh_public_keys.nharmon}}
+{{ssh_public_keys.mlewellyn}}
+{{ssh_public_keys.nzaccardi}}
+{% endraw %}

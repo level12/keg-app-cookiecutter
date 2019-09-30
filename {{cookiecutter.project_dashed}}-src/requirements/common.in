@@ -13,6 +13,7 @@ raven
 requests
 responses
 simplejson
+sqlalchemy-utils
 tox
 xlsxwriter
 

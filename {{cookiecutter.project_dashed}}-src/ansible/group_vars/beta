@@ -1,9 +1,9 @@
 app_environment: beta
 
-app_celery_alive_url: '{{ cookiecutter.beta_celery_alive_url }}'
+app_celery_alive_url: 'https://cronitor.link/{{ cookiecutter.beta_celery_alive_url }}/complete'
 
 {% raw %}
-app_sentry_dsn: "{{ app_sentry_dsn_beta }}"
+app_sentry_dsn: "{{ app_sentry_dsn }}"
 app_flask_secret_key: "{{ app_flask_secret_key_beta }}"
 app_db_pass: "{{ app_db_pass_beta }}"
 app_rabbitmq_pass: "{{ app_rabbitmq_pass_beta }}"
