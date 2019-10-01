@@ -3,8 +3,8 @@ jobs:
     build:
         docker:
             - image: level12/python-test-multi
-            - image: rabbitmq
-            - image: postgres:9.6
+            - image: rabbitmq:{{cookiecutter.rabbitmq_version}}
+            - image: postgres:{{cookiecutter.db_postgres_version}}
               environment:
                   POSTGRES_USER: postgres
                   POSTGRES_PASSWORD: password

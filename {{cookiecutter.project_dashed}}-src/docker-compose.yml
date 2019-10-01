@@ -14,12 +14,12 @@
 version: '2'
 services:
   {{ cookiecutter.project_dashed }}-pg:
-      image: postgres:9.6-alpine
+      image: postgres:{{cookiecutter.db_postgres_version}}-alpine
       container_name: {{ cookiecutter.project_dashed }}-pg
       ports:
         - '127.0.0.1:12432:5432'
   {{ cookiecutter.project_dashed }}-rabbitmq:
-      image: rabbitmq:3.7-alpine
+      image: rabbitmq:{{cookiecutter.rabbitmq_version}}-alpine
       container_name: {{ cookiecutter.project_dashed }}-rabbitmq
       ports:
         - '127.0.0.1:12672:5672'
