@@ -12,9 +12,10 @@ class DevProfile(object):
     #   TCP/IP based: postgresql://USER:PASS@localhost/{{cookiecutter.project_namespace}}
     SQLALCHEMY_DATABASE_URI = '{{cookiecutter.sa_db_uri_prefix.rstrip("/")}}/{{cookiecutter.project_namespace}}'
 
-    # TODO: are these needed?  If so, add comment for where they are used.
+    # These are used for creating an initial developer user following database init
     DEVELOPER_NAME = '{{cookiecutter.developer_name}}'
     DEVELOPER_EMAIL = '{{cookiecutter.developer_email}}'
+    DEVELOPER_PASSWORD = '{{cookiecutter.developer_password}}'
 
     MAIL_DEFAULT_SENDER = '{{cookiecutter.developer_email}}'
 

@@ -12,6 +12,7 @@
   "rabbitmq_version": "3.7",
   "developer_name": "",
   "developer_email": "",
+  "developer_password": "",
   "gh_repo_path": "",
   "gh_repo_name": "",
   "circle_badge_token": "",

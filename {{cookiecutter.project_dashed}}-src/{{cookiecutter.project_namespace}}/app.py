@@ -45,3 +45,18 @@ class DatabaseManager(keg.db.DatabaseManager):
             testing_db_restore(app)
         else:
             self.db_init_with_clear()
+
+    def db_init(self):
+        super().db_init()
+        # If all the developer variables are set, then create our first user.
+        try:
+            from {{cookiecutter.project_namespace}}.model.entities import User
+            User.add(
+                name=self.app.config['DEVELOPER_NAME'],
+                email=self.app.config['DEVELOPER_EMAIL'],
+                password=self.app.config['DEVELOPER_PASSWORD'],
+                is_verified=True,
+                is_superuser=True,
+            )
+        except KeyError:
+            pass
