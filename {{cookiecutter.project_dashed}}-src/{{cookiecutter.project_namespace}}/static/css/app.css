@@ -1,3 +1,12 @@
+.alert {
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.alert-dismissible .close {
+    right: 0px;
+}
+
 .alert-danger {
     color:#a94442;
     background-color:#f2dede;

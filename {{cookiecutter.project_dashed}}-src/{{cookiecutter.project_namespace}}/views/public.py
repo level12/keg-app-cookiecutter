@@ -43,3 +43,15 @@ class HealthCheck(BaseView):
         ctasks.ping_url.apply_async((alive_url,), priority=10)
 
         return '{} ok'.format(flask.current_app.name)
+
+
+class AlertsDemo(BaseView):
+    blueprint = public_bp
+    template_name = 'base-page.html'
+
+    def get(self):
+        flask.flash('Success message', 'success')
+        flask.flash('Info message', 'info')
+        flask.flash('Warning message', 'warning')
+        flask.flash('Error message', 'error')
+        flask.flash('Danger message', 'danger')

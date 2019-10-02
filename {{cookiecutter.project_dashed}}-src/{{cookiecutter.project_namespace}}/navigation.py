@@ -14,6 +14,7 @@ def init_navigation(app):
                 NavItem('Hello', NavURL('public.hello')),
                 NavItem('Protected', NavURL('private.protected_example'),
                         icon_class='fas fa-lock'),
+                NavItem('Alerts Demo', NavURL('public.alerts-demo')),
                 icon_class='fas fa-file',
             ),
             NavItem(
