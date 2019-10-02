@@ -40,6 +40,49 @@ Project Setup Checklist
 
 * Update this readme
 
+What's In This App
+=======================
+
+The application produced by keg-app-cookiecutter is intended to integrate the various tools and
+practices needed for Keg apps. The readme sections below have specifics for several areas that
+will be applicable to most projects and should likely be retained. This section, and the checklist
+above, can be removed in favor of project-specific information.
+
+Tools/concepts included in this app:
+
+* Environment setup and usage with pip-tools
+* Configuration and helpful defaults
+* Docker setup for dependency services
+* Basic app, model, views
+* Keg-Auth integration
+
+  * User/group/permission/bundle model
+  * Email notifications
+  * Use of view test helpers to efficiently set up an authenticated client
+
+* Webgrid setup
+* Celery setup and usage for background process workers
+* Template/navigation
+
+  * Uses Keg-Auth navigation helpers
+
+    * Limits available menu items to those that pass basic authorization tests
+    * Auto-expands menu to the item matching the current view, and highlights it
+
+* Example views showing public/private authentication requirements and authorization
+* Migrations with alembic
+
+  * Support for separation of schema and data migrations
+
+* Deployment through ansible
+
+  * LastPass CLI usage for gathering deployment secrets
+
+* CI configuration
+* Monitoring needs for app health and celery
+* Sentry setup for exception handling/reporting
+* Accepted linting standards
+
 Secrets
 =========
 
