@@ -1,0 +1,22 @@
+Keg-Auth
+alembic
+celery
+flake8
+flask-bootstrap
+Flask-Mail
+flask-webtest
+psycopg2-binary
+pyquery
+pytest
+pytest-cov
+raven
+requests
+responses
+simplejson
+sqlalchemy-utils
+tox
+xlsxwriter
+
+# Additional Flake8 checks
+-e git+https://github.com/level12/flake8-level12.git#egg=flake8_level12
+

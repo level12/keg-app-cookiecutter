@@ -9,6 +9,7 @@ class DeployedProfile(object):
         '@{{app_db_host}}/{{app_db_name}}'
 
     SENTRY_DSN = '{{app_sentry_dsn}}'
+    SENTRY_ENVIRONMENT = '{{ app_environment }}'
 
     KEG_KEYRING_ENABLE = False
 
@@ -17,7 +18,9 @@ class DeployedProfile(object):
     KEG_LOG_SYSLOG_JSON = True
 
     MAIL_DEFAULT_SENDER = 'devteam@level12.io'
+    MAIL_DEBUG = False
 
+    CELERY_ALIVE_URL = '{{ app_celery_alive_url }}'
     CELERY = {
         'broker_url': 'amqp://{{ app_rabbitmq_user }}:{{ app_rabbitmq_pass }}@localhost:5672/'
             '{{ app_rabbitmq_vhost }}',

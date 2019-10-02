@@ -13,7 +13,7 @@ from {{cookiecutter.project_namespace}}.extensions import auth_entity_registry
 log = logging.getLogger(__name__)
 
 # Default cascade setting for parent/child relationships.  Should get set on parent side.
-# More info: https://level12.atlassian.net/wiki/spaces/devs/blog/2015/06/17/14286861/Proper+Configuration+of+SQLAlchemy+Parent+Child+Relationships  # noqa
+# Docs: https://l12.io/sa-parent-child-relationship-config
 _rel_cascade = 'all, delete-orphan'
 
 

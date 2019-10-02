@@ -1,4 +1,4 @@
-import mock
+from unittest import mock
 
 from {{cookiecutter.project_namespace}}.celery import tasks
 from {{cookiecutter.project_namespace}}.celery.testing import task_tracker

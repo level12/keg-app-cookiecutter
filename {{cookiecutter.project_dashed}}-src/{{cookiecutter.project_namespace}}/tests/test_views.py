@@ -108,5 +108,6 @@ class TestBlogCrud(AuthViewBase):
 
     def test_list_export(self):
         entities.Blog.testing_create()
-        resp = self.client.get('/blog-posts?export_to=xls')
-        assert resp.content_type == 'application/vnd.ms-excel'
+        resp = self.client.get('/blog-posts?export_to=xlsx')
+        mime_type = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        assert resp.content_type == mime_type

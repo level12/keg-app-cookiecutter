@@ -1,17 +1,22 @@
-
 use_pvt_dns: false
 
 project_ident: {{ cookiecutter.project_namespace }}
+project_ident_env: {{ cookiecutter.project_namespace }}-{{ '{{' }} app_environment {{'}}'}}
+project_authorized_keys_fpath: files/project-user-authorized-keys
 
-app_db_host: "{{ cookiecutter.database_pvt_host }}"
+app_db_host: "{{ '{{' }} lookup('dig', '+short', '{{cookiecutter.database_pvt_host}}', '@ns1.linode.com') {{ '}}' }}"
+
 {% raw %}
 # Host and ip setup
+# Note: if you get a dnspython error from dig lookups, install dnspython with pip in local env
 network_domain: level12.net
-host_fqdn: "{{inventory_hostname}}.{{network_domain}}"
-host_ip: "{{ lookup('pipe', 'dig +short ' + host_fqdn) }}"
-host_fqdn_pvt: "{{inventory_hostname}}.pvt.{{network_domain}}"
-host_ip_pvt: "{{ lookup('pipe', 'dig +short ' + host_fqdn_pvt) }}"
+internal_hostname: "{{ inventory_hostname }}"
+host_fqdn: "{{ internal_hostname }}.{{network_domain}}"
+host_ip: "{{ lookup('dig', '+short', host_fqdn, '@ns1.linode.com') }}"
+host_fqdn_pvt: "{{ internal_hostname }}.pvt.{{network_domain}}"
+host_ip_pvt: "{{ lookup('dig', '+short', host_fqdn_pvt, '@ns1.linode.com') }}"
 
+ansible_os_family: Debian
 ansible_ssh_host: "{{ host_fqdn_pvt if use_pvt_dns else host_fqdn }}"
 ansible_service_mgr: systemd
 
@@ -38,8 +43,10 @@ nginx_vhost_ssl_cert_key_fpath: /etc/letsencrypt/live/{{ nginx_vhost_server_name
 
 
 pyapp3_app_type: wsgi
-# If you change this, make sure you change the pip version used in wheelhouse.ini.
-pyapp3_python_version: 3.5
+pyapp3_python_version: 3.7
+pyapp3_venv_use_timestamp: True
+pyapp3_requirements_fpath: "{{ pyapp3_requirements_dpath }}/common.txt"
+pyapp3_install_from_wheelhouse: false
 pyapp3_settings_dest_fpath: "{{ pyapp3_source_dpath }}/{{project_ident}}-config.py"
 pyapp3_settings_src_fpath: "files/{{project_ident}}-config.py"
 {% endraw %}

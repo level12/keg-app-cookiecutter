@@ -26,6 +26,11 @@ Project Setup Checklist
     * Appveyor
     * Sentry
 
+* Build requirements files::
+
+    cd requirements
+    make
+
 * Git init, commit, push
 * Verify
 
@@ -35,6 +40,41 @@ Project Setup Checklist
 
 * Update this readme
 
+Secrets
+=========
+
+All sensitive information should be stored in LastPass: {{cookiecutter.lastpass_secrets_folder}}
+
+Secrets are pulled in from from LastPass using the `lpass cli`_ binary for both development usage
+and ansible.  Make sure you have the binary installed to a location on your PATH.  The first time
+you use the lpass binary, it will pop up a dialogue asking for you LastPass password.
+
+.. _lpass cli: https://github.com/lastpass/lastpass-cli
+
+Quickstart
+==========
+
+#. Clone the repo
+
+#. `docker-compose up -d` or you will have to have the same services available without Docker.
+
+#. Copy the file `{{cookiecutter.project_namespace}}-config-example.py` at the root of this project to
+   `{{cookiecutter.project_namespace}}-config.py`. Adjust settings as needed for your local dev environment.
+
+#. Run `tox` and verify the tests pass.  Read the tox file to learn how this project sets up
+   dependencies and runs tests.
+
+#. Create and activate a virtualenv with the version of Python tox is testing with.
+
+#. We use pip-tools to manage Python dependencies in this project.  Add dependencies to the
+   list in `requirements/common.in`, run `make` in the `requirements` folder, and `pip-sync`
+   the result.
+
+#. You will have to install the project separately with `pip install -e .`
+
+#. Set up the database tables with `{{cookiecutter.project_namespace}} develop db init`
+
+#. Run the app with `{{cookiecutter.project_namespace}} develop run` and `./scripts/celery-worker`.
 
 Celery
 =================
@@ -45,7 +85,7 @@ The celery worker can be run with::
 
 View your queues and stuff using flower (`pip install flower`)::
 
-    celery flower --app racebetter.celery.worker
+    celery flower --app {{cookiecutter.project_namespace}}.celery.worker
 
 Purging the queues::
 
@@ -74,7 +114,7 @@ Assuming that is successful, you should then deploy::
 
 You can verify the deploy by:
 
-* Browsing to: https://yourapp-beta.level12.biz/ping-db
+* Browsing to: https://yourapp-beta.level12.biz/health-check
 * Browsing to: https://yourapp-beta.level12.biz/exception-test
 
   * Verify this shows up in Sentry
@@ -85,8 +125,10 @@ You can verify the deploy by:
   * Look on the server in ~/syslogs/app.log for the app's log messages
   * Look at logzio, the messages should have shipped there as well through rsyslog
 
-* Setup an alert in Logz.io for the "ping-pong" log message to arrive 5 times in 10 minutes.  This
-  ensures both that Celery is running and that log messages are shipping correctly.
+* Setup health-check and Celery alive monitors on the Cronitor dashboard. This
+  ensures both that the uwsgi service is alive and Celery is running.
+
+  * Example monitors are on Cronitor under KegDemo
 
 
 Database Backup, Restore, and Migration Tests

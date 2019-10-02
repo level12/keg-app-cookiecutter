@@ -3,11 +3,13 @@
   "project_dashed": "{{ cookiecutter.project_name|lower|replace(' ', '-') }}",
   "project_namespace": "{{ cookiecutter.project_name|lower|replace(' ', '') }}",
   "project_class": "{{ cookiecutter.project_name|replace(' ', '') }}",
-  "python_version": "3.6",
+  "python_version": "3.7",
   "python_tox": "py{{cookiecutter.python_version|replace('.', '') }}",
   "python_executable": "python{{cookiecutter.python_version}}",
   "db_url_env_name": "{{ cookiecutter.project_namespace|upper }}_DB_URL",
-  "sa_db_uri_prefix": "postgresql://postgres:password@localhost/",
+  "db_postgres_version": "11",
+  "sa_db_uri_prefix": "postgresql://postgres@localhost:12432/",
+  "rabbitmq_version": "3.7",
   "developer_name": "",
   "developer_email": "",
   "gh_repo_path": "",
@@ -15,5 +17,8 @@
   "circle_badge_token": "",
   "codecov_api_token": "",
   "codecov_badge_token": "",
-  "database_pvt_host": "sierra.pvt.level12.net"
+  "database_pvt_host": "sierra.pvt.level12.net",
+  "beta_celery_alive_url": "",
+  "prod_celery_alive_url": "",
+  "lastpass_secrets_folder": ""
 }

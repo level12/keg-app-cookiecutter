@@ -7,17 +7,21 @@ def init_navigation(app):
     app.auth_manager.add_navigation_menu(
         'main',
         NavItem(
-            NavItem('Home', NavURL('public.home')),
+            NavItem('Home', NavURL('public.home'), icon_class='fas fa-home'),
+            NavItem('Blog', NavURL('private.blog:list'), icon_class='fas fa-blog'),
             NavItem(
                 'Pages',
                 NavItem('Hello', NavURL('public.hello')),
-                NavItem('Protected', NavURL('private.protected_example')),
+                NavItem('Protected', NavURL('private.protected_example'),
+                        icon_class='fas fa-lock'),
+                icon_class='fas fa-file',
             ),
             NavItem(
                 'Management',
-                NavItem('Bundles', NavURL('auth.bundle:list')),
-                NavItem('Groups', NavURL('auth.group:list')),
-                NavItem('Users', NavURL('auth.user:list')),
+                NavItem('Bundles', NavURL('auth.bundle:list'), icon_class='fas fa-briefcase'),
+                NavItem('Groups', NavURL('auth.group:list'), icon_class='fas fa-users'),
+                NavItem('Users', NavURL('auth.user:list'), icon_class='fas fa-user'),
+                icon_class='fas fa-cog',
             ),
         )
     )

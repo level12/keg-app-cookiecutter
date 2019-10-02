@@ -4,6 +4,8 @@ import flask
 from keg.db import db
 from keg.web import BaseView, rule
 
+from {{cookiecutter.project_namespace}}.celery import tasks as ctasks
+
 public_bp = flask.Blueprint('public', __name__,)
 log = logging.getLogger(__name__)
 
@@ -21,7 +23,7 @@ class Hello(BaseView):
         self.assign('name', name)
 
 
-class PingDB(BaseView):
+class HealthCheck(BaseView):
     """ An endpoint our monitoring service can watch that, unlike Keg's /ping, will also
         test connectivity to the DB before returning an "ok" message.
     """
@@ -35,5 +37,9 @@ class PingDB(BaseView):
         # Log aggregator (e.g. Loggly) can alert on this as a "heartbeat" for the app assuming
         # something like Cronitor is hitting this URL repeatedly to monitor uptime.
         log.info('ping-db ok')
+
+        alive_url = flask.current_app.config['CELERY_ALIVE_URL']
+
+        ctasks.ping_url.apply_async((alive_url,), priority=10)
 
         return '{} ok'.format(flask.current_app.name)

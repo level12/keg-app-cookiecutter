@@ -41,10 +41,17 @@ Once cookiecutter is installed, you can use this cookiecutter like::
 
     cookiecutter <KEG-CC-DIR> --no-input --overwrite-if-exists -o <CREATE-PROJ-IN-DIR>
 
+
+Icons
+=====
+
+Webgrid, by default, use Font-Awesome 5 Free for fonts. The font is loaded by the template
+from the Font-Awesome server. We do not ship those files with this repo for licensing reasons.
+
 Development
 ===========
 
-* Dependencies: managed with pipenv
+* Dependencies: managed with pip-tools
 * Readme preview: `restview readme.rst`
 
 In order to QA the output of this project, I run the cookiecutter and apply it to

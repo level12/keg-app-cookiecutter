@@ -4,9 +4,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container" id="navigation">
-    {{ navigation.render_menu(auth_manager.menus['main']) }}
-</div>
 <div class="container" id="flash-messages">
     {%- with messages = get_flashed_messages(with_categories=True) %}
     {%- if messages %}
@@ -18,8 +15,17 @@
     {%- endif %}
     {%- endwith %}
 </div>
-<div class="container" id="page-content">
-    {% block page_content %}{% endblock %}
+<div class="container-fluid" id="page-content">
+    <div class="row">
+        <div class="col-sm-2 hidden-xs">
+            <div id="navigation">
+                {{ navigation.render_menu(auth_manager.menus['main'], expand_to_current=True) }}
+            </div>
+        </div>
+        <div class="col-sm-10 col-xs-12">
+            {% block page_content %}{% endblock %}
+        </div>
+    </div>
 </div>
 {% endblock %}
 {% endraw %}

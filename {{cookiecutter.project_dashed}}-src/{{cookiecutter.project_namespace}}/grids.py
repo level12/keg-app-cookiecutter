@@ -3,11 +3,7 @@ import webgrid
 import webgrid.flask
 
 from {{cookiecutter.project_namespace}}.model import entities
-
-
-class Grid(webgrid.BaseGrid):
-    manager = webgrid.flask.WebGrid()
-    session_on = True
+from {{cookiecutter.project_namespace}}.libs.grids import Grid
 
 
 class Blog(Grid):

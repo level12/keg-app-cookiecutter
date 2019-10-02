@@ -1,7 +1,8 @@
-#!/bin/bash
+#!/bin/bash -e
 # Used in .circleci/config.yml to run the cookiecutter.
 
-CCSRC_PATH=$(dirname $(readlink -f $0))
+# Get the current directory name in a "portable" way...
+CCSRC_PATH="$(dirname "$(python -c 'import os, sys; print(os.path.realpath(sys.argv[1]))' $0)")"
 PROJECTS_PATH=/tmp/
 
 cookiecutter $CCSRC_PATH --no-input --overwrite-if-exists -o $PROJECTS_PATH \

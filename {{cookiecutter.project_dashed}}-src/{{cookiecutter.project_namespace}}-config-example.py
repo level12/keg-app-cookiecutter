@@ -1,3 +1,4 @@
+from {{cookiecutter.project_namespace}}.celery.config import celery_config
 
 DEFAULT_PROFILE = 'DevProfile'
 
@@ -17,13 +18,12 @@ class DevProfile(object):
 
     MAIL_DEFAULT_SENDER = '{{cookiecutter.developer_email}}'
 
+    KEG_LOG_SYSLOG_ENABLED = False
+
     # Needed by at least KegAuth for sending emails from the command line
     SERVER_NAME = 'localhost:5000'
 
-    CELERY = {
-        # Local rabbitmq server
-        'broker_url': 'amqp://guest@localhost:5672//',
-    }
+    CELERY = celery_config(broker_url='amqp://guest@localhost:12672//')
 
 
 class TestProfile(object):
@@ -38,13 +38,7 @@ class TestProfile(object):
     # Mail related tests need to have this set, even though actual email is not generated.
     MAIL_DEFAULT_SENDER = '{{cookiecutter.developer_email}}'
 
-    CELERY = {
-        # Local rabbitmq server
-        'broker_url': 'amqp://guest@localhost:5672//',
-        # Celery integration tests should use a different queue in case we have Celery workers
-        # running in development and happen to run tests at the same time.
-        'task_default_queue': '__tests__',
-    }
+    CELERY = celery_config(broker_url='amqp://guest@localhost:12672//', queue_name='__tests__')
 
     # When using `py.test --db-restore ...` this setting tells us what the backup files names look
     # like.  See {{cookiecutter.project_namespace}}.libs.db.testing_db_restore() for more details.
