@@ -5,7 +5,7 @@ from {{cookiecutter.project_namespace}} import extensions, navigation
 from {{cookiecutter.project_namespace}}.libs.db import testing_db_restore
 from {{cookiecutter.project_namespace}}.libs.grids import Grid
 import {{cookiecutter.project_namespace}}.libs.json as _app_json
-from {{cookiecutter.project_namespace}}.views import blueprints
+from {{cookiecutter.project_namespace}}.auth import blueprints
 
 
 class {{cookiecutter.project_class}}(Keg):
