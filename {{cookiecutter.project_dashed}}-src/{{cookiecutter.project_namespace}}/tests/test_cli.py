@@ -29,28 +29,15 @@ class TestCelerySetup:
     def setup(self):
         task_tracker.reset()
 
+    @mock.patch.object(tasks, 'requests', autospec=True, spec_set=True)
     @mock.patch('{{cookiecutter.project_namespace}}.celery.app.db', autospec=True, spec_set=True)
-    def test_removed_ok(self, m_db, celery_session_worker):
+    def test_removed_ok(self, m_db, m_requests, celery_session_worker):
         """ The DB session needs to be removed when every task is finished. """
 
-        tasks.ping.delay()
+        tasks.ping_url.delay('foo')
 
         # Wait for the task to complete in a different thread.
-        task_tracker.wait_for('{{cookiecutter.project_namespace}}.celery.tasks.ping')
-        # Cleanup is sometimes not complete at this point, need to sleep a minimal amount more
-        sleep(0.3)
-
-        m_db.session.remove.assert_called_once_with()
-
-    @mock.patch('{{cookiecutter.project_namespace}}.celery.app.db', autospec=True, spec_set=True)
-    def test_removed_error(self, m_db, celery_session_worker):
-        """ DB session removal needs to work for exceptions too. """
-
-        tasks.error.delay()
-
-        # Wait for the task to complete in a different thread.
-        task_tracker.wait_for('{{cookiecutter.project_namespace}}.celery.tasks.error',
-                              throw_failure=False)
+        task_tracker.wait_for('{{cookiecutter.project_namespace}}.celery.tasks.ping_url')
         # Cleanup is sometimes not complete at this point, need to sleep a minimal amount more
         sleep(0.3)
 
