@@ -1,8 +1,9 @@
 from keg import Keg
 import keg.db
 
-from {{cookiecutter.project_namespace}} import extensions, grids, navigation
+from {{cookiecutter.project_namespace}} import extensions, navigation
 from {{cookiecutter.project_namespace}}.libs.db import testing_db_restore
+from {{cookiecutter.project_namespace}}.libs.grids import Grid
 import {{cookiecutter.project_namespace}}.libs.json as _app_json
 from {{cookiecutter.project_namespace}}.views import blueprints
 
@@ -29,8 +30,8 @@ class {{cookiecutter.project_class}}(Keg):
 
         navigation.init_navigation(self)
 
-        grids.Grid.manager.init_db(keg.db.db)
-        grids.Grid.manager.init_app(self)
+        Grid.manager.init_db(keg.db.db)
+        Grid.manager.init_app(self)
 
 
 class DatabaseManager(keg.db.DatabaseManager):

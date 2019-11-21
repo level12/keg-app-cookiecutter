@@ -2,25 +2,12 @@ import logging
 
 import flask
 from keg.db import db
-from keg.web import BaseView, rule
+from keg.web import BaseView
 
 from {{cookiecutter.project_namespace}}.celery import tasks as ctasks
 
 public_bp = flask.Blueprint('public', __name__,)
 log = logging.getLogger(__name__)
-
-
-@public_bp.route('/')
-def home():
-    return 'Hello World from {{cookiecutter.project_name}}!'
-
-
-class Hello(BaseView):
-    blueprint = public_bp
-    rule('<name>')
-
-    def get(self, name='World'):
-        self.assign('name', name)
 
 
 class HealthCheck(BaseView):
@@ -43,15 +30,3 @@ class HealthCheck(BaseView):
         ctasks.ping_url.apply_async((alive_url,), priority=10)
 
         return '{} ok'.format(flask.current_app.name)
-
-
-class AlertsDemo(BaseView):
-    blueprint = public_bp
-    template_name = 'base-page.html'
-
-    def get(self):
-        flask.flash('Success message', 'success')
-        flask.flash('Info message', 'info')
-        flask.flash('Warning message', 'warning')
-        flask.flash('Error message', 'error')
-        flask.flash('Danger message', 'danger')
