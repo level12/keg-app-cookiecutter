@@ -2,25 +2,31 @@ import logging
 
 import flask
 from keg.db import db
-from keg.web import BaseView, rule
+from keg.web import BaseView
+from keg_auth import make_blueprint
+from keg_auth.forms import user_form as user_form_base
+from keg_auth.views import User as UserBase
 
 from {{cookiecutter.project_namespace}}.celery import tasks as ctasks
+from {{cookiecutter.project_namespace}}.extensions import auth_manager
 
-public_bp = flask.Blueprint('public', __name__,)
 log = logging.getLogger(__name__)
 
 
-@public_bp.route('/')
-def home():
-    return 'Hello World from {{cookiecutter.project_name}}!'
+def user_form(config, allow_superuser, endpoint, fields=['name', 'is_enabled']):
+    return user_form_base(config, allow_superuser, endpoint, fields=fields)
 
 
-class Hello(BaseView):
-    blueprint = public_bp
-    rule('<name>')
+class User(UserBase):
+    # need to make this a static method so it isn't bound on the view instance
+    form_cls = staticmethod(user_form)
 
-    def get(self, name='World'):
-        self.assign('name', name)
+
+# This blueprint is for keg-auth's views (Login, user management, etc.)
+auth_bp = make_blueprint(__name__, auth_manager, user_crud_cls=User)
+private_bp = flask.Blueprint('private', __name__,)
+public_bp = flask.Blueprint('public', __name__,)
+blueprints = (auth_bp, public_bp, private_bp,)
 
 
 class HealthCheck(BaseView):
@@ -43,15 +49,3 @@ class HealthCheck(BaseView):
         ctasks.ping_url.apply_async((alive_url,), priority=10)
 
         return '{} ok'.format(flask.current_app.name)
-
-
-class AlertsDemo(BaseView):
-    blueprint = public_bp
-    template_name = 'base-page.html'
-
-    def get(self):
-        flask.flash('Success message', 'success')
-        flask.flash('Info message', 'info')
-        flask.flash('Warning message', 'warning')
-        flask.flash('Error message', 'error')
-        flask.flash('Danger message', 'danger')

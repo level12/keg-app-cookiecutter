@@ -5,8 +5,6 @@ from keg_elements.db.mixins import DefaultColsMixin, MethodsMixin
 import keg_auth
 import sqlalchemy as sa
 from sqlalchemy.dialects.postgresql import JSONB
-import sqlalchemy.orm as saorm
-from sqlalchemy_utils import ArrowType, EmailType
 
 from {{cookiecutter.project_namespace}}.extensions import auth_entity_registry
 
@@ -19,37 +17,6 @@ _rel_cascade = 'all, delete-orphan'
 
 class EntityMixin(DefaultColsMixin, MethodsMixin):
     pass
-
-
-class Blog(db.Model, EntityMixin):
-    __tablename__ = 'blogs'
-
-    title = sa.Column(sa.Unicode(250), nullable=False, unique=True)
-    posted_utc = sa.Column(ArrowType, nullable=False)
-
-    comments = saorm.relationship('Comment', cascade=_rel_cascade, passive_deletes=True,
-                                  foreign_keys='Comment.blog_id')
-
-
-class Comment(db.Model, EntityMixin):
-    __tablename__ = 'comments'
-    __table_args__ = (
-        sa.UniqueConstraint('blog_id', 'author_name', name='uc_comments_unique_author'),
-    )
-
-    # FK and parent relationship
-    blog_id = sa.Column(sa.ForeignKey(Blog.id, ondelete='cascade'), nullable=False)
-    blog = saorm.relationship(Blog, foreign_keys=blog_id)
-
-    author_name = sa.Column(sa.Unicode(250), nullable=False)
-    author_email = sa.Column(EmailType)
-    comment = sa.Column(sa.Unicode, nullable=False)
-
-    @classmethod
-    def testing_create(cls, **kwargs):
-        if 'blog' not in kwargs and 'blog_id' not in kwargs:
-            kwargs['blog'] = Blog.testing_create(_commit=False)
-        return super().testing_create(**kwargs)
 
 
 @auth_entity_registry.register_user

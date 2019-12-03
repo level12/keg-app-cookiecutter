@@ -7,16 +7,6 @@ def init_navigation(app):
     app.auth_manager.add_navigation_menu(
         'main',
         NavItem(
-            NavItem('Home', NavURL('public.home'), icon_class='fas fa-home'),
-            NavItem('Blog', NavURL('private.blog:list'), icon_class='fas fa-blog'),
-            NavItem(
-                'Pages',
-                NavItem('Hello', NavURL('public.hello')),
-                NavItem('Protected', NavURL('private.protected_example'),
-                        icon_class='fas fa-lock'),
-                NavItem('Alerts Demo', NavURL('public.alerts-demo')),
-                icon_class='fas fa-file',
-            ),
             NavItem(
                 'Management',
                 NavItem('Bundles', NavURL('auth.bundle:list'), icon_class='fas fa-briefcase'),
