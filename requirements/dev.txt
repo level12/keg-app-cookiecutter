@@ -7,7 +7,7 @@
 argh==0.26.2              # via watchdog
 arrow==0.15.2
 binaryornot==0.4.4
-bleach==3.1.0             # via readme-renderer
+bleach==3.1.1             # via readme-renderer
 certifi==2019.9.11
 chardet==3.0.4
 click==7.0
