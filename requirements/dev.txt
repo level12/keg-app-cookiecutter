@@ -5,29 +5,29 @@
 #    pip-compile --output-file=dev.txt dev.in
 #
 argh==0.26.2              # via watchdog
-arrow==0.15.2
-binaryornot==0.4.4
-bleach==3.1.0             # via readme-renderer
-certifi==2019.9.11
-chardet==3.0.4
-click==7.0
-cookiecutter==1.6.0
+arrow==0.15.2             # via -r requirements/common.txt, jinja2-time
+binaryornot==0.4.4        # via -r requirements/common.txt, cookiecutter
+bleach==3.1.2             # via readme-renderer
+certifi==2019.9.11        # via -r requirements/common.txt, requests
+chardet==3.0.4            # via -r requirements/common.txt, binaryornot, requests
+click==7.0                # via -r requirements/common.txt, cookiecutter
+cookiecutter==1.6.0       # via -r requirements/common.txt
 docutils==0.15.2          # via readme-renderer, restview
-future==0.17.1
-idna==2.8
-jinja2-time==0.2.0
-jinja2==2.10.1
-markupsafe==1.1.1
+future==0.17.1            # via -r requirements/common.txt, cookiecutter
+idna==2.8                 # via -r requirements/common.txt, requests
+jinja2-time==0.2.0        # via -r requirements/common.txt, cookiecutter
+jinja2==2.10.1            # via -r requirements/common.txt, cookiecutter, jinja2-time
+markupsafe==1.1.1         # via -r requirements/common.txt, jinja2
 pathtools==0.1.2          # via watchdog
-poyo==0.5.0
+poyo==0.5.0               # via -r requirements/common.txt, cookiecutter
 pygments==2.4.2           # via readme-renderer, restview
-python-dateutil==2.8.0
+python-dateutil==2.8.0    # via -r requirements/common.txt, arrow
 pyyaml==5.1.2             # via watchdog
 readme-renderer==24.0     # via restview
-requests==2.22.0
-restview==2.9.2
-six==1.12.0
-urllib3==1.25.6
-watchdog==0.9.0
+requests==2.22.0          # via -r requirements/common.txt, cookiecutter
+restview==2.9.2           # via -r requirements/dev.in
+six==1.12.0               # via -r requirements/common.txt, bleach, python-dateutil, readme-renderer
+urllib3==1.25.6           # via -r requirements/common.txt, requests
+watchdog==0.9.0           # via -r requirements/dev.in
 webencodings==0.5.1       # via bleach
-whichcraft==0.6.1
+whichcraft==0.6.1         # via -r requirements/common.txt, cookiecutter
