@@ -1,5 +1,5 @@
-sierra-beta internal_hostname=sierra
-sierra-prod internal_hostname=sierra
+circus-beta internal_hostname=circus
+circus-prod internal_hostname=circus
 
 [webservers]
 vault
@@ -7,12 +7,12 @@ bank
 
 [beta]
 bank
-sierra-beta
+circus-beta
 
 [prod]
 vault
-sierra-prod
+circus-prod
 
 [dbservers]
-sierra-prod
-sierra-beta
+circus-prod
+circus-beta

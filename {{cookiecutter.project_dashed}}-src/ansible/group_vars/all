@@ -4,7 +4,7 @@ project_ident: {{ cookiecutter.project_namespace }}
 project_ident_env: {{ cookiecutter.project_namespace }}-{{ '{{' }} app_environment {{'}}'}}
 project_authorized_keys_fpath: files/project-user-authorized-keys
 
-app_db_host: "{{ '{{' }} lookup('dig', '+short', '{{cookiecutter.database_pvt_host}}', '@ns1.linode.com') {{ '}}' }}"
+app_db_host: "{{ '{{' }} lookup('dig', '+short', '{{cookiecutter.database_pvt_host}}', '@ns-452.awsdns-56.com') {{ '}}' }}"
 
 {% raw %}
 # Host and ip setup
@@ -12,9 +12,9 @@ app_db_host: "{{ '{{' }} lookup('dig', '+short', '{{cookiecutter.database_pvt_ho
 network_domain: level12.net
 internal_hostname: "{{ inventory_hostname }}"
 host_fqdn: "{{ internal_hostname }}.{{network_domain}}"
-host_ip: "{{ lookup('dig', '+short', host_fqdn, '@ns1.linode.com') }}"
+host_ip: "{{ lookup('dig', '+short', host_fqdn, '@ns-452.awsdns-56.com') }}"
 host_fqdn_pvt: "{{ internal_hostname }}.pvt.{{network_domain}}"
-host_ip_pvt: "{{ lookup('dig', '+short', host_fqdn_pvt, '@ns1.linode.com') }}"
+host_ip_pvt: "{{ lookup('dig', '+short', host_fqdn_pvt, '@ns-452.awsdns-56.com') }}"
 
 ansible_os_family: Debian
 ansible_ssh_host: "{{ host_fqdn_pvt if use_pvt_dns else host_fqdn }}"
