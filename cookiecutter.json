@@ -3,7 +3,7 @@
   "project_dashed": "{{ cookiecutter.project_name|lower|replace(' ', '-') }}",
   "project_namespace": "{{ cookiecutter.project_name|lower|replace(' ', '') }}",
   "project_class": "{{ cookiecutter.project_name|replace(' ', '') }}",
-  "python_version": "3.7",
+  "python_version": "3.8",
   "python_tox": "py{{cookiecutter.python_version|replace('.', '') }}",
   "python_executable": "python{{cookiecutter.python_version}}",
   "db_url_env_name": "{{ cookiecutter.project_namespace|upper }}_DB_URL",
