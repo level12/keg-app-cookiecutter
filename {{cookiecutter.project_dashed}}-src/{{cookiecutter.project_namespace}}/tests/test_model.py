@@ -18,4 +18,5 @@ class TestUser(EntityBase):
         ColumnCheck('name'),
         ColumnCheck('settings', required=False),
         ColumnCheck('last_login_utc', required=False),
+        ColumnCheck('disabled_utc', required=False)
     ]

@@ -1,6 +1,7 @@
 Keg-Auth
 alembic
 celery
+email_validator
 flake8
 flask-bootstrap
 Flask-Mail

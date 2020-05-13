@@ -43,7 +43,7 @@ nginx_vhost_ssl_cert_key_fpath: /etc/letsencrypt/live/{{ nginx_vhost_server_name
 
 
 pyapp3_app_type: wsgi
-pyapp3_python_version: 3.7
+pyapp3_python_version: 3.8
 pyapp3_venv_use_timestamp: True
 pyapp3_requirements_fpath: "{{ pyapp3_requirements_dpath }}/common.txt"
 pyapp3_install_from_wheelhouse: false
