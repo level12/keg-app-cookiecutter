@@ -18,6 +18,11 @@ def pytest_configure(config):
     )
 
 
+def pytest_runtest_setup():
+    # Avoid a messed up transaction interfering with other tests.
+    db.session.rollback()
+
+
 @pytest.fixture(scope='session')
 def celery_config():
     """ Need to setup custom task annotations so the task tracker works correctly. """
