@@ -177,7 +177,7 @@ class PostgresRestore(PostgresBase):
             inner join pg_namespace ns
                 on (pg_proc.pronamespace = ns.oid)
             where ns.nspname = 'public'
-        """.format(schema)
+        """
         return [row for row in self.db_engine.execute(sql)]
 
     def drop_schema(self, schema):
