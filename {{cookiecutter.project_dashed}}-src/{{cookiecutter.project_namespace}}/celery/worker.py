@@ -1,3 +1,5 @@
+import os
+
 from celery import Task as TaskBase
 from celery.signals import setup_logging, worker_process_init
 from keg.db import db
@@ -19,7 +21,7 @@ def add_handler(**kwargs):
 uwsgi_config = {
     # Don't log to stdout or uwsgi picks it up and that gets sent to syslog too resulting in double
     # the log volume with no benefit.
-    'KEG_LOG_STREAM_ENABLED': False
+    'KEG_LOG_STREAM_ENABLED': os.environ.get('KEG_LOG_STREAM_ENABLED', False) == 'on'
 }
 
 # Assuming this module will only ever be called by `celery worker` and we therefore need to setup
