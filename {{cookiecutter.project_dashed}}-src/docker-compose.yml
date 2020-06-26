@@ -16,6 +16,11 @@ services:
   {{ cookiecutter.project_dashed }}-pg:
       image: postgres:{{cookiecutter.db_postgres_version}}-alpine
       container_name: {{ cookiecutter.project_dashed }}-pg
+      environment:
+        POSTGRES_MULTIPLE_DATABASES: {{cookiecutter.project_namespace}},test
+        POSTGRES_PASSWORD: Password12!
+      volumes:
+        - ./docker/pg-init-scripts:/docker-entrypoint-initdb.d
       ports:
         - '127.0.0.1:12432:5432'
   {{ cookiecutter.project_dashed }}-rabbitmq:
