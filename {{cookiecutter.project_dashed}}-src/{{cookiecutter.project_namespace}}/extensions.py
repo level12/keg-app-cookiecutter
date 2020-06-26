@@ -6,10 +6,9 @@ from flask_bootstrap import Bootstrap
 from flask_mail import Mail as FlaskMail
 from flask_wtf.csrf import CSRFProtect
 from keg_auth import AuthManager, AuthMailManager, AuthEntityRegistry
-from keg_elements.sentry import SentryClient
-from raven.contrib.flask import Sentry
 
 from {{cookiecutter.project_namespace}}.libs.grids import Grid
+from {{cookiecutter.project_namespace}}.libs.sentry import Sentry
 
 permissions = (
     'app-permission',
@@ -31,6 +30,6 @@ auth_manager = AuthManager(
 
 csrf = CSRFProtect()
 
-sentry = Sentry(client_cls=SentryClient)
+sentry = Sentry()
 
 bootstrap = Bootstrap()

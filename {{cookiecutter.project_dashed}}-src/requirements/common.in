@@ -10,9 +10,9 @@ psycopg2-binary
 pyquery
 pytest
 pytest-cov
-raven
 requests
 responses
+sentry_sdk
 simplejson
 sqlalchemy-utils
 tox
