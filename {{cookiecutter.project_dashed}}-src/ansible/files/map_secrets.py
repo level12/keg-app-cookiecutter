@@ -33,7 +33,7 @@ varmap = {
     'app_flask_secret_key_prod': 'flask_secret_key_prod',
     'app_rabbitmq_pass_beta': 'rabbitmq_pass_beta',
     'app_rabbitmq_pass_prod': 'rabbitmq_pass_prod',
-    'app_sentry_dsn': 'sentry_dsn',
+    'pyapp3_sentry_dsn': 'sentry_dsn',
 
     # App config file only
     # --------------------

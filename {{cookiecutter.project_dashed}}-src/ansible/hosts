@@ -1,5 +1,5 @@
-circus-beta internal_hostname=circus
-circus-prod internal_hostname=circus
+{{cookiecutter.database_pvt_host}}-beta internal_hostname={{cookiecutter.database_pvt_host}}
+{{cookiecutter.database_pvt_host}}-prod internal_hostname={{cookiecutter.database_pvt_host}}
 
 [webservers]
 vault
@@ -7,12 +7,12 @@ bank
 
 [beta]
 bank
-circus-beta
+{{cookiecutter.database_pvt_host}}-beta
 
 [prod]
 vault
-circus-prod
+{{cookiecutter.database_pvt_host}}-prod
 
 [dbservers]
-circus-prod
-circus-beta
+{{cookiecutter.database_pvt_host}}-prod
+{{cookiecutter.database_pvt_host}}-beta

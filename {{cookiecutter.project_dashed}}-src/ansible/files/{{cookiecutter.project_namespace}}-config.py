@@ -8,7 +8,7 @@ class DeployedProfile(object):
     SQLALCHEMY_DATABASE_URI = 'postgresql://{{app_db_user}}:{{app_db_pass}}' \
         '@{{app_db_host}}/{{app_db_name}}'
 
-    SENTRY_DSN = '{{app_sentry_dsn}}'
+    SENTRY_DSN = '{{pyapp3_sentry_dsn}}'
     SENTRY_ENVIRONMENT = '{{ app_environment }}'
 
     KEG_KEYRING_ENABLE = False
