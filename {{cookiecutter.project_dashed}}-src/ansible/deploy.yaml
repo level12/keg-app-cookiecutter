@@ -34,11 +34,4 @@
       args:
         chdir: "{{ pyapp3_source_dpath }}"
       tags: db
-
-    - name: Setup periodic cron job
-      cron:
-        name: run celery ping/log command every minute
-        minute: "*"
-        job: "{{ app_cli_bin }} --quiet celery ping"
-      tags: cron
 {% endraw %}
