@@ -3,12 +3,10 @@ import os
 from celery import Task as TaskBase
 from celery.signals import setup_logging, worker_process_init
 from keg.db import db
-from raven.contrib.celery import register_signal
 
 from {{cookiecutter.project_namespace}}.app import {{cookiecutter.project_class}}
 # By using the name "celery" `celery worker` will find the instance.
 from {{cookiecutter.project_namespace}}.celery.app import celery_app as celery  # noqa
-from {{cookiecutter.project_namespace}}.extensions import sentry
 
 
 @setup_logging.connect
@@ -30,10 +28,6 @@ uwsgi_config = {
 # You must set the {{cookiecutter.project_class.upper()}}_CONFIG_PROFILE environment variable in
 # order for this to work.  See project's readme for an example.
 _app = {{cookiecutter.project_class}}().init(config=uwsgi_config)
-
-if _app.config.get('SENTRY_DSN'):
-    # hook into the Celery error handler
-    register_signal(sentry.client)
 
 
 class ContextTask(TaskBase):
