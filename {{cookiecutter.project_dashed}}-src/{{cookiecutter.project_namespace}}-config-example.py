@@ -3,7 +3,7 @@ from {{cookiecutter.project_namespace}}.celery.config import celery_config
 DEFAULT_PROFILE = 'DevProfile'
 
 
-class DevProfile(object):
+class DevProfile:
     # Secret key for Flask -- CHANGE THIS!
     SECRET_KEY = 'abc123'
 
@@ -27,7 +27,7 @@ class DevProfile(object):
     CELERY = celery_config(broker_url='amqp://guest@localhost:12672//')
 
 
-class TestProfile(object):
+class TestProfile:
     SQLALCHEMY_DATABASE_URI = '{{cookiecutter.sa_db_uri_prefix.rstrip("/")}}/test'
 
     # Make tests faster
