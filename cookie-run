@@ -6,4 +6,3 @@ CCSRC_PATH=$(dirname $(readlink -f $0))
 PROJECTS_PATH=~/projects/
 
 cookiecutter $CCSRC_PATH --no-input --overwrite-if-exists -o $PROJECTS_PATH
- cookiecutter-ci.config
