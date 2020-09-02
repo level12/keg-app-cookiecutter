@@ -1,9 +1,9 @@
 Keg-Auth
 alembic
+bootstrap-flask
 celery
 email_validator
 flake8
-flask-bootstrap
 Flask-Mail
 flask-webtest
 psycopg2-binary
