@@ -1,16 +1,15 @@
 import os
-import os.path as osp
+import pathlib
 
 from setuptools import setup
 
-cdir = os.path.abspath(os.path.dirname(__file__))
-README = open(osp.join(cdir, 'readme.rst')).read()
-CHANGELOG = open(osp.join(cdir, 'changelog.rst')).read()
+cdir = pathlib.Path(__file__).parent
+README = cdir.joinpath('readme.rst').read_text('utf-8')
+CHANGELOG = cdir.joinpath('changelog.rst').read_text('utf-8')
 
-version_fpath = osp.join(cdir, '{{cookiecutter.project_namespace}}', 'version.py')
+VERSION_SRC = cdir.joinpath('{{cookiecutter.project_namespace}}', 'version.py').read_text('utf-8')
 version_globals = {}
-with open(version_fpath) as fo:
-    exec(fo.read(), version_globals)
+exec(VERSION_SRC, version_globals)
 
 
 setup(
