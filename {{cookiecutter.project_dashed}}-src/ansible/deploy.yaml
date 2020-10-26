@@ -20,14 +20,14 @@
       shell: "{{ app_cli_bin }} develop db init"
       args:
         chdir: "{{ pyapp3_source_dpath }}"
-      when: first_run
+      when: first_run|bool
       tags: db
 
     - name: Alembic stamp as head
       shell: "{{ pyapp3_venv_bin_dpath }}/alembic stamp head"
       args:
         chdir: "{{ pyapp3_source_dpath }}"
-      when: first_run
+      when: first_run|bool
       tags: db
 
     - name: Run any database migrations
