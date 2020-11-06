@@ -286,7 +286,7 @@ class PostgresBackup(PostgresBase):
 
             public_tables = self.get_table_list_from_db('public')
             if 'alembic_version' in public_tables:
-                self.pg_dump('alembic.sql', '-t', 'alembic_version')
+                self.pg_dump('-t', 'alembic_version', back_type='alembic.sql')
 
         if backup_type in ('both', 'full'):
             self.pg_dump('--format', 'custom', '--blobs', back_type='full.bak')
