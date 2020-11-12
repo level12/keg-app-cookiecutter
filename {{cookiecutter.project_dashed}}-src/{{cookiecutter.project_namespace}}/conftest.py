@@ -10,6 +10,8 @@ import {{cookiecutter.project_namespace}}.libs.db as libs_db
 # You can uncomment this if you end up with asserts in libraries outside tests.
 # pytest.register_assert_rewrite('{{cookiecutter.project_namespace}}.libs.testing')
 
+pytest_plugins = ('celery.contrib.pytest',)
+
 
 def pytest_configure(config):
     {{cookiecutter.project_class}}.testing_prep(
