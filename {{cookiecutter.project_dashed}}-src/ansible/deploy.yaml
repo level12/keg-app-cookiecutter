@@ -8,12 +8,13 @@
   vars:
     first_run: false
     app_cli_bin: "{{"{{"}} pyapp3_venv_bin_dpath }}/{{cookiecutter.project_namespace}}"
+    sentry_cron_cmd: "/usr/local/bin/cron-sentry --quiet {{"{{"}} app_cli_bin }}"
 {% raw %}
   remote_user: "{{project_user}}"
   tags:
     - web
   roles:
-    - { role: pyapp3, pyapp3_op: deploy, tags: pyapp3-role}
+    - { role: pyapp3, pyapp3_op: deploy, tags: pyapp3-role }
   tasks:
     - name: Create initial database schema
       shell: "{{ app_cli_bin }} develop db init"
@@ -34,4 +35,12 @@
       args:
         chdir: "{{ pyapp3_source_dpath }}"
       tags: db
+
+    - name: Setup heartbeat cron job
+      cron:
+        name: run celery ping/log command every minute
+        minute: "*"
+        job: "{{ sentry_cron_cmd }} --quiet celery ping"
+      when: app_celery_alive_url is defined
+      tags: cron
 {% endraw %}
