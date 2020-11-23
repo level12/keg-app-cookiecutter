@@ -11,3 +11,9 @@
 # Visual Studio Code clutter
 .vscode
 tags
+
+# Pycharm / JetBrains cluuter
+.idea
+
+# Pyenv local env declaration file
+.python-version

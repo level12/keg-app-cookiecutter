@@ -1,1 +1,7 @@
 .vscode
+
+# Pycharm / JetBrains cluuter
+.idea
+
+# Pyenv local env declaration file
+.python-version
