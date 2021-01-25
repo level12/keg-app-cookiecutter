@@ -1,6 +1,6 @@
 Keg-Auth
 alembic
-celery
+celery>=5.0
 email_validator
 flake8
 flask-bootstrap
