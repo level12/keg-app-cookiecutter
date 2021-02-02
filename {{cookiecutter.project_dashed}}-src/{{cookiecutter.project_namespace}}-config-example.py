@@ -18,6 +18,7 @@ class DevProfile:
     DEVELOPER_PASSWORD = '{{cookiecutter.developer_password}}'
 
     MAIL_DEFAULT_SENDER = '{{cookiecutter.developer_email}}'
+    MAIL_SUPPRESS_SEND = True
 
     KEG_LOG_SYSLOG_ENABLED = False
 
