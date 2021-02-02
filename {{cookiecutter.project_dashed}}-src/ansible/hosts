@@ -1,18 +1,15 @@
-{{cookiecutter.database_pvt_host}}-beta internal_hostname={{cookiecutter.database_pvt_host}}
-{{cookiecutter.database_pvt_host}}-prod internal_hostname={{cookiecutter.database_pvt_host}}
-
 [webservers]
 vault
 bank
 
 [beta]
 bank
-{{cookiecutter.database_pvt_host}}-beta
+{{cookiecutter.database_host}}-beta
 
 [prod]
 vault
-{{cookiecutter.database_pvt_host}}-prod
+{{cookiecutter.database_host}}-prod
 
 [dbservers]
-{{cookiecutter.database_pvt_host}}-prod
-{{cookiecutter.database_pvt_host}}-beta
+{{cookiecutter.database_host}}-prod
+{{cookiecutter.database_host}}-beta
