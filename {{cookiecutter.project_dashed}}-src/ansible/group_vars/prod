@@ -1,6 +1,6 @@
 app_environment: prod
 
-app_celery_alive_url: 'https://cronitor.link/{{ cookiecutter.prod_celery_alive_url }}/complete'
+app_celery_alive_url: '{{ cookiecutter.prod_celery_alive_url }}'
 
 {% raw %}
 app_flask_secret_key: "{{ app_flask_secret_key_prod }}"
