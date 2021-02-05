@@ -3,4 +3,4 @@
 # Over time, development environments can sometimes build up large queues of tasks that don't really
 # need to be ran.  So, use --purge to clean out the queues before starting.
 export KEG_LOG_STREAM_ENABLED=on
-celery worker --app {{cookiecutter.project_namespace}}.celery.worker --autoscale=15,5 -l info --purge
+celery --app {{cookiecutter.project_namespace}}.celery.worker worker --autoscale=15,5 -l info --purge
