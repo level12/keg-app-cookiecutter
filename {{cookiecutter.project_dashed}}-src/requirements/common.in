@@ -10,6 +10,7 @@ psycopg2-binary
 pyquery
 pytest
 pytest-cov
+python-dotenv
 requests
 responses
 sentry_sdk

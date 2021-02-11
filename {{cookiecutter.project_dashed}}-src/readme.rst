@@ -104,6 +104,9 @@ Quickstart
 #. Copy the file `{{cookiecutter.project_namespace}}-config-example.py` at the root of this project to
    `{{cookiecutter.project_namespace}}-config.py`. Adjust settings as needed for your local dev environment.
 
+#. Copy the file `.flaskenv-example` at the root of this project to `.flaskenv`. Adjust settings as
+   needed for your local dev environment.
+
 #. Run `tox` and verify the tests pass.  Read the tox file to learn how this project sets up
    dependencies and runs tests.
 

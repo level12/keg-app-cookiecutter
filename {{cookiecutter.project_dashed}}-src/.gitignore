@@ -8,6 +8,9 @@
 /htmlcov
 .pytest_cache
 
+# .env file for Flask development server
+.flaskenv
+
 # Visual Studio Code clutter
 .vscode
 tags
