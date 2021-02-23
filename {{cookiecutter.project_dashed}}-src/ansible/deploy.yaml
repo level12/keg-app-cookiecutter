@@ -36,6 +36,12 @@
         chdir: "{{ pyapp3_source_dpath }}"
       tags: db
 
+    - name: sentry dsn var for cron-sentry
+      cronvar:
+        name: SENTRY_DSN
+        value: '{{ pyapp3_sentry_dsn }}'
+      tags: cron
+
     - name: Setup heartbeat cron job
       cron:
         name: run celery ping/log command every minute
