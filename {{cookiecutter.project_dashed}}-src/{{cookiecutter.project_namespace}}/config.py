@@ -5,11 +5,6 @@ class DefaultProfile(object):
     """
         These values will apply to all configuration profiles.
     """
-    # It's tempting to turn this off to avoid the warning, but if you are storing passwords
-    # in your settings, leave this enabled and setup a keyring.  See the app's keyring related
-    # commands for help.
-    KEG_KEYRING_ENABLE = True
-
     # Used in at least email templates
     SITE_NAME = '{{cookiecutter.project_name}}'
     # Used in at least email subject lines
@@ -24,7 +19,7 @@ class DefaultProfile(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # For PGSQL applications, can be removed for other db platforms
-    KEG_DB_ENGINE_OPTIONS = {
+    SQLALCHEMY_ENGINE_OPTIONS = {
         'json_serializer': flask.json.dumps,
         'json_deserializer': flask.json.loads,
     }
@@ -39,9 +34,6 @@ class TestProfile(object):
 
     # Make tests faster
     PASSLIB_CRYPTCONTEXT_KWARGS = dict(schemes=['plaintext'])
-
-    # silence warnings
-    KEG_KEYRING_ENABLE = False
 
     # Mail related tests need to have this set, even though actual email is not generated.
     MAIL_DEFAULT_SENDER = 'devteam+i-better-not-get-email-from-these-tests@level12.io'

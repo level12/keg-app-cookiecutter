@@ -34,9 +34,6 @@ class TestProfile:
     # Make tests faster
     PASSLIB_CRYPTCONTEXT_KWARGS = dict(schemes=['plaintext'])
 
-    # silence warnings
-    KEG_KEYRING_ENABLE = False
-
     # Mail related tests need to have this set, even though actual email is not generated.
     MAIL_DEFAULT_SENDER = '{{cookiecutter.developer_email}}'
 
