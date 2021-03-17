@@ -1,6 +1,17 @@
+{% raw %}
 - name: web app remove
   hosts: old-webservers
   tags:
     - web
   roles:
-    - { role: pyapp3, pyapp3_op: remove, tags: pyapp3-role}
+    - role: letsencrypt
+      letsencrypt_op: remove
+      letsencrypt_domains: "{{ [ nginx_vhost_server_name ] }}"
+      tags:
+        - letsencrypt-role
+
+    - role: pyapp3
+      pyapp3_op: remove
+      tags:
+        - pyapp3-role
+{% endraw %}
