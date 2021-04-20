@@ -5,6 +5,7 @@ celery>=5.0
 email_validator
 flake8
 Flask-Mail
+flask-sqlalchemy<2.5
 flask-webtest
 psycopg2-binary
 pyquery
@@ -15,6 +16,7 @@ requests
 responses
 sentry_sdk
 simplejson
+sqlalchemy<1.4
 sqlalchemy-utils
 tox
 xlsxwriter
