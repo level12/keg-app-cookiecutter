@@ -1,6 +1,6 @@
 app_environment: beta
 
-app_celery_alive_url: '{{ cookiecutter.beta_celery_alive_url }}'
+app_celery_alive_key: '{{ cookiecutter.celery_alive_key_beta }}'
 
 {% raw %}
 app_flask_secret_key: "{{ app_flask_secret_key_beta }}"

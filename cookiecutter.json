@@ -19,8 +19,7 @@
   "codecov_api_token": "",
   "codecov_badge_token": "",
   "database_host": "circus",
-  "database_pvt_host": "circus",
-  "beta_celery_alive_url": "",
-  "prod_celery_alive_url": "",
+  "celery_alive_key_beta": "",
+  "celery_alive_key_prod": "",
   "lastpass_secrets_folder": ""
 }
