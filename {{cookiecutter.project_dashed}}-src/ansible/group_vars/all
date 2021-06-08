@@ -5,7 +5,6 @@ project_ident_env: {{ cookiecutter.project_namespace }}-{{ '{{' }} app_environme
 project_authorized_keys_fpath: files/project-user-authorized-keys
 
 app_db_host: "{{ '{{' }} lookup('dig', '+short', '{{cookiecutter.database_host}}.pvt.{{ '{{' }} network_domain {{ '}}' }}', '@ns-452.awsdns-56.com') {{ '}}' }}"
-app_celery_alive_url: https://cronitor.link/{{cookiecutter.app_celery_alive_key}}/complete
 
 {% raw %}
 # Host and ip setup
@@ -32,6 +31,7 @@ app_rabbitmq_user: "{{project_ident_env}}"
 
 app_celery_dir: '{{ project_home_dpath }}/celery'
 app_celery_pid_fpath: /tmp/{{ project_ident }}_celery.pid
+app_celery_alive_url: https://cronitor.link/{{cookiecutter.app_celery_alive_key}}/complete
 
 nginx_vhost_name: "{{project_ident}}"
 nginx_vhost_enable_static_route: false
