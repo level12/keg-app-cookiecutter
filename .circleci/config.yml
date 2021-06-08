@@ -6,8 +6,10 @@ jobs:
             - image: rabbitmq:3.8
             - image: postgres:13
               environment:
-                  POSTGRES_USER: postgres
-                  POSTGRES_PASSWORD: password
+                POSTGRES_USER: postgres
+                # Ok for local dev, potentially UNSAFE in other applications.  Don't blindly copy
+                # & paste without considering implications.
+                POSTGRES_HOST_AUTH_METHOD: trust
         steps:
             - checkout
             - run: python3.9 -m pip install tox cookiecutter pip-tools

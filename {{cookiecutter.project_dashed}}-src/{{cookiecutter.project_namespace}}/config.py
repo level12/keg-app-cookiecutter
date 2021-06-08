@@ -30,7 +30,7 @@ class DefaultProfile(object):
 class TestProfile(object):
     # These settings reflect what is needed in CI.  For local development, use
     # {{cookiecutter.project_namespace}}-config.py to override.
-    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:password@localhost/postgres'
+    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres@localhost/postgres'
 
     # Make tests faster
     PASSLIB_CRYPTCONTEXT_KWARGS = dict(schemes=['plaintext'])
