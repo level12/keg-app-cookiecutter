@@ -1,17 +1,7 @@
-{% raw %}
-- name: web app remove
-  hosts: old-webservers
-  tags:
-    - web
-  roles:
-    - role: letsencrypt
-      letsencrypt_op: remove
-      letsencrypt_domains: "{{ [ nginx_vhost_server_name ] }}"
-      tags:
-        - letsencrypt-role
 
-    - role: pyapp3
-      pyapp3_op: remove
-      tags:
-        - pyapp3-role
-{% endraw %}
+- name: web app remove
+  hosts: 127.0.0.1
+  connection: local
+  tasks:
+    - fail:
+        msg: Use level12-cli servers app-removal instead
