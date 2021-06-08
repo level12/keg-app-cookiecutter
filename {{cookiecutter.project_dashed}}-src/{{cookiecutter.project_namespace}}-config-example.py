@@ -9,7 +9,7 @@ class DevProfile:
 
     # Examples:
     #   Socket based, no pass: postgresql://USER@:5433/{{cookiecutter.project_namespace}}
-    #   TCP/IP based: postgresql://USER:PASS@localhost/{{cookiecutter.project_namespace}}
+    #   TCP/IP based & matches docker-compose: postgresql://postgres@127.0.0.1:12432/{{cookiecutter.project_namespace}}
     SQLALCHEMY_DATABASE_URI = '{{cookiecutter.sa_db_uri_prefix.rstrip("/")}}/{{cookiecutter.project_namespace}}'
 
     # These are used for creating an initial developer user following database init
@@ -29,7 +29,7 @@ class DevProfile:
 
 
 class TestProfile:
-    SQLALCHEMY_DATABASE_URI = '{{cookiecutter.sa_db_uri_prefix.rstrip("/")}}/test'
+    SQLALCHEMY_DATABASE_URI = '{{cookiecutter.sa_db_uri_prefix.rstrip("/")}}/{{cookiecutter.project_namespace}}_tests'
 
     # Make tests faster
     PASSLIB_CRYPTCONTEXT_KWARGS = dict(schemes=['plaintext'])
