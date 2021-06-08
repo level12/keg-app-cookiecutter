@@ -2,6 +2,6 @@
 # the tests
 -r common.txt
 
+python-dotenv
 restview
-keyring
-
+supervisor

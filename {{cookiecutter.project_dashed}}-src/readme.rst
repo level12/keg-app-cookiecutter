@@ -120,7 +120,7 @@ Quickstart
 
 #. Set up the database tables with `{{cookiecutter.project_namespace}} develop db init`
 
-#. Run the app with `{{cookiecutter.project_namespace}} develop run` and `./scripts/celery-worker`.
+#. Run the app with `supervisord` (inspect supervisord.conf for more info).
 
 Celery
 =================
