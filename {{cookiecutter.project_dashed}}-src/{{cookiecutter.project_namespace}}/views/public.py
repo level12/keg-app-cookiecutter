@@ -30,3 +30,12 @@ class HealthCheck(BaseView):
         ctasks.ping_url.apply_async((alive_url,), priority=10)
 
         return '{} ok'.format(flask.current_app.name)
+
+
+class Home(BaseView):
+    blueprint = public_bp
+    url = '/'
+
+    def get(self):
+        # see: templates/home.html
+        pass
