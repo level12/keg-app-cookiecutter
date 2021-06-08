@@ -3,5 +3,5 @@
 -r common.txt
 
 restview
-watchdog
+watchdog[watchmedo]
 
