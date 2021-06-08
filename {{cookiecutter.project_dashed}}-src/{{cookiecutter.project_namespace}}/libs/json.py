@@ -12,6 +12,8 @@ class JSONEncoder(flask.json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, (dt.datetime, dt.date, arrow.Arrow)):
             return obj.isoformat()
+        if isinstance(obj, decimal.Decimal):
+            return float(obj)
         return super().default(obj)
 
 
