@@ -1,0 +1,24 @@
+/* production-day.css */
+.nav-tabs li a.active {
+    color: black;
+}
+
+tbody input {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+thead th,
+tbody td {
+    white-space: nowrap;
+}
+
+tbody td {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    vertical-align: middle !important;
+}
+
+td.static {
+    text-align: center;
+}

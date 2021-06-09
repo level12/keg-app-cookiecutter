@@ -1,0 +1,43 @@
+{% raw %}
+{% macro table(cat_totals, totals) -%}
+    <table class="table table-bordered">
+        <thead>
+            <th>Category</th>
+            <th>Need</th>
+            <th>Shift 1</th>
+            <th>Shift 2</th>
+            <th>Net</th>
+        </thead>
+        <tbody>
+            {% for cat_total in cat_totals %}
+            <tr>
+                <td>{{ cat_total.category_name }}</td>
+                <td>{{ cat_total.need|decimalfmt(0) }}</td>
+                <td>{{ cat_total.shift_1|decimalfmt(0) }}</td>
+                <td>{{ cat_total.shift_2|decimalfmt(0) }}</td>
+                <td>{{ cat_total.net|decimalfmt(0) }}</td>
+            {% endfor %}
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Totals:</th>
+                <td>{{ totals.need|decimalfmt(0) }}</td>
+                <td>{{ totals.shift_1|decimalfmt(0) }}</td>
+                <td>{{ totals.shift_2|decimalfmt(0) }}</td>
+                <td>{{ totals.net|decimalfmt(0) }}</td>
+            </tr>
+        </tfoot>
+    </table>
+{%- endmacro %}
+
+<div class="row">
+    {% for name, dept in dept_map.items() %}
+    <div class="col-md-4">
+        <h2>{{name}}</h2>
+        {{ table(dept_groups[dept.id], dept_totals[dept.id]) }}
+
+    </div>
+    {% endfor %}
+</div>
+{% endraw %}

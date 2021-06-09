@@ -1,0 +1,18 @@
+{% raw %}
+<div id="reactRoot"></div>
+
+{% block body_foot %}
+    {# This bundle is not generated from the cookie-cutter, it's just an example of how the page
+    # could work and load data for a JS app.#}
+    <script src="/static/frontend-app.js"></script>
+    <script>
+        let urls = {
+            prodDay: "{{ url_for('private.production-day:dept', day_id=day_id, dept_id=dept_id) }}?json",
+            updateField: "{{ url_for('private.production-day-update-field') }}"
+        }
+        let store = frontend.renderApp('reactRoot', urls)
+
+        frontend.debugToConsole(store);
+    </script>
+{% endblock %}
+{% endraw %}

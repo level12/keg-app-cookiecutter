@@ -1,3 +1,4 @@
+from blazeutils import numbers
 from keg import Keg
 import keg.db
 
@@ -16,6 +17,10 @@ class {{cookiecutter.project_class}}(Keg):
 
     json_encoder = _app_json.JSONEncoder
     json_decoder = _app_json.JSONDecoder
+
+    template_filters = {
+        'decimalfmt': numbers.decimalfmt
+    }
 
     def db_manager_cls(self):
         return DatabaseManager

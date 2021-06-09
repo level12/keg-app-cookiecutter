@@ -11,15 +11,15 @@ from .libs.grids import Grid
 from .libs.sentry import Sentry
 
 permissions = (
-    'app-permission',
     'auth-manage',
+    'manager',
 )
 
 mail = FlaskMail()
 auth_mail_manager = AuthMailManager(mail)
 auth_entity_registry = AuthEntityRegistry()
 
-_app_endpoints = {'after-login': 'auth.user'}
+_app_endpoints = {'after-login': 'public.home'}
 auth_manager = AuthManager(
     mail_manager=auth_mail_manager,
     endpoints=_app_endpoints,
