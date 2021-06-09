@@ -15,3 +15,8 @@ def ping_url(self, url, retry_wait_secs=1):
     except requests.RequestException:
         log.exception('ping_url() encountered an exception')
         raise self.retry(countdown=retry_wait_secs)
+
+
+@app.task
+def say(msg):
+    log.info(f'say: {msg}')
