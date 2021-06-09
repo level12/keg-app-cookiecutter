@@ -1,8 +1,8 @@
 import click
 from keg import current_app
 
-from {{cookiecutter.project_namespace}}.app import {{cookiecutter.project_class}}
-from {{cookiecutter.project_namespace}}.celery import tasks
+from ..app import {{cookiecutter.project_class}}
+from ..celery import tasks
 
 
 @{{cookiecutter.project_class}}.cli.group()

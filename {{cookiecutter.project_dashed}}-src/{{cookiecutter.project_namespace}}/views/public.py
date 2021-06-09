@@ -2,9 +2,9 @@ import logging
 
 import flask
 from keg.db import db
-from keg.web import BaseView
 
-from {{cookiecutter.project_namespace}}.celery import tasks as ctasks
+from ..celery import tasks as ctasks
+from ..libs.views import BaseView
 
 log = logging.getLogger(__name__)
 public_bp = flask.Blueprint('public', __name__,)

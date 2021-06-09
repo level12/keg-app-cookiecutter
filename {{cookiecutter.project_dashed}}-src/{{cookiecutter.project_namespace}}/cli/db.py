@@ -1,7 +1,7 @@
 import click
 
-from {{cookiecutter.project_namespace}}.app import {{cookiecutter.project_class}}
-import {{cookiecutter.project_namespace}}.libs.db as lib_db
+from ..app import {{cookiecutter.project_class}}
+from ..libs import db as lib_db
 
 
 @{{cookiecutter.project_class}}.cli.group()

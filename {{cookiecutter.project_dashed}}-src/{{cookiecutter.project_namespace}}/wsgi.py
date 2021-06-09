@@ -1,4 +1,4 @@
-from {{cookiecutter.project_namespace}}.app import {{cookiecutter.project_class}}
+from .app import {{cookiecutter.project_class}}
 
 # Config specific to WSGI workers
 uwsgi_config = {

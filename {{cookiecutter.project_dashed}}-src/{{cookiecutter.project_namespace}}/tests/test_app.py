@@ -3,7 +3,7 @@ from decimal import Decimal as D
 
 import arrow
 
-import {{cookiecutter.project_namespace}}.model.entities as ents
+from ..model import entities as ents
 
 
 class TestJSONCustomization:

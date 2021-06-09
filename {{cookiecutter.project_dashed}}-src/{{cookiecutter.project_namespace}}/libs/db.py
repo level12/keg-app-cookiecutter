@@ -18,7 +18,7 @@ from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.ext.declarative import declarative_base
 import sqlalchemy.orm as sa_orm
 
-from {{cookiecutter.project_namespace}}.libs.alembic import alembic_upgrade
+from .alembic import alembic_upgrade
 
 
 log = logging.getLogger(__name__)

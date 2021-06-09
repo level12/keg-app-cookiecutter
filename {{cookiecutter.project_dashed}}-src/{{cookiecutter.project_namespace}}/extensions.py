@@ -7,8 +7,8 @@ from flask_mail import Mail as FlaskMail
 from flask_wtf.csrf import CSRFProtect
 from keg_auth import AuthManager, AuthMailManager, AuthEntityRegistry
 
-from {{cookiecutter.project_namespace}}.libs.grids import Grid
-from {{cookiecutter.project_namespace}}.libs.sentry import Sentry
+from .libs.grids import Grid
+from .libs.sentry import Sentry
 
 permissions = (
     'app-permission',

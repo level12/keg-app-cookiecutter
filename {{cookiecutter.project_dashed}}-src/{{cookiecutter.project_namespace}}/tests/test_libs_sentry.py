@@ -1,7 +1,7 @@
 import keg
 import pytest
 
-from {{cookiecutter.project_namespace}}.libs import sentry
+from ..libs import sentry
 
 
 class TestSentryEventFilter:

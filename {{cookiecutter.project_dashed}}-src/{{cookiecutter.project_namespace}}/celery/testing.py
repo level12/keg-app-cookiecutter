@@ -6,7 +6,7 @@ from celery.contrib.testing import worker
 from keg.db import db
 
 # important to import from .cli so that the commands get attached
-from {{cookiecutter.project_namespace}}.cli import {{cookiecutter.project_class}}
+from ..cli import {{cookiecutter.project_class}}
 
 TaskResult = namedtuple('TaskResult', 'status, retval, task_id, args, kwargs, einfo, thread_id,'
                         'db_session_id')

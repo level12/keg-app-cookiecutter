@@ -3,9 +3,9 @@ from unittest import mock
 
 from keg.testing import CLIBase
 
-import {{cookiecutter.project_namespace}}.celery.tasks as tasks
-from {{cookiecutter.project_namespace}}.celery.testing import task_tracker
-from {{cookiecutter.project_namespace}}.model import entities as ents
+from ..celery import tasks
+from ..celery.testing import task_tracker
+from ..model import entities as ents
 
 
 class TestCLI(CLIBase):

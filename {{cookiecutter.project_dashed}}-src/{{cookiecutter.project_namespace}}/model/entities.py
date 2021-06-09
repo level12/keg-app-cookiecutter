@@ -5,8 +5,10 @@ from keg_elements.db.mixins import DefaultColsMixin, MethodsMixin
 import keg_auth
 import sqlalchemy as sa
 from sqlalchemy.dialects.postgresql import JSONB
+from sqlalchemy.ext.hybrid import hybrid_property
 
-from {{cookiecutter.project_namespace}}.extensions import auth_entity_registry
+from ..extensions import auth_entity_registry
+from ..libs.model import EntityMixin, tc_relation
 
 log = logging.getLogger(__name__)
 
