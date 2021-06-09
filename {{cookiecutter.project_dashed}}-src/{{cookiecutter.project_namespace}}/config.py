@@ -11,7 +11,7 @@ class DefaultProfile(object):
     SITE_ABBR = '{{cookiecutter.project_name}}'
 
     # Used at least by Keg Auth templates to know what to extend
-    BASE_TEMPLATE = 'base-page.html'
+    BASE_TEMPLATE = 'includes/base-page.html'
 
     # Used by Keg Auth CLI to determine what arguments to require for create-user
     KEGAUTH_CLI_USER_ARGS = ['name', 'email']
@@ -42,3 +42,8 @@ class TestProfile(object):
         # This should be for the docker container setup in the CircleCI config.
         'broker_url': 'amqp://guest@localhost:5672//',
     }
+
+    CELERY_ALIVE_URL = 'keep-celery-alive'
+
+    # Disable CSRF by default in tests
+    WTF_CSRF_ENABLED = False
