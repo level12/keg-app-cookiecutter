@@ -1,11 +1,10 @@
-from unittest import mock
-
 import flask
 import flask_webtest as webtest
 from keg_auth.testing import AuthTestApp, ViewTestBase
 import pytest
 
 from ..model import entities as ents
+from ..libs.testing import mock_patch
 
 
 # Scope needs to be class level b/c ViewTestBase clears out users in setup_class()
@@ -26,7 +25,7 @@ class TestPublic:
         resp = self.client.get('/ping')
         assert resp.text == '{{cookiecutter.project_namespace}} ok'
 
-    @mock.patch('{{cookiecutter.project_namespace}}.views.public.ctasks')
+    @mock_patch('{{cookiecutter.project_namespace}}.views.public.ctasks')
     def test_health_check(self, m_ctasks):
         # Use this for cronitor.
         resp = self.client.get('/health-check')

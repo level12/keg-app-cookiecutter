@@ -2,7 +2,6 @@ import datetime as dt
 import logging
 
 from keg.db import db
-from keg_elements.db.mixins import DefaultColsMixin, MethodsMixin
 import keg_auth
 import sqlalchemy as sa
 from sqlalchemy import orm

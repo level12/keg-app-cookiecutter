@@ -1,5 +1,3 @@
-import datetime
-
 from .. import grids
 from ..libs import testing
 from ..model import entities as ents

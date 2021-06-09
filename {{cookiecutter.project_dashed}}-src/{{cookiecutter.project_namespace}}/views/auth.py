@@ -1,11 +1,9 @@
 import logging
 
-from keg.db import db
 from keg_auth import make_blueprint
 from keg_auth.forms import user_form as user_form_base
 from keg_auth.views import User as UserBase
 
-from ..celery import tasks as ctasks
 from ..extensions import auth_manager
 
 

@@ -6,8 +6,8 @@ from webgrid import filters
 from .libs import grids as libgrids
 from .model import entities as ents
 
-# Filters
 
+# Filters
 class DepartmentFilter(filters.OptionsIntFilterBase):
     options_from = lambda self: ents.Department.pairs('id', 'name')
 
@@ -21,7 +21,6 @@ class ProdCatFilter(filters.OptionsIntFilterBase):
 
 
 # Columns
-
 class DaysDate(webgrid.LinkColumnBase):
     def create_url(self, record):
         return flask.url_for('private.production-day:summary', day_id=record.id)
@@ -31,7 +30,6 @@ class DaysDate(webgrid.LinkColumnBase):
 
 
 # Grids
-
 class Days(libgrids.Grid):
     webgrid.Column('Id', ents.Day.id, visible=False)
     DaysDate('Date', ents.Day.date, filters.DateFilter)
@@ -50,6 +48,7 @@ class Department(libgrids.Grid):
             query = query.order_by('name')
 
         return query
+
 
 class ProductBrand(libgrids.Grid):
     ActionColumn(

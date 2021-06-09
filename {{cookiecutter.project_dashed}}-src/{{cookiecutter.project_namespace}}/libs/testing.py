@@ -55,11 +55,16 @@ def app_config(**kwargs):
         yield mocked_config
 
 
-
 def mock_patch_obj(*args, **kwargs):
     kwargs.setdefault('autospec', True)
     kwargs.setdefault('spec_set', True)
     return mock.patch.object(*args, **kwargs)
+
+
+def mock_patch(*args, **kwargs):
+    kwargs.setdefault('autospec', True)
+    kwargs.setdefault('spec_set', True)
+    return mock.patch(*args, **kwargs)
 
 
 def iter_pyq(pyq):

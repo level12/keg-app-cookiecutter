@@ -46,5 +46,5 @@ class Home(BaseView):
         return
         # You may want this eventually:
         # from flask_login import current_user
-        if not current_user.is_authenticated:
-            return flask.redirect(flask.url_for('auth.login'))
+        # if not current_user.is_authenticated:
+        #    return flask.redirect(flask.url_for('auth.login'))
