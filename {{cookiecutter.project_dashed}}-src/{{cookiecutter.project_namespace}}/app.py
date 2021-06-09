@@ -52,7 +52,7 @@ class DatabaseManager(keg.db.DatabaseManager):
         super().db_init()
         # If all the developer variables are set, then create our first user.
         try:
-            from {{cookiecutter.project_namespace}}.model.entities import User
+            from .model.entities import User
             User.add(
                 name=self.app.config['DEVELOPER_NAME'],
                 email=self.app.config['DEVELOPER_EMAIL'],
