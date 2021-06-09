@@ -1,3 +1,4 @@
+Keg>=0.9.1
 Keg-Auth
 alembic
 bootstrap-flask
