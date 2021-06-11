@@ -41,10 +41,10 @@ class TestPublic:
 
     def test_home(self, auth_client):
         resp = self.client.get('/')
-        assert resp.pyquery('#page-content p').text() == 'You need to login.'
+        assert resp.pyquery('main p').text() == 'You need to login.'
 
         resp = auth_client.get('/')
-        assert resp.pyquery('#page-content p').text() == 'This is the home page. :)'
+        assert resp.pyquery('main p').text() == 'This is the home page. :)'
 
 
 class TestPrivate(ViewTestBase):
