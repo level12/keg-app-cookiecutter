@@ -4,9 +4,9 @@ from celery import Task as TaskBase
 from celery.signals import setup_logging, worker_process_init
 from keg.db import db
 
-from .app import {{cookiecutter.project_class}}
+from ..app import {{cookiecutter.project_class}}
 # By using the name "celery" `celery worker` will find the instance.
-from .celery.app import celery_app as celery  # noqa
+from .app import celery_app as celery  # noqa
 
 
 @setup_logging.connect
