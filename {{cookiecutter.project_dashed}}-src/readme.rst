@@ -16,15 +16,15 @@ Project Setup Checklist
 * setup git hooks from /scripts
 * create project on
 
-    * GitHub
-    * Appveyor?
-    * Sentry
+  * GitHub
+  * Appveyor?
+  * Sentry
 
 * Setup Slack integrations for
 
-    * CircleCI
-    * Appveyor
-    * Sentry
+  * CircleCI
+  * Appveyor
+  * Sentry
 
 * Build requirements files::
 
@@ -34,9 +34,9 @@ Project Setup Checklist
 * Git init, commit, push
 * Verify
 
-    ** CI builds pass
-    ** Coverage is pushed
-    ** Failed CI builds show up in a Slack channel
+  * CI builds pass
+  * Coverage is pushed
+  * Failed CI builds show up in a Slack channel
 
 * Update this readme
 
@@ -66,8 +66,8 @@ Tools/concepts included in this app:
 
   * Uses Keg-Auth navigation helpers
 
-    * Limits available menu items to those that pass basic authorization tests
-    * Auto-expands menu to the item matching the current view, and highlights it
+  * Limits available menu items to those that pass basic authorization tests
+  * Auto-expands menu to the item matching the current view, and highlights it
 
 * Example views showing public/private authentication requirements and authorization
 * Migrations with alembic
