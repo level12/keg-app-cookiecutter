@@ -7,12 +7,23 @@ def init_navigation(app):
     app.auth_manager.add_navigation_menu(
         'main',
         NavItem(
+            NavItem('Days', NavURL('private.days')),
+            NavItem('Departments', NavURL('private.department:list',
+                requires_permissions='manager')),
             NavItem(
-                'Management',
-                NavItem('Bundles', NavURL('auth.bundle:list'), icon_class='fas fa-briefcase'),
-                NavItem('Groups', NavURL('auth.group:list'), icon_class='fas fa-users'),
-                NavItem('Users', NavURL('auth.user:list'), icon_class='fas fa-user'),
-                icon_class='fas fa-cog',
+                'Products',
+                NavItem('Brands', NavURL('private.product-brand:list',
+                    requires_permissions='manager')),
+                NavItem('Categories', NavURL('private.product-cat:list',
+                    requires_permissions='manager')),
+                NavItem('Products', NavURL('private.product:list', requires_permissions='manager')),
+            ),
+            NavItem(
+                'Auth',
+                NavItem('Logout', NavURL('auth.logout')),
+                NavItem('Bundles', NavURL('auth.bundle:list')),
+                NavItem('Groups', NavURL('auth.group:list')),
+                NavItem('Users', NavURL('auth.user:list')),
             ),
         )
     )

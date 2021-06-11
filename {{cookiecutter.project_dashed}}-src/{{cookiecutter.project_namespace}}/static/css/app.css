@@ -1,6 +1,22 @@
+.navbar {
+    background-color: #f3f3f3;
+    border-bottom: solid 1px #ddd;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.navbar-nav > .nav-item {
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+}
+
+.navbar-nav > .nav-item.nav-current,
+.nav-item:hover {
+    background-color: #ddd;
+}
+
 .alert {
-    margin-bottom: 10px;
-    padding: 10px;
+    padding: .7rem;
 }
 
 .alert-dismissible .close {
@@ -11,6 +27,10 @@
     color:#a94442;
     background-color:#f2dede;
     border-color:#ebccd1
+}
+
+main {
+    margin-top: 1rem;
 }
 
 .datagrid .records {
@@ -40,37 +60,4 @@
 .datagrid .delete-link:hover, .datagrid .edit-link:hover {
     text-decoration: none;
     transform: scale(1.5);
-}
-
-#navigation {
-    border-right: 3px solid #8dc63f;
-    margin-top: 20px;
-}
-
-#navigation li {
-  list-style-type: none;
-}
-
-#navigation li.nav-current {
-  background-color: #eeeeee;
-}
-
-#navigation li a {
-  background-color: transparent;
-  display: block;
-  position: relative;
-  padding: 10px 15px;
-  text-decoration: none;
-}
-
-#navigation li a:hover {
-  background-color: #eeeeee;
-  display: block;
-  position: relative;
-  padding: 10px 15px;
-  color: #23527c;
-}
-
-#navigation li a i.fas {
-  padding-right: 0.4em;
 }
