@@ -5,7 +5,7 @@ DEFAULT_PROFILE = 'DeployedProfile'
 class DeployedProfile(object):
     SECRET_KEY = '{{app_flask_secret_key}}'
 
-    SQLALCHEMY_DATABASE_URI = 'postgresql://{{app_db_user}}:{{app_db_pass}}' \
+    SQLALCHEMY_DATABASE_URI = 'postgresql://{{app_db_user}}:{{app_db_pass|urlencode()}}' \
         '@{{app_db_host}}/{{app_db_name}}'
 
     SENTRY_DSN = '{{pyapp3_sentry_dsn}}'
@@ -22,7 +22,7 @@ class DeployedProfile(object):
 
     CELERY_ALIVE_URL = '{{ app_celery_alive_url }}'
     CELERY = {
-        'broker_url': 'amqp://{{ app_rabbitmq_user }}:{{ app_rabbitmq_pass }}@localhost:5672/'
+        'broker_url': 'amqp://{{ app_rabbitmq_user }}:{{ app_rabbitmq_pass|urlencode() }}@localhost:5672/'
             '{{ app_rabbitmq_vhost }}',
         # Recycle workers at reasonable interval to work around possible memory leaks.
         'worker_max_tasks_per_child': 2000,
