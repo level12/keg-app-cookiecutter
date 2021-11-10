@@ -19,6 +19,7 @@ simplejson
 sqlalchemy
 sqlalchemy-utils
 tox
+wtforms<3.0  # https://github.com/level12/keg-elements/issues/161
 xlsxwriter
 xlrd
 
