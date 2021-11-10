@@ -10,10 +10,11 @@ lastpass_folder = '{{ cookiecutter.lastpass_secrets_folder }}'
 #   1) None as a value implies use the same value as the ansible variable name (just a shortcut)
 #   2) The value of each item in this dict will be looked up against the LastPass site data using
 #       fields: name, username, and id (in that order).  It must be complete match for the field.
-#   3) There are two special suffixes that you can use on the key:
+#   3) There are three special suffixes that you can use on the key:
 #       - _*: two variables will be created one for the username and one for the password.
 #               e.g. 'app_api_*' --> app_api_username & app_api_password
 #       - ~: the value returned will be the account username instead of the password.
+#       - #: the note will be returned instead of the password
 #
 # You can list sites w/ their fields & values by running something like:
 #   lpass show -xjG --field=fullname "{{ cookiecutter.lastpass_secrets_folder }}"

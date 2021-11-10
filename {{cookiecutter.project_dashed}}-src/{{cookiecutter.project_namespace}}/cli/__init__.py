@@ -2,9 +2,9 @@ import logging
 
 from ..app import {{cookiecutter.project_class}}
 
-# This import is to get a cli sub-module loaded.
-from ..cli import celery  # noqa
-from ..cli import db  # noqa
+# These imports are to get the cli sub-modules loaded.
+from . import celery  # noqa
+from . import db  # noqa
 
 log = logging.getLogger(__name__)
 
