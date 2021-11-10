@@ -1,6 +1,6 @@
 app_environment: prod
 
-app_celery_alive_key: '{{ cookiecutter.celery_alive_key_beta }}'
+app_celery_alive_key: '{{ cookiecutter.celery_alive_key_prod }}'
 
 {% raw %}
 app_flask_secret_key: "{{ app_flask_secret_key_prod }}"
