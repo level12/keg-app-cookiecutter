@@ -1,9 +1,8 @@
 from collections import namedtuple
 
 from blazeutils.strings import normalizews
-import commonmark
 import flask
-
+from . import markdown
 
 MailParts = namedtuple('MailParts', 'subject text html')
 
@@ -16,5 +15,5 @@ def mail_template(template_name_or_list, **kwargs):
     return MailParts(
         normalizews(subject),
         markdown,
-        commonmark.commonmark(markdown)
+        markdown.render(markdown)
     )

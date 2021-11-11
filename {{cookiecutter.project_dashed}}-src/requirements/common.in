@@ -8,6 +8,9 @@ flake8
 Flask-Mail
 flask-sqlalchemy
 flask-webtest
+html-sanitizer
+# linkify required for "gfm-like" configuration
+markdown-it-py[linkify]
 psycopg2-binary
 pyquery
 pytest
