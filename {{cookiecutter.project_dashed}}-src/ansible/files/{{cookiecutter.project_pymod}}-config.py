@@ -1,3 +1,5 @@
+from {{cookiecutter.project_pymod}}.celery.config import celery_config
+
 # flake8: noqa
 DEFAULT_PROFILE = 'DeployedProfile'
 
@@ -21,12 +23,7 @@ class DeployedProfile(object):
     MAIL_DEBUG = False
 
     CELERY_ALIVE_URL = '{{ app_celery_alive_url }}'
-    CELERY = {
-        'broker_url': 'amqp://{{ app_rabbitmq_user }}:{{ app_rabbitmq_pass|urlencode() }}@localhost:5672/'
-            '{{ app_rabbitmq_vhost }}',
-        # Recycle workers at reasonable interval to work around possible memory leaks.
-        'worker_max_tasks_per_child': 2000,
-    }
+    CELERY = celery_config(broker_url='amqp://guest@localhost:12672//')
 
     # Needed by at least KegAuth for sending emails from the command line
     SERVER_NAME = '{{ nginx_vhost_server_name }}'
