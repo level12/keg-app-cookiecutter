@@ -28,7 +28,7 @@ class EntityMixin(DefaultColsMixin, MethodsMixin):
         return result.scalar()
 
 
-def tc_relation(ent_cls, kwargs, rel_col_name, rel_ent_cls):
+def tc_relation(kwargs, rel_col_name, rel_ent_cls):
     id_col_name = f'{rel_col_name}_id'
     rel_name_dunder = f'{rel_col_name}__'
 
