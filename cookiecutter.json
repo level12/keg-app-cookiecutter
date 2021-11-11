@@ -8,7 +8,7 @@
   "python_executable": "python{{cookiecutter.python_version}}",
   "db_url_env_name": "{{ cookiecutter.project_namespace|upper }}_DB_URL",
   "db_postgres_version": "13",
-  "sa_db_uri_prefix": "postgresql://postgres:Password12!@localhost:12432/",
+  "sa_db_uri_prefix": "postgresql://postgres@localhost:12432/",
   "rabbitmq_version": "3.8",
   "developer_name": "",
   "developer_email": "",
