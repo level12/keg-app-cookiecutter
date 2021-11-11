@@ -9,10 +9,11 @@ def init_navigation(app):
         NavItem(
             NavItem(
                 'Auth',
-                NavItem('Logout', NavURL('auth.logout')),
+                NavItem('Login', NavURL('auth.login', requires_anonymous=True)),
                 NavItem('Bundles', NavURL('auth.bundle:list')),
                 NavItem('Groups', NavURL('auth.group:list')),
                 NavItem('Users', NavURL('auth.user:list')),
+                NavItem('Logout', NavURL('auth.logout', requires_user=True)),
             ),
         )
     )
