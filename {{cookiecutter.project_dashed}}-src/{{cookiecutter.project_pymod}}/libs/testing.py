@@ -67,13 +67,6 @@ def mock_patch(*args, **kwargs):
     kwargs.setdefault('spec_set', True)
     return mock.patch(*args, **kwargs)
 
-
-def iter_pyq(pyq):
-    """Iterates over the children of a PyQuery ojbect and converts each child to another PyQuery
-    object."""
-    return [pyq.eq(ix) for ix in range(len(pyq))]
-
-
 def default_assert_fn(x, y):
     assert x == y
 
