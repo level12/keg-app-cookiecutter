@@ -99,8 +99,8 @@ class Product(EntityMixin, db.Model):
 
     @classmethod
     def testing_create(cls, **kwargs):
-        kwargs = tc_relation(cls, kwargs, 'department', Department)
-        kwargs = tc_relation(cls, kwargs, 'category', ProductCat)
+        kwargs = tc_relation(kwargs, 'department', Department)
+        kwargs = tc_relation(kwargs, 'category', ProductCat)
         return super().testing_create(**kwargs)
 
     @classmethod
@@ -167,8 +167,8 @@ class ProductionDay(EntityMixin, db.Model):
 
     @classmethod
     def testing_create(cls, **kwargs):
-        kwargs = tc_relation(cls, kwargs, 'day', Day)
-        kwargs = tc_relation(cls, kwargs, 'product', Product)
+        kwargs = tc_relation(kwargs, 'day', Day)
+        kwargs = tc_relation(kwargs, 'product', Product)
         return super().testing_create(**kwargs)
 
     @classmethod
