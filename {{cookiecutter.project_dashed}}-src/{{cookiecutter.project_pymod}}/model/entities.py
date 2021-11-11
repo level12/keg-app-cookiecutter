@@ -45,6 +45,11 @@ class Group(db.Model, keg_auth.GroupMixin, EntityMixin):
     __tablename__ = 'auth_groups'
 
 
+@auth_entity_registry.register_attempt
+class Attempt(keg_auth.AttemptMixin, EntityMixin, db.Model):
+    __tablename__ = 'auth_attempts'
+
+
 class Department(EntityMixin, db.Model):
     __tablename__ = 'departments'
     __upsert_index_elements__ = ('name',)
