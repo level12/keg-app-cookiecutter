@@ -1,6 +1,6 @@
 *.pyc
 *.egg-info
-/{{cookiecutter.project_dashed}}-config.py
+/{{cookiecutter.project_pymod}}-config.py
 *.coverage
 /.tox
 /coverage.xml
