@@ -12,3 +12,5 @@ class GridManager(webgrid.flask.WebGrid):
 
 class Grid(webgrid.BaseGrid):
     manager = GridManager()
+
+#foo

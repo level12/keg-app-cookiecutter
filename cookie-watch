@@ -8,4 +8,4 @@ export PYTHONWARNINGS=ignore::UserWarning
 watchmedo shell-command \
     --recursive \
     --command=$CCSRC_PATH/cookie-run-demo \
-    $CCSRC_PATH/{{cookiecutter.project_dashed}}-src
+    $CCSRC_PATH/{{cookiecutter.src_dirname}}-src

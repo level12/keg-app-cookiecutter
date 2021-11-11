@@ -5,6 +5,7 @@
   "project_pymod": "{{ cookiecutter.project_ident }}",
   "project_class": "{{ cookiecutter.project_name|replace(' ', '') }}",
   "project_cli_bin": "{{ cookiecutter.project_ident }}",
+  "src_dirname": "{{ cookiecutter.project_dashed }}-src",
   "python_version": "3.9",
   "python_tox": "py{{cookiecutter.python_version|replace('.', '') }}",
   "python_executable": "python{{cookiecutter.python_version}}",
