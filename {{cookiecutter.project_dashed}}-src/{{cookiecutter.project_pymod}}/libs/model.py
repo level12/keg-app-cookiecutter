@@ -35,6 +35,7 @@ def tc_relation(kwargs, rel_col_name, rel_ent_cls):
     if id_col_name not in kwargs and rel_col_name not in kwargs:
         rel_keys = [key for key in kwargs.keys() if key.startswith(rel_name_dunder)]
         rel_kwargs = {key.replace(rel_name_dunder, '', 1): kwargs.pop(key) for key in rel_keys}
-        kwargs[rel_col_name] = rel_ent_cls.testing_create(**rel_kwargs)
+        rel_ent_inst = rel_ent_cls.testing_create(**rel_kwargs)
+        kwargs[id_col_name] = rel_ent_inst.id
 
     return kwargs
