@@ -19,7 +19,7 @@ _rel_cascade = 'all, delete-orphan'
 
 
 @auth_entity_registry.register_user
-class User(db.Model, keg_auth.UserEmailMixin, keg_auth.UserMixin, EntityMixin):
+class User(keg_auth.UserEmailMixin, keg_auth.UserMixin, EntityMixin, db.Model):
     """ Make sure EntityMixin is after UserMixin or testing_create() is wrong.  """
     __tablename__ = 'auth_users'
 
@@ -28,7 +28,7 @@ class User(db.Model, keg_auth.UserEmailMixin, keg_auth.UserMixin, EntityMixin):
 
 
 @auth_entity_registry.register_permission
-class Permission(db.Model, keg_auth.PermissionMixin, EntityMixin):
+class Permission(keg_auth.PermissionMixin, EntityMixin, db.Model):
     __tablename__ = 'auth_permissions'
 
     def __repr__(self):
@@ -36,12 +36,12 @@ class Permission(db.Model, keg_auth.PermissionMixin, EntityMixin):
 
 
 @auth_entity_registry.register_bundle
-class Bundle(db.Model, keg_auth.BundleMixin, EntityMixin):
+class Bundle(keg_auth.BundleMixin, EntityMixin, db.Model):
     __tablename__ = 'auth_bundles'
 
 
 @auth_entity_registry.register_group
-class Group(db.Model, keg_auth.GroupMixin, EntityMixin):
+class Group(keg_auth.GroupMixin, EntityMixin, db.Model):
     __tablename__ = 'auth_groups'
 
 
