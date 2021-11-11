@@ -4,13 +4,20 @@ import io
 import re
 from unittest import mock
 
+import blazeutils
 import flask
+from flask_wtf.csrf import generate_csrf
 from keg import signals
+import keg_auth.testing
+from pyquery import PyQuery
+import sqlalchemy
+from sqlalchemy.dialects import postgresql as sa_postgresql
+from webgrid.testing import compiler_instance_factory
 from werkzeug.datastructures import MultiDict
 import wrapt
 import xlrd
 
-from pyquery import PyQuery
+from ..model import entities as ents
 
 
 def inrequest(*req_args, **req_kwargs):
@@ -313,3 +320,85 @@ class FormBase:
                 assert pq(".input-group-prepend").text() == prefix
             if suffix:
                 assert pq(".input-group-append").text() == suffix
+
+
+def query_to_str(statement, bind=None):
+    """
+        returns a string of a sqlalchemy.orm.Query with parameters bound
+        WARNING: this is dangerous and ONLY for testing, executing the results
+        of this function can result in an SQL Injection attack.
+    """
+    if isinstance(statement, sqlalchemy.orm.Query):
+        if bind is None:
+            bind = statement.session.get_bind()
+        statement = statement.statement
+    elif bind is None:
+        bind = statement.bind
+
+    if bind is None:
+        raise Exception('bind param (engine or connection object) required when using with an'
+                        ' unbound statement')
+
+    dialect = bind.dialect
+    compiler = statement._compiler(dialect)
+    literal_compiler = compiler_instance_factory(compiler, dialect, statement)
+    return 'TESTING ONLY BIND: ' + literal_compiler.process(statement)
+
+
+def print_sa(statement):
+    ''' Print an SA statment compiled as it will actually look when sent to postgres.  A lot of the
+        time, this is no different from what you'd get with print(statement), but it can matter
+        for Postgres specific syntax like their `distinct on (...)`.
+        SA core statements get passed in directly: print_sa(select(...))
+        SA ORM queries should send in the statement: print_sa(ents.SomeThing.query.statement)
+    '''
+    print(statement.compile(dialect=sa_postgresql.dialect()))
+
+
+def user_client(user=None, permissions=None, is_active=True):
+    permission_ent = flask.current_app.auth_manager.entity_registry.permission_cls
+
+    if user is None:
+        # ensure all of the tokens exists
+        defined_perms = set(
+            blazeutils.tolist(perm)[0] for perm in flask.current_app.auth_manager.permissions
+        )
+        for perm in blazeutils.tolist(permissions):
+            if perm not in defined_perms:
+                raise Exception('permission {} not specified in the auth manager'.format(perm))
+            permission_ent.testing_create(token=perm)
+
+        user = ents.User.testing_create(is_active=is_active, permissions=permissions or ())
+    test_app = AuthTestApp(flask.current_app, user=user)
+    test_app.__user__ = user
+    return test_app
+
+
+class AuthTestApp(keg_auth.testing.AuthTestApp):
+    """
+        Adds features to help with CSRF validation.
+    """
+
+    def __init__(self, app, **kwargs):
+        self._csrf_token = None
+        self._add_csrf = kwargs.pop('add_csrf', False)
+
+        super().__init__(app, **kwargs)
+
+    def _gen_csrf(self):
+        if not self._csrf_token:
+            with self.app.test_request_context():
+                self._csrf_token = generate_csrf()
+                raw_token = flask.session['csrf_token']
+
+            with self.session_transaction() as sess:
+                sess['csrf_token'] = raw_token
+
+        return self._csrf_token
+
+    def post(self, *args, **kwargs):
+        if kwargs.pop('add_csrf', self._add_csrf):
+            kwargs.setdefault('headers', {})
+            kwargs['headers']['X-CSRF-Token'] = self._gen_csrf()
+
+        return super().post(*args, **kwargs)

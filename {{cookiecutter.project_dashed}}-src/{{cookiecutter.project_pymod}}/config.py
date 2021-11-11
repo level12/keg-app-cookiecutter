@@ -53,6 +53,3 @@ class TestProfile(object):
     }
 
     CELERY_ALIVE_URL = 'keep-celery-alive'
-
-    # Disable CSRF by default in tests
-    WTF_CSRF_ENABLED = False
