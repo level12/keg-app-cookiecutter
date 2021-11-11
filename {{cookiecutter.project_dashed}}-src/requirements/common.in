@@ -24,7 +24,6 @@ sqlalchemy-utils
 tox
 wtforms<3.0  # https://github.com/level12/keg-elements/issues/161
 xlsxwriter
-xlrd
 
 # Additional Flake8 checks
 -e git+https://github.com/level12/flake8-level12.git#egg=flake8_level12
