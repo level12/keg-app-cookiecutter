@@ -2,13 +2,13 @@ import keg
 from keg.db import db
 import pytest
 
-import {{cookiecutter.project_namespace}}.celery.testing as ct
+import {{cookiecutter.project_pymod}}.celery.testing as ct
 # important to import from .cli so that the commands get attached
-from {{cookiecutter.project_namespace}}.cli import {{cookiecutter.project_class}}
-import {{cookiecutter.project_namespace}}.libs.db as libs_db
+from {{cookiecutter.project_pymod}}.cli import {{cookiecutter.project_class}}
+import {{cookiecutter.project_pymod}}.libs.db as libs_db
 
 # You can uncomment this if you end up with asserts in libraries outside tests.
-# pytest.register_assert_rewrite('{{cookiecutter.project_namespace}}.libs.testing')
+# pytest.register_assert_rewrite('{{cookiecutter.project_pymod}}.libs.testing')
 
 pytest_plugins = ('celery.contrib.pytest',)
 

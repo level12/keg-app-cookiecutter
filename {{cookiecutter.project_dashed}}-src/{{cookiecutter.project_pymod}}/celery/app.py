@@ -36,8 +36,8 @@ def configure(keg_app):
 
 
 celery_app = Celery(
-    '{{cookiecutter.project_namespace}}',
-    include=['{{cookiecutter.project_namespace}}.celery.tasks']
+    '{{cookiecutter.project_pymod}}',
+    include=['{{cookiecutter.project_pymod}}.celery.tasks']
 )
 
 # Quickly fail if RabbitMQ can't be reached so tests/scripts don't hang.

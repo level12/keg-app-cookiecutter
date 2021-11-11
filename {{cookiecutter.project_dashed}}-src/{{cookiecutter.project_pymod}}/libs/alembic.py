@@ -41,7 +41,7 @@ def alembic_apply(revision):
 
 @contextmanager
 def alembic_automap_init(alembic_op):
-    # Import inside to avoid circular imports.  {{cookiecutter.project_namespace}}.libs.db imports
+    # Import inside to avoid circular imports.  {{cookiecutter.project_pymod}}.libs.db imports
     # from this file.
     from racebetter.model.utils import reflect_db
 

@@ -1,7 +1,7 @@
 use_pvt_dns: false
 
-project_ident: {{ cookiecutter.project_namespace }}
-project_ident_env: {{ cookiecutter.project_namespace }}-{{ '{{' }} app_environment {{'}}'}}
+project_ident: {{ cookiecutter.project_ident }}
+project_ident_env: {{ cookiecutter.project_ident }}-{{ '{{' }} app_environment {{'}}'}}
 project_authorized_keys_fpath: files/project-user-authorized-keys
 
 app_db_host: "{{ '{{' }} lookup('dig', '+short', '{{cookiecutter.database_host}}.pvt.{{ '{{' }} network_domain {{ '}}' }}', '@ns-452.awsdns-56.com') {{ '}}' }}"

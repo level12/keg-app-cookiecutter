@@ -25,7 +25,7 @@ config file with a `default_context` section.  Example:
     developer_email: randy.syring@level12.io
     developer_password: password
     project_name: Green Blue EPR
-    project_namespace: epr
+    project_ident: epr
     project_class: GBEPR
     gh_repo_org: level12
     gh_repo_name: gb-epr

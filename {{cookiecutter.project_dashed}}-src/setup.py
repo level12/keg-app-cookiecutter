@@ -6,7 +6,7 @@ cdir = pathlib.Path(__file__).parent
 README = cdir.joinpath('readme.rst').read_text('utf-8')
 CHANGELOG = cdir.joinpath('changelog.rst').read_text('utf-8')
 
-VERSION_SRC = cdir.joinpath('{{cookiecutter.project_namespace}}', 'version.py').read_text('utf-8')
+VERSION_SRC = cdir.joinpath('{{cookiecutter.project_pymod}}', 'version.py').read_text('utf-8')
 version_globals = {}
 exec(VERSION_SRC, version_globals)
 
@@ -25,7 +25,7 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python :: 2.7',
     ],
-    packages=['{{cookiecutter.project_namespace}}'],
+    packages=['{{cookiecutter.project_pymod}}'],
     include_package_data=True,
     zip_safe=False,
     install_requires=[
@@ -34,6 +34,6 @@ setup(
     ],
     entry_points='''
         [console_scripts]
-        {{cookiecutter.project_namespace}} = {{cookiecutter.project_namespace}}.cli:cli_entry
+        {{cookiecutter.project_cli_bin}} = {{cookiecutter.project_pymod}}.cli:cli_entry
     ''',
 )

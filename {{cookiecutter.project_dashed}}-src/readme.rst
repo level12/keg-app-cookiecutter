@@ -101,8 +101,8 @@ Quickstart
 
 #. `docker-compose up -d` or you will have to have the same services available without Docker.
 
-#. Copy the file `{{cookiecutter.project_namespace}}-config-example.py` at the root of this project to
-   `{{cookiecutter.project_namespace}}-config.py`. Adjust settings as needed for your local dev environment.
+#. Copy the file `{{cookiecutter.project_dashed}}-config-example.py` at the root of this project to
+   `{{cookiecutter.project_dashed}}-config.py`. Adjust settings as needed for your local dev environment.
 
 #. Copy the file `.flaskenv-example` at the root of this project to `.flaskenv`. Adjust settings as
    needed for your local dev environment.
@@ -118,7 +118,7 @@ Quickstart
 
 #. You will have to install the project separately with `pip install -e .`
 
-#. Set up the database tables with `{{cookiecutter.project_namespace}} develop db init`
+#. Set up the database tables with `{{cookiecutter.project_cli_bin}} develop db init`
 
 #. Run the app with `supervisord` (inspect supervisord.conf for more info).
 
@@ -131,7 +131,7 @@ The celery worker can be run with::
 
 View your queues and stuff using flower (`pip install flower`)::
 
-    celery flower --app {{cookiecutter.project_namespace}}.celery.worker
+    celery flower --app {{cookiecutter.project_pymod}}.celery.worker
 
 Purging the queues::
 
@@ -166,7 +166,7 @@ You can verify the deploy by:
   * Verify this shows up in Sentry
 
 * Verify the app's logging messages through Celery, which cron should be running once a minute.
-  You can run manually with: `{{cookiecutter.project_namespace}} log` and `{{cookiecutter.project_namespace}} celery ping`.
+  You can run manually with: `{{cookiecutter.project_cli_bin}} log` and `{{cookiecutter.project_cli_bin}} celery ping`.
 
   * Look on the server in ~/syslogs/app.log for the app's log messages
   * Look at logzio, the messages should have shipped there as well through rsyslog
@@ -192,7 +192,7 @@ Backups
     .../ansible$ ansible-playbook -l prod db-backup.yaml -t full
 
     # Find the backups on your local machine
-    $ ls -lh /tmp/{{cookiecutter.project_namespace}}-*
+    $ ls -lh /tmp/{{cookiecutter.project_dashed}}-*
 
 Files will be generated on the remote server, downloaded to `/tmp`, and then deleted from the
 server.
@@ -204,13 +204,13 @@ Restore
 ::
 
     # Restore SQL files - schema, alembic table if it exists, but no data
-    $ {{cookiecutter.project_namespace}} db-restore /tmp/{{cookiecutter.project_namespace}}-*.sql
-    INFO - {{cookiecutter.project_namespace}}.libs.db - Restoring /tmp/{{cookiecutter.project_namespace}}-schema.sql to None:5433/{{cookiecutter.project_namespace}}
+    $ {{cookiecutter.project_dashed}} db-restore /tmp/{{cookiecutter.project_dashed}}-*.sql
+    INFO - {{cookiecutter.project_dashed}}.libs.db - Restoring /tmp/{{cookiecutter.project_dashed}}-schema.sql to None:5433/{{cookiecutter.project_dashed}}
     restore finished
 
     # Or, full restore with data
-    $ {{cookiecutter.project_namespace}} db-restore /tmp/{{cookiecutter.project_namespace}}-full.bak
-    INFO - {{cookiecutter.project_namespace}}.libs.db - Restoring /tmp/{{cookiecutter.project_namespace}}-full.bak to None:5433/{{cookiecutter.project_namespace}}
+    $ {{cookiecutter.project_dashed}} db-restore /tmp/{{cookiecutter.project_dashed}}-full.bak
+    INFO - {{cookiecutter.project_dashed}}.libs.db - Restoring /tmp/{{cookiecutter.project_dashed}}-full.bak to None:5433/{{cookiecutter.project_dashed}}
     restore finished
 
 
@@ -225,7 +225,7 @@ the testing process.
 So, we would like a way to run tests on top of a DB that has been prepared by restoring & applying
 Alembic migrations.  We have some pytest integration which does most of that work for us::
 
-    $ py.test --db-restore {{cookiecutter.project_namespace}}
+    $ py.test --db-restore {{cookiecutter.project_pymod}}
 
 That will:
 

@@ -4,7 +4,7 @@ from keg.db import db
 from keg_auth.model import KAPasswordType
 from sqlalchemy_utils import ArrowType, EmailType
 
-from {{cookiecutter.project_namespace}}.app import {{cookiecutter.project_class}}
+from {{cookiecutter.project_pymod}}.app import {{cookiecutter.project_class}}
 
 
 if keg.current_app:

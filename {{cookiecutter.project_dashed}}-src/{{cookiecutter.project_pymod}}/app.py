@@ -11,7 +11,7 @@ from .views import blueprints
 
 
 class {{cookiecutter.project_class}}(Keg):
-    import_name = '{{cookiecutter.project_namespace}}'
+    import_name = '{{cookiecutter.project_pymod}}'
     use_blueprints = blueprints
     db_enabled = True
 

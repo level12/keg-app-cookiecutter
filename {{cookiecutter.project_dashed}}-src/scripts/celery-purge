@@ -1,3 +1,3 @@
 #!/bin/sh
 
-celery purge --app {{cookiecutter.project_namespace}}.celery.worker
+celery purge --app {{cookiecutter.project_pymod}}.celery.worker

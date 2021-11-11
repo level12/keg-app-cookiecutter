@@ -30,14 +30,14 @@ class TestCelerySetup:
         task_tracker.reset()
 
     @mock.patch.object(tasks, 'requests', autospec=True, spec_set=True)
-    @mock.patch('{{cookiecutter.project_namespace}}.celery.app.db', autospec=True, spec_set=True)
+    @mock.patch('{{cookiecutter.project_pymod}}.celery.app.db', autospec=True, spec_set=True)
     def test_removed_ok(self, m_db, m_requests, celery_session_worker):
         """ The DB session needs to be removed when every task is finished. """
 
         tasks.ping_url.delay('foo')
 
         # Wait for the task to complete in a different thread.
-        task_tracker.wait_for('{{cookiecutter.project_namespace}}.celery.tasks.ping_url')
+        task_tracker.wait_for('{{cookiecutter.project_pymod}}.celery.tasks.ping_url')
         # Cleanup is sometimes not complete at this point, need to sleep a minimal amount more
         sleep(0.3)
 
@@ -46,14 +46,14 @@ class TestCelerySetup:
 
 class TestDBCli(CLIBase):
 
-    @mock.patch('{{cookiecutter.project_namespace}}.cli.db.lib_db.PostgresBackup', autospec=True, spec_set=True)
+    @mock.patch('{{cookiecutter.project_pymod}}.cli.db.lib_db.PostgresBackup', autospec=True, spec_set=True)
     def test_backup(self, m_PostgresBackup):
         # set "errors" to nothing
         m_PostgresBackup.return_value.run.return_value = []
         result = self.invoke('db', 'backup', 'sql')
         assert 'backup finished\n' == result.output
 
-    @mock.patch('{{cookiecutter.project_namespace}}.cli.db.lib_db.PostgresRestore', autospec=True, spec_set=True)
+    @mock.patch('{{cookiecutter.project_pymod}}.cli.db.lib_db.PostgresRestore', autospec=True, spec_set=True)
     def test_restore(self, PostgresRestore):
         # set "errors" to nothing
         PostgresRestore.return_value.run.return_value = []

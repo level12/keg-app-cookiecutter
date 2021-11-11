@@ -7,7 +7,7 @@
     - "{{"{{"}} lookup('env','ANSIBLE_ROLES_PATH') }}/includes/vars.yml"
   vars:
     first_run: false
-    app_cli_bin: "{{"{{"}} pyapp3_venv_bin_dpath }}/{{cookiecutter.project_namespace}}"
+    app_cli_bin: "{{"{{"}} pyapp3_venv_bin_dpath }}/{{cookiecutter.project_cli_bin}}"
     sentry_cron_cmd: "/usr/local/bin/cron-sentry --quiet {{"{{"}} app_cli_bin }}"
 {% raw %}
   remote_user: "{{project_user}}"

@@ -19,7 +19,7 @@ services:
       ports:
         - '127.0.0.1:12432:5432'
       environment:
-        POSTGRES_MULTIPLE_DATABASES: {{cookiecutter.project_namespace}},{{cookiecutter.project_namespace}}_tests
+        POSTGRES_MULTIPLE_DATABASES: {{cookiecutter.project_dashed}},{{cookiecutter.project_dashed}}-tests
         # Ok for local dev, potentially UNSAFE in other applications.  Don't blindly copy & paste
         # without considering implications.
         POSTGRES_HOST_AUTH_METHOD: trust
