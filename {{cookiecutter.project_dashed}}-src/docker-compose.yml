@@ -10,6 +10,11 @@
 # - `docker rmi <image name>`
 # - `docker stop $(docker ps -aq)`: stop all running containers
 # - `docker rm $(docker ps -a -q)`: remove all stopped containers
+#
+# Can use a .env to customize port mappings, but that will only work when running docker-compose in
+# the same directory as this file.  You can also use an override file if desired.
+# https://docs.docker.com/compose/environment-variables/
+# https://docs.docker.com/compose/extends/
 
 version: '2'
 services:
@@ -17,7 +22,7 @@ services:
       image: postgres:{{cookiecutter.db_postgres_version}}-alpine
       container_name: {{ cookiecutter.project_dashed }}-pg
       ports:
-        - '127.0.0.1:12432:5432'
+        - '${KEG_APP_POSTGRES_IP:-127.0.0.1}:${KEG_APP_POSTGRES_PORT:-12432}:5432'
       environment:
         POSTGRES_MULTIPLE_DATABASES: {{cookiecutter.project_dashed}},{{cookiecutter.project_dashed}}-tests
         # Ok for local dev, potentially UNSAFE in other applications.  Don't blindly copy & paste
@@ -29,4 +34,4 @@ services:
       image: rabbitmq:{{cookiecutter.rabbitmq_version}}-alpine
       container_name: {{ cookiecutter.project_dashed }}-rabbitmq
       ports:
-        - '127.0.0.1:12672:5672'
+        - '${KEG_APP_RABBITMQ_IP:-127.0.0.1}:${KEG_APP_RABBITMQ_PORT:-12672}:5672'
