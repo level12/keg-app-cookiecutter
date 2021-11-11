@@ -41,6 +41,16 @@ def render_item(type_, obj, autogen_context):
     return False
 
 
+def compare_type(context, inspected_column, metadata_column, inspected_type, metadata_type):
+    """Custom compare_type function for alembic autogeneration"""
+    if metadata_type == KAPasswordType or type(metadata_type) == KAPasswordType:
+        # KAPasswordType throws flask app context errors during type
+        # comparison, so we return False to disable type comparison
+        return False
+    # Returning "None" defaults to alembic's built-in type comparison
+    return None
+
+
 def run_migrations_offline():
     """Run migrations in 'offline' mode.
 
@@ -77,6 +87,7 @@ def run_migrations_online():
             connection=connection,
             target_metadata=target_metadata,
             render_item=render_item,
+            compare_type=compare_type,
         )
 
         with context.begin_transaction():
