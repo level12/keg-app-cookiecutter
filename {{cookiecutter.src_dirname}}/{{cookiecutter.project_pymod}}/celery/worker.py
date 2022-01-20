@@ -44,7 +44,7 @@ class ContextTask(TaskBase):
 
 
 # It might seem like this assignment happens too late to be effective.  By the time this assignment
-# takes place, the tasks in racebetter.celery.tasks have already been setup.  However, it seems
+# takes place, the tasks in myapp.celery.tasks have already been setup.  However, it seems
 # that Celery uses a proxy object for task registration which will defer the creation of the task
 # classes until they are used.  From celery.app.base.Celery.task docstring:
 #
