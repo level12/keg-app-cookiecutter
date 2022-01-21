@@ -31,7 +31,7 @@ def app_config_cli(**kwargs):
         to dynamically set app config variables using mock.patch.dict like we normally would.
         Example::
         class TestCLI(CLIBase):
-            app_cls = RaceBetter
+            app_cls = {{cookiecutter.project_class}}
             def test_it(self):
                 with testing.app_config_cli(FOO_NAME='Bar'):
                     result = self.invoke('echo-foo-name')

@@ -43,7 +43,7 @@ def alembic_apply(revision):
 def alembic_automap_init(alembic_op):
     # Import inside to avoid circular imports.  {{cookiecutter.project_pymod}}.libs.db imports
     # from this file.
-    from racebetter.model.utils import reflect_db
+    from .db import reflect_db
 
     # Use the same connection to the DB that the Alembic environment is using so that all of our
     # operations are happening withing the single Alembic-managed transaction.  The goal is that
