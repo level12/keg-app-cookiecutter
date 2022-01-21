@@ -2,7 +2,7 @@
 """
     We init the extensions outside of .app to make less likely to be in an import loop.
 """
-from flask_bootstrap import Bootstrap
+from flask_bootstrap import Bootstrap4
 from flask_mail import Mail as FlaskMail
 from flask_wtf.csrf import CSRFProtect
 from keg_auth import AuthManager, AuthMailManager, AuthEntityRegistry
@@ -32,4 +32,4 @@ csrf = CSRFProtect()
 
 sentry = Sentry()
 
-bootstrap = Bootstrap()
+bootstrap = Bootstrap4()
