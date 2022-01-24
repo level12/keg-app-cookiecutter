@@ -7,8 +7,9 @@ import flask.json
 
 class JSONEncoder(flask.json.JSONEncoder):
     """
-        The Flask JSONEncoder but puts dates in iso format instead of http date format.
+    The Flask JSONEncoder but puts dates in iso format instead of http date format.
     """
+
     def default(self, obj):
         if isinstance(obj, (dt.datetime, dt.date, arrow.Arrow)):
             return obj.isoformat()
@@ -19,8 +20,9 @@ class JSONEncoder(flask.json.JSONEncoder):
 
 class JSONDecoder(flask.json.JSONDecoder):
     """
-        A custom JSON decoder that will convert floats to Decimals.
+    A custom JSON decoder that will convert floats to Decimals.
     """
+
     def __init__(self, *args, **kwargs):
         # Same as simplejson.loads(..., use_decimal=True)
         kwargs.setdefault('parse_float', decimal.Decimal)

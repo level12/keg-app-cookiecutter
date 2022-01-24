@@ -4,27 +4,33 @@ from ..libs import markdown
 
 
 def test_render_unsafe():
-    src = textwrap.dedent('''
+    src = textwrap.dedent(
+        '''
         # A Test
         <script></script>
         http://example.com
-    ''')
+    '''
+    )
 
-    expected = textwrap.dedent('''
+    expected = textwrap.dedent(
+        '''
     <h1>A Test</h1>
     <script></script>
     <p><a href="http://example.com">http://example.com</a></p>
-    ''').lstrip()
+    '''
+    ).lstrip()
 
     assert markdown.render_unsafe(src) == expected
 
 
 def test_render():
-    src = textwrap.dedent('''
+    src = textwrap.dedent(
+        '''
         # A Test
         <script></script>
         http://example.com
-    ''')
+    '''
+    )
 
     expected = '<h1>A Test</h1> <p><a href="http://example.com">http://example.com</a></p>'
 

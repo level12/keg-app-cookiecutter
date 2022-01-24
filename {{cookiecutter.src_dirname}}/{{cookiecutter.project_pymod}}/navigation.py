@@ -15,5 +15,5 @@ def init_navigation(app):
                 NavItem('Users', NavURL('auth.user:list')),
                 NavItem('Logout', NavURL('auth.logout', requires_user=True)),
             ),
-        )
+        ),
     )

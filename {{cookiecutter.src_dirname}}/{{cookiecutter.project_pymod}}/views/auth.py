@@ -6,7 +6,6 @@ from keg_auth.views import User as UserBase
 
 from ..extensions import auth_manager
 
-
 log = logging.getLogger(__name__)
 
 

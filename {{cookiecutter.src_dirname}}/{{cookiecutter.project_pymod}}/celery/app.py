@@ -10,8 +10,8 @@ log = logging.getLogger(__name__)
 
 def on_task_failure(task, exc, task_id, args, kwargs, einfo):
     """
-        Log any task failures.  We will also get email notifications which is handled directly by
-        celery and setup in the workers module.
+    Log any task failures.  We will also get email notifications which is handled directly by
+    celery and setup in the workers module.
     """
     message = 'Task {} failed w/ args: {}, {}\n{}'
     log.error(message.format(task.name, args, kwargs, einfo.traceback))

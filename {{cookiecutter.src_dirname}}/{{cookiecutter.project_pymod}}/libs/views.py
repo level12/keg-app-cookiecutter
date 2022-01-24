@@ -1,6 +1,6 @@
+import keg_elements.views
 from blazeutils import strings
 from keg.web import BaseView as _BaseView
-import keg_elements.views
 
 
 class BaseView(_BaseView):

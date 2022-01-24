@@ -9,7 +9,6 @@ from ..model import entities as ents
 
 
 class TestCLI(CLIBase):
-
     def setup(self):
         ents.User.delete_cascaded()
 
@@ -25,14 +24,13 @@ class TestCLI(CLIBase):
 
 
 class TestCelerySetup:
-
     def setup(self):
         task_tracker.reset()
 
     @mock.patch.object(tasks, 'requests', autospec=True, spec_set=True)
     @mock.patch('{{cookiecutter.project_pymod}}.celery.app.db', autospec=True, spec_set=True)
     def test_removed_ok(self, m_db, m_requests, celery_session_worker):
-        """ The DB session needs to be removed when every task is finished. """
+        """The DB session needs to be removed when every task is finished."""
 
         tasks.ping_url.delay('foo')
 
@@ -45,7 +43,6 @@ class TestCelerySetup:
 
 
 class TestDBCli(CLIBase):
-
     @mock.patch('{{cookiecutter.project_pymod}}.cli.db.lib_db.PostgresBackup', autospec=True, spec_set=True)
     def test_backup(self, m_PostgresBackup):
         # set "errors" to nothing

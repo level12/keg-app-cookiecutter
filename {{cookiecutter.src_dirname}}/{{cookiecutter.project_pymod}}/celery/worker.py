@@ -19,7 +19,8 @@ def add_handler(**kwargs):
 uwsgi_config = {
     # Don't log to stdout or uwsgi picks it up and that gets sent to syslog too resulting in double
     # the log volume with no benefit.
-    'KEG_LOG_STREAM_ENABLED': os.environ.get('KEG_LOG_STREAM_ENABLED', False) == 'on'
+    'KEG_LOG_STREAM_ENABLED': os.environ.get('KEG_LOG_STREAM_ENABLED', False)
+    == 'on'
 }
 
 # Assuming this module will only ever be called by `celery worker` and we therefore need to setup
@@ -32,9 +33,10 @@ _app = {{cookiecutter.project_class}}().init(config=uwsgi_config)
 
 class ContextTask(TaskBase):
     """
-        We need to wrap the execution of each Celery task in a Flask app context in order for
-        flask.current_app and similiar to work.
+    We need to wrap the execution of each Celery task in a Flask app context in order for
+    flask.current_app and similiar to work.
     """
+
     # Abstract tells Celery not to register this task in the task registry.
     abstract = True
 
@@ -61,11 +63,11 @@ celery.Task = ContextTask
 @worker_process_init.connect
 def prep_db_pool(**kwargs):
     """
-        When Celery fork's the parent process, the db engine & connection pool is included in that.
-        But, the db connections should not be shared across processes, so we tell the engine
-        to dispose of all existing connections, which will cause new ones to be opend in the child
-        processes as needed.
-        More info: https://docs.sqlalchemy.org/en/latest/core/pooling.html#using-connection-pools-with-multiprocessing  # noqa
+    When Celery fork's the parent process, the db engine & connection pool is included in that.
+    But, the db connections should not be shared across processes, so we tell the engine
+    to dispose of all existing connections, which will cause new ones to be opend in the child
+    processes as needed.
+    More info: https://docs.sqlalchemy.org/en/latest/core/pooling.html#using-connection-pools-with-multiprocessing  # noqa
     """
     with _app.app_context():
         db.engine.dispose()

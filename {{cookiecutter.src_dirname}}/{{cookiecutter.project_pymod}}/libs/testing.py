@@ -3,13 +3,13 @@ from unittest import mock
 
 import blazeutils
 import flask
-from flask_wtf.csrf import generate_csrf
-from keg import signals
 import keg_auth.testing
 import sqlalchemy
+import wrapt
+from flask_wtf.csrf import generate_csrf
+from keg import signals
 from sqlalchemy.dialects import postgresql as sa_postgresql
 from webgrid.testing import compiler_instance_factory
-import wrapt
 
 from ..model import entities as ents
 
@@ -19,23 +19,24 @@ def inrequest(*req_args, **req_kwargs):
     def wrapper(wrapped, instance, args, kwargs):
         with flask.current_app.test_request_context(*req_args, **req_kwargs):
             return wrapped(*args, **kwargs)
+
     return wrapper
 
 
 @contextlib.contextmanager
 def app_config_cli(**kwargs):
     """
-        Set config values on any apps instantiated while the context manager is active.
-        This is intended to be used with cli tests where the `current_app` in the test will be
-        different from the `current_app` when the CLI command is invoked, making it very difficult
-        to dynamically set app config variables using mock.patch.dict like we normally would.
-        Example::
-        class TestCLI(CLIBase):
-            app_cls = {{cookiecutter.project_class}}
-            def test_it(self):
-                with testing.app_config_cli(FOO_NAME='Bar'):
-                    result = self.invoke('echo-foo-name')
-                assert 'Bar' in result.output
+    Set config values on any apps instantiated while the context manager is active.
+    This is intended to be used with cli tests where the `current_app` in the test will be
+    different from the `current_app` when the CLI command is invoked, making it very difficult
+    to dynamically set app config variables using mock.patch.dict like we normally would.
+    Example::
+    class TestCLI(CLIBase):
+        app_cls = {{cookiecutter.project_class}}
+        def test_it(self):
+            with testing.app_config_cli(FOO_NAME='Bar'):
+                result = self.invoke('echo-foo-name')
+            assert 'Bar' in result.output
     """
 
     @signals.config_complete.connect
@@ -47,10 +48,10 @@ def app_config_cli(**kwargs):
 
 @contextlib.contextmanager
 def app_config(**kwargs):
-    """ Just a shortcut for mock.patch.dict...
-            def test_it(self):
-                with testing.app_config(FOO_NAME='Bar'):
-                    assert flask.current_app.config['FOO_NAME'] == 'Bar'
+    """Just a shortcut for mock.patch.dict...
+    def test_it(self):
+        with testing.app_config(FOO_NAME='Bar'):
+            assert flask.current_app.config['FOO_NAME'] == 'Bar'
     """
     with mock.patch.dict(flask.current_app.config, **kwargs) as mocked_config:
         yield mocked_config
@@ -70,9 +71,9 @@ def mock_patch(*args, **kwargs):
 
 def query_to_str(statement, bind=None):
     """
-        returns a string of a sqlalchemy.orm.Query with parameters bound
-        WARNING: this is dangerous and ONLY for testing, executing the results
-        of this function can result in an SQL Injection attack.
+    returns a string of a sqlalchemy.orm.Query with parameters bound
+    WARNING: this is dangerous and ONLY for testing, executing the results
+    of this function can result in an SQL Injection attack.
     """
     if isinstance(statement, sqlalchemy.orm.Query):
         if bind is None:
@@ -82,8 +83,10 @@ def query_to_str(statement, bind=None):
         bind = statement.bind
 
     if bind is None:
-        raise Exception('bind param (engine or connection object) required when using with an'
-                        ' unbound statement')
+        raise Exception(
+            'bind param (engine or connection object) required when using with an'
+            ' unbound statement'
+        )
 
     dialect = bind.dialect
     compiler = statement._compiler(dialect)
@@ -92,11 +95,11 @@ def query_to_str(statement, bind=None):
 
 
 def print_sa(statement):
-    ''' Print an SA statment compiled as it will actually look when sent to postgres.  A lot of the
-        time, this is no different from what you'd get with print(statement), but it can matter
-        for Postgres specific syntax like their `distinct on (...)`.
-        SA core statements get passed in directly: print_sa(select(...))
-        SA ORM queries should send in the statement: print_sa(ents.SomeThing.query.statement)
+    '''Print an SA statment compiled as it will actually look when sent to postgres.  A lot of the
+    time, this is no different from what you'd get with print(statement), but it can matter
+    for Postgres specific syntax like their `distinct on (...)`.
+    SA core statements get passed in directly: print_sa(select(...))
+    SA ORM queries should send in the statement: print_sa(ents.SomeThing.query.statement)
     '''
     print(statement.compile(dialect=sa_postgresql.dialect()))
 
@@ -122,7 +125,7 @@ def user_client(user=None, permissions=None, is_active=True):
 
 class AuthTestApp(keg_auth.testing.AuthTestApp):
     """
-        Adds features to help with CSRF validation.
+    Adds features to help with CSRF validation.
     """
 
     def __init__(self, app, **kwargs):

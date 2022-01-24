@@ -1,9 +1,11 @@
 from contextlib import contextmanager
 from os import path as osp
+
+import keg
+
 import alembic
 import alembic.config
 from alembic.script import ScriptDirectory
-import keg
 
 
 def alembic_config(config=None):
@@ -23,9 +25,9 @@ def alembic_upgrade(revision):
 
 def alembic_apply(revision):
     """
-        Stamp the current DB at the "down_revision" of the revision to be applied. Then,
-        "upgrade" to the revision requested.
-        This should guarantee that only the requested revision is run and nothing it depends on.
+    Stamp the current DB at the "down_revision" of the revision to be applied. Then,
+    "upgrade" to the revision requested.
+    This should guarantee that only the requested revision is run and nothing it depends on.
     """
     alembic_conf = alembic_config()
     scriptdir = ScriptDirectory.from_config(alembic_conf)

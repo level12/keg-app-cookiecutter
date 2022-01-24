@@ -1,7 +1,4 @@
-from keg_elements.testing import (
-    ColumnCheck,
-    EntityBase,
-)
+from keg_elements.testing import ColumnCheck, EntityBase
 
 from ..model import entities as ents
 
@@ -18,5 +15,5 @@ class TestUser(EntityBase):
         ColumnCheck('name'),
         ColumnCheck('settings', required=False),
         ColumnCheck('last_login_utc', required=False),
-        ColumnCheck('disabled_utc', required=False)
+        ColumnCheck('disabled_utc', required=False),
     ]

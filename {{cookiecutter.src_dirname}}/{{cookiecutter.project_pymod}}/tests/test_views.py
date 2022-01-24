@@ -1,10 +1,10 @@
 import flask
 import flask_webtest as webtest
-from keg_auth.testing import AuthTestApp
 import pytest
+from keg_auth.testing import AuthTestApp
 
-from ..model import entities as ents
 from ..libs.testing import mock_patch
+from ..model import entities as ents
 
 
 # Scope needs to be class level b/c ViewTestBase clears out users in setup_class()

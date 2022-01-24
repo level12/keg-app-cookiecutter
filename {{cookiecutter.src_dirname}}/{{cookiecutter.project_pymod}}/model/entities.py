@@ -1,8 +1,8 @@
 import logging
 
-from keg.db import db
 import keg_auth
 import sqlalchemy as sa
+from keg.db import db
 from sqlalchemy.dialects.postgresql import JSONB
 
 from ..extensions import auth_entity_registry
@@ -17,7 +17,8 @@ _rel_cascade = 'all, delete-orphan'
 
 @auth_entity_registry.register_user
 class User(keg_auth.UserEmailMixin, keg_auth.UserMixin, EntityMixin, db.Model):
-    """ Make sure EntityMixin is after UserMixin or testing_create() is wrong.  """
+    """Make sure EntityMixin is after UserMixin or testing_create() is wrong."""
+
     __tablename__ = 'auth_users'
 
     name = sa.Column(sa.Unicode(250), nullable=False)
