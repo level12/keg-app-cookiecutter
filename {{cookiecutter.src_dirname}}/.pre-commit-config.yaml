@@ -29,3 +29,7 @@ repos:
         'types': [python]
         entry: flake8
         files: ^{{cookiecutter.project_pymod}}/
+    -   id: count-heads
+        name: Count Alembic Heads
+        language: system
+        entry: python scripts/count-heads.py
