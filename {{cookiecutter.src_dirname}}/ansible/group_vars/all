@@ -67,8 +67,8 @@ pyapp3_wsgi_extras_all:
     attach-daemon2 =
     command={{ pyapp3_venv_bin_dpath }}/celery
     --app={{project_ident}}.celery.worker
-    worker
     --workdir={{ project_home_dpath }}
+    worker
     --pidfile={{ app_celery_pid_fpath }}
     --hostname=celery.%h,
     pidfile={{ app_celery_pid_fpath }},
