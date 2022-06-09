@@ -29,7 +29,7 @@ click==8.0.1
     # via
     #   -r common.txt
     #   cookiecutter
-cookiecutter==1.7.3
+cookiecutter==2.1.1
     # via -r common.txt
 docutils==0.17.1
     # via
@@ -39,25 +39,21 @@ idna==2.10
     # via
     #   -r common.txt
     #   requests
-jinja2-time==0.2.0
-    # via
-    #   -r common.txt
-    #   cookiecutter
 jinja2==3.0.1
     # via
     #   -r common.txt
     #   cookiecutter
     #   jinja2-time
+jinja2-time==0.2.0
+    # via
+    #   -r common.txt
+    #   cookiecutter
 markupsafe==2.0.1
     # via
     #   -r common.txt
     #   jinja2
 packaging==20.9
     # via bleach
-poyo==0.5.0
-    # via
-    #   -r common.txt
-    #   cookiecutter
 pygments==2.9.0
     # via
     #   readme-renderer
@@ -72,8 +68,11 @@ python-slugify==5.0.2
     # via
     #   -r common.txt
     #   cookiecutter
-pyyaml==5.4.1
-    # via watchdog
+pyyaml==6.0
+    # via
+    #   -r common.txt
+    #   cookiecutter
+    #   watchdog
 readme-renderer==29.0
     # via restview
 requests==2.25.1
@@ -86,7 +85,6 @@ six==1.16.0
     # via
     #   -r common.txt
     #   bleach
-    #   cookiecutter
     #   python-dateutil
     #   readme-renderer
 text-unidecode==1.3
