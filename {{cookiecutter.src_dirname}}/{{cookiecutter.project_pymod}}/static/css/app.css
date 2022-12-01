@@ -5,13 +5,13 @@
     padding-bottom: 0;
 }
 
-.navbar-nav > .nav-item {
+.navbar-nav .nav-item {
     padding-top: .5rem;
     padding-bottom: .5rem;
 }
 
-.navbar-nav > .nav-item.nav-current,
-.navbar-nav > .nav-item:hover {
+.navbar-nav .nav-item.nav-current,
+.navbar-nav .nav-item:hover {
     background-color: #ddd;
 }
 
