@@ -16,7 +16,7 @@ binaryornot==0.4.4
     #   cookiecutter
 bleach==3.3.0
     # via readme-renderer
-certifi==2021.5.30
+certifi==2022.12.7
     # via
     #   -r common.txt
     #   requests
@@ -39,15 +39,15 @@ idna==2.10
     # via
     #   -r common.txt
     #   requests
-jinja2-time==0.2.0
-    # via
-    #   -r common.txt
-    #   cookiecutter
 jinja2==3.0.1
     # via
     #   -r common.txt
     #   cookiecutter
     #   jinja2-time
+jinja2-time==0.2.0
+    # via
+    #   -r common.txt
+    #   cookiecutter
 markupsafe==2.0.1
     # via
     #   -r common.txt
