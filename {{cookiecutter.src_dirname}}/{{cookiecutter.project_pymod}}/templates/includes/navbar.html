@@ -14,7 +14,7 @@
         >
         {{ render_link_text(node) }}
     </a>
-    <ul class="dropdown-menu" aria-labelledby="navgroup-{{ node.nav_group }}">
+    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navgroup-{{ node.nav_group }}">
         {% for sub_node in node.permitted_sub_nodes %}
             {{ render_node(sub_node) }}
         {% endfor %}
