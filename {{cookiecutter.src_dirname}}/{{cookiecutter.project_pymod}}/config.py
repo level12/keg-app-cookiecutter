@@ -26,16 +26,6 @@ class DefaultProfile(object):
 
     SENTRY_USER_ATTRS = ['email', 'name']
 
-    # Give up to 15 failed attempts in 10 minutes.
-    KEGAUTH_RESET_ATTEMPT_LIMIT = KEGAUTH_FORGOT_ATTEMPT_LIMIT = KEGAUTH_LOGIN_ATTEMPT_LIMIT = 15
-    KEGAUTH_RESET_ATTEMPT_TIMESPAN = (
-        KEGAUTH_FORGOT_ATTEMPT_TIMESPAN
-    ) = KEGAUTH_LOGIN_ATTEMPT_TIMESPAN = (10 * 60)
-    # Lock for 60 minutes to clear.
-    KEGAUTH_RESET_ATTEMPT_LOCKOUT = (
-        KEGAUTH_FORGOT_ATTEMPT_LOCKOUT
-    ) = KEGAUTH_LOGIN_ATTEMPT_LOCKOUT = (60 * 60)
-
 
 class TestProfile(object):
     # These settings reflect what is needed in CI.  For local development, use
