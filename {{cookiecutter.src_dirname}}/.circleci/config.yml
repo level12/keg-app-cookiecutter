@@ -35,4 +35,4 @@ jobs:
 
             - run:
                 name: push code coverage
-                command: bash scripts/codecov-verify && bash codecov -X coveragepy -t {{cookiecutter.codecov_upload_token}}
+                command: bash scripts/codecov-verify && codecov -X coveragepy -t {{cookiecutter.codecov_upload_token}}
