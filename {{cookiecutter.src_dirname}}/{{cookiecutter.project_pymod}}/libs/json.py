@@ -1,13 +1,15 @@
 import datetime as dt
 import decimal
+import json
 
 import arrow
 import flask.json
 
 
-class JSONEncoder(flask.json.JSONEncoder):
+class JSONProvider(flask.json.provider.DefaultJSONProvider):
     """
-    The Flask JSONEncoder but puts dates in iso format instead of http date format.
+    The Flask JSON provider but puts dates in iso format instead of http date format,
+    and converts float to decimal during parse.
     """
 
     def default(self, obj):
@@ -17,13 +19,9 @@ class JSONEncoder(flask.json.JSONEncoder):
             return float(obj)
         return super().default(obj)
 
-
-class JSONDecoder(flask.json.JSONDecoder):
-    """
-    A custom JSON decoder that will convert floats to Decimals.
-    """
-
-    def __init__(self, *args, **kwargs):
+    def loads(self, s, **kwargs):
         # Same as simplejson.loads(..., use_decimal=True)
         kwargs.setdefault('parse_float', decimal.Decimal)
-        super().__init__(*args, **kwargs)
+        # Don't call super here (may get request object issues from code setting up
+        # deprecation warning)
+        return json.loads(s, **kwargs)

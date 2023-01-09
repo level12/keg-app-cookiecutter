@@ -15,8 +15,7 @@ class {{cookiecutter.project_class}}(Keg):
     use_blueprints = blueprints
     db_enabled = True
 
-    json_encoder = _app_json.JSONEncoder
-    json_decoder = _app_json.JSONDecoder
+    json_provider_class = _app_json.JSONProvider
 
     template_filters = {'decimalfmt': numbers.decimalfmt}
 
