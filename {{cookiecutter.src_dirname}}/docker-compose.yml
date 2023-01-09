@@ -36,10 +36,10 @@ services:
     ports:
       - '${KEG_APP_RABBITMQ_IP:-127.0.0.1}:${KEG_APP_RABBITMQ_PORT:-12672}:5672'
   {{ cookiecutter.project_dashed }}-mailhog:
-    image: mailhog:{{cookiecutter.mailhog_version}}
+    image: mailhog/mailhog:{{cookiecutter.mailhog_version}}
     container_name: {{ cookiecutter.project_dashed }}-mailhog
     logging:
       driver: 'none'  # disable saving logs
     ports:
-      - '${KEG_APP_MAILHOG_IP:-127.0.0.1}:${KEG_APP_MAILHOG_PORT_1:-128025}:8025'
-      - '${KEG_APP_MAILHOG_IP:-127.0.0.1}:${KEG_APP_MAILHOG_PORT_2:-121025}:1025'
+      - '${KEG_APP_MAILHOG_IP:-127.0.0.1}:${KEG_APP_MAILHOG_PORT_1:-12825}:8025'
+      - '${KEG_APP_MAILHOG_IP:-127.0.0.1}:${KEG_APP_MAILHOG_PORT_2:-12125}:1025'
