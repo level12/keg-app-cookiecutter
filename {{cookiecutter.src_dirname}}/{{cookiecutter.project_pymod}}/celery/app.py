@@ -1,8 +1,6 @@
 import logging
 
 from celery import Celery
-from celery.signals import task_postrun
-from keg.db import db
 from keg.signals import app_ready
 
 log = logging.getLogger(__name__)
