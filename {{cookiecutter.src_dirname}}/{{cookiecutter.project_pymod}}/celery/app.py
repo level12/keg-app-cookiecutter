@@ -17,13 +17,6 @@ def on_task_failure(task, exc, task_id, args, kwargs, einfo):
     log.error(message.format(task.name, args, kwargs, einfo.traceback))
 
 
-@task_postrun.connect
-def on_task_postrun(task_id, task, args, kwargs, retval, state, **extra):
-    # Remove the db session to avoid memory problems and to clear out any failed DB
-    # transactions so future tasks in this process don't get hung up.
-    db.session.remove()
-
-
 @app_ready.connect
 def configure(keg_app):
     celery_config = keg_app.config['CELERY'].copy()
