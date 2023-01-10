@@ -10,7 +10,7 @@ from ..model import entities as ents
 # Scope needs to be class level b/c ViewTestBase clears out users in setup_class()
 @pytest.fixture(scope='class')
 def auth_client(perms=None):
-    return AuthTestApp(flask.current_app, user=ents.User.testing_create(permissions=perms))
+    return AuthTestApp(flask.current_app, user=ents.User.fake(permissions=perms))
 
 
 class TestPublic:
