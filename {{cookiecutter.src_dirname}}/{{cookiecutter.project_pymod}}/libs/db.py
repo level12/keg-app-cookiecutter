@@ -118,6 +118,8 @@ class PostgresRestore(PostgresBase):
     * Our method of clearing assumes the restoring user has permission to delete everything.
     """
 
+    extensions = []
+
     def __init__(self, db_name=None, db_engine=None, db_manager=None, jobs=None):
         super().__init__(db_engine)
         self.db_manager = db_manager or current_app.db_manager
@@ -184,6 +186,12 @@ class PostgresRestore(PostgresBase):
         return [row for row in self.db_engine.execute(sql)]
 
     def drop_schema(self, schema):
+        for extension in self.extensions:
+            try:
+                self.db_engine.execute('DROP EXTENSION IF EXISTS "{}" CASCADE'.format(extension))
+            except Exception as e:
+                self.errors.append(str(e))
+
         for funcname, funcargs in self.get_function_list_from_db(schema):
             try:
                 self.db_engine.execute(
