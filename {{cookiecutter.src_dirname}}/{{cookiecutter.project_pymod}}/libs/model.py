@@ -1,3 +1,4 @@
+import arrow
 from keg.db import db
 from keg_elements.db.mixins import DefaultColsMixin, MethodsMixin
 from sqlalchemy.dialects.postgresql import insert as pgsql_insert
@@ -18,7 +19,14 @@ class EntityMixin(DefaultColsMixin, MethodsMixin):
 
         assert on_conflict_do in ('nothing', 'update')
         if on_conflict_do == 'update':
-            stmt = stmt.on_conflict_do_update(index_elements=index_elements, set_=values)
+            touching_timestamps = {}
+            if hasattr(cls, 'updated_utc'):
+                # on_conflict_do_update won't take into account columns onupdate attributes
+                touching_timestamps.update({'updated_utc': arrow.utcnow()})
+            stmt = stmt.on_conflict_do_update(
+                index_elements=index_elements,
+                set_={**values, **touching_timestamps}
+            )
         else:
             stmt = stmt.on_conflict_do_nothing(index_elements=index_elements)
 
