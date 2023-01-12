@@ -24,7 +24,6 @@ class DeployedProfile(object):
     MAIL_DEFAULT_SENDER = 'devteam@level12.io'
     MAIL_DEBUG = False
 
-    CELERY_ALIVE_URL = '{{ app_celery_alive_url }}'
     CELERY = celery_config(broker_url='amqp://guest@localhost:12672//')
 
     # Needed by at least KegAuth for sending emails from the command line
@@ -32,4 +31,6 @@ class DeployedProfile(object):
     # This is important so that generated auth related URLS are secure.  We have an SSL redirect
     # but by the time that would fire, the key would have already been sent in the URL.
     PREFERRED_URL_SCHEME = 'https'
+
+    CRONITOR_ENV = '{{ "production" if app_environment == "prod" else "beta" }}'
 {% endraw %}
