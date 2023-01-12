@@ -13,4 +13,8 @@ pyapp3_wsgi_extras_prod:
   -
 
 pyapp3_wsgi_extras: "{{ pyapp3_wsgi_extras_all + pyapp3_wsgi_extras_prod }}"
+
+app_cronitor_group: "{{project_ident_env}}"
+app_cronitor_notification_group: "{{project_ident_env}}"
+
 {% endraw %}

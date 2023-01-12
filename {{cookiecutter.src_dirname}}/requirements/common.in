@@ -3,6 +3,7 @@ Keg-Auth
 alembic
 bootstrap-flask
 celery>=5.0
+cronitor
 email_validator
 flake8
 Flask-Mail
@@ -22,7 +23,7 @@ simplejson
 sqlalchemy
 sqlalchemy-utils
 tox
-wtforms<3.0  # https://github.com/level12/keg-elements/issues/161
+wtforms
 xlsxwriter
 
 # Additional Flake8 checks
