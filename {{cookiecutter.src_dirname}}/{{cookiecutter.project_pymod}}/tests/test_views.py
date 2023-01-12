@@ -25,12 +25,18 @@ class TestPublic:
         resp = self.client.get('/ping')
         assert resp.text == '{{cookiecutter.project_pymod}} ok'
 
-    @mock_patch('{{cookiecutter.project_pymod}}.views.public.ctasks')
-    def test_health_check(self, m_ctasks):
+    @mock_patch('marsh.views.public.ctasks.cronitor_ping')
+    def test_health_check(self, m_cronitor_ping):
         # Use this for cronitor.
         resp = self.client.get('/health-check')
-        assert resp.text == '{{cookiecutter.project_pymod}} ok'
-        m_ctasks.ping_url.apply_async.assert_called_once_with(('keep-celery-alive',), priority=10)
+        assert resp.text == 'marsh ok'
+        m_cronitor_ping.assert_called_once_with('CRONITOR_CELERY_ALIVE', 'complete')
+
+    # def test_health_check(self, m_ctasks):
+    #     # Use this for cronitor.
+    #     resp = self.client.get('/health-check')
+    #     assert resp.text == '{{cookiecutter.project_pymod}} ok'
+    #     m_ctasks.ping_url.apply_async.assert_called_once_with(('keep-celery-alive',), priority=10)
 
     def test_exception(self):
         # This tests the app exception route, not Kegs.

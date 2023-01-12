@@ -1,5 +1,4 @@
 import click
-from keg import current_app
 
 from ..app import {{cookiecutter.project_class}}
 from ..celery import tasks
@@ -12,8 +11,7 @@ def celery():
 
 @celery.command()
 def ping_alive():
-    alive_url = current_app.config['CELERY_ALIVE_URL']
-    tasks.ping_url.apply_async((alive_url,), priority=1)
+    tasks.cronitor_ping('CRONITOR_CELERY_ALIVE', 'complete')
 
 
 @celery.command()

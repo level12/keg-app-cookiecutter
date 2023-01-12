@@ -29,9 +29,7 @@ class HealthCheck(BaseView):
         # something like Cronitor is hitting this URL repeatedly to monitor uptime.
         log.info('ping-db ok')
 
-        alive_url = flask.current_app.config['CELERY_ALIVE_URL']
-
-        ctasks.ping_url.apply_async((alive_url,), priority=10)
+        ctasks.cronitor_ping('CRONITOR_CELERY_ALIVE', 'complete')
 
         return '{} ok'.format(flask.current_app.name)
 

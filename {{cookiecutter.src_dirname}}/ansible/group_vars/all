@@ -31,7 +31,6 @@ app_rabbitmq_user: "{{project_ident_env}}"
 
 app_celery_dir: '{{ project_home_dpath }}/celery'
 app_celery_pid_fpath: /tmp/{{ project_ident }}_celery.pid
-app_celery_alive_url: https://cronitor.link/{{app_celery_alive_key}}/complete
 
 nginx_vhost_name: "{{project_ident}}"
 nginx_vhost_enable_static_route: false

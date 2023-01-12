@@ -47,6 +47,5 @@
         name: run celery ping/log command every minute
         minute: "*"
         job: "{{ sentry_cron_cmd }} --quiet celery ping-alive"
-      when: app_celery_alive_url is defined
       tags: cron
 {% endraw %}
