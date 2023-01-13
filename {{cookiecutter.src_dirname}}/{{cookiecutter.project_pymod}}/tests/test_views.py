@@ -28,18 +28,16 @@ class TestPublic:
         assert resp.text == '{{cookiecutter.project_pymod}} ok'
         assert m_ping_cronitor.apply_async.mock_calls == [call(('celery-alive',), priority=1)]
 
+    def test_exception(self):
+        # This tests the app exception route, not Kegs.
+        # Refs: https://github.com/level12/keg-app-cookiecutter/issues/130
+        with pytest.raises(Exception) as excinfo:
+            self.client.get('/exception')
+        assert str(excinfo.value) == 'Deliberate exception for testing purposes'
 
-def test_exception(self):
-    # This tests the app exception route, not Kegs.
-    # Refs: https://github.com/level12/keg-app-cookiecutter/issues/130
-    with pytest.raises(Exception) as excinfo:
-        self.client.get('/exception')
-    assert str(excinfo.value) == 'Deliberate exception for testing purposes'
+    def test_home(self, auth_client):
+        resp = self.client.get('/')
+        assert resp.pyquery('main p').text() == 'You need to login.'
 
-
-def test_home(self, auth_client):
-    resp = self.client.get('/')
-    assert resp.pyquery('main p').text() == 'You need to login.'
-
-    resp = auth_client.get('/')
-    assert resp.pyquery('main p').text() == 'This is the home page. :)'
+        resp = auth_client.get('/')
+        assert resp.pyquery('main p').text() == 'This is the home page. :)'

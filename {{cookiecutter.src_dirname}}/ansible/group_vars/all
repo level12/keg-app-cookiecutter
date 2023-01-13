@@ -74,8 +74,8 @@ pyapp3_wsgi_extras_all:
     freq=2,
     reloadsignal=15,
     stopsignal=15
-{% endraw %}
 
 # Cronitor
 app_cronitor_api_key: "{{ cronitor_api_key }}"
 app_cronitor_monitor_suffix: "{{ project_ident_env }}"
+{% endraw %}
