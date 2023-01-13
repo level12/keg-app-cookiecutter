@@ -1,12 +1,11 @@
-{% raw %}
 {% set group_config -%}
-    group: "{{app_cronitor_group}}"
+    group: "{{"{{"}}app_cronitor_group}}"
     notify:
-      - "{{app_cronitor_notification_group}}"
+      - "{{"{{"}}app_cronitor_notification_group}}"
 {%- endset %}
 jobs:
   # Alive
-  celery-alive-{{project_ident_env}}:
+  celery-alive-{{"{{"}}project_ident_env}}:
     {{group_config}}
     name: Celery Alive
     grace_seconds: 60
@@ -16,16 +15,15 @@ jobs:
     assertions:
       - job.completes every 5 minutes
 checks:
-  web-{{project_ident_env}}:
+  web-{{"{{"}}project_ident_env}}:
     {{group_config}}
     name: Web
     schedule: every 60 seconds
     request:
-      url: "https://{{nginx_vhost_server_name}}/health-check"
+      url: "https://{{"{{"}}nginx_vhost_server_name}}/health-check"
       timeout_seconds: 10
     assertions:
-      - response.body contains {{project_ident}} ok
+      - response.body contains {{"{{"}}project_ident}} ok
       - "ssl_certificate.expires_in > 9"
     grace_seconds: 60
     realert_interval: 2 hours
-{% endraw %}
