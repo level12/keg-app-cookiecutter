@@ -32,6 +32,9 @@ class {{cookiecutter.project_class}}(Keg):
         if self.config.get('SENTRY_DSN'):
             extensions.sentry.init_app(self)
 
+        if self.config.get('CRONITOR_API_KEY'):
+            extensions.cronitor.init_app(self)
+
         navigation.init_navigation(self)
 
         Grid.manager.init_db(keg.db.db)

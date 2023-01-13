@@ -4,6 +4,7 @@ from ..app import {{cookiecutter.project_class}}
 
 # These imports are to get the cli sub-modules loaded.
 from . import celery  # noqa
+from . import cronitor  # noqa
 from . import db  # noqa
 
 log = logging.getLogger(__name__)

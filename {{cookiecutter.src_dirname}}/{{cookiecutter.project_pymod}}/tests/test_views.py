@@ -1,3 +1,5 @@
+from unittest.mock import call
+
 import flask
 import flask_webtest as webtest
 import pytest
@@ -19,18 +21,12 @@ class TestPublic:
         # anonymous user
         cls.client = webtest.TestApp(flask.current_app)
 
-    def test_ping(self):
-        # This only tests the view layer, provided by Keg. Don't use this for cronitor.
-        # Refs: https://github.com/level12/keg-app-cookiecutter/issues/130
-        resp = self.client.get('/ping')
-        assert resp.text == '{{cookiecutter.project_pymod}} ok'
-
-    @mock_patch('{{cookiecutter.project_pymod}}.views.public.ctasks')
-    def test_health_check(self, m_ctasks):
+    @mock_patch('{{cookiecutter.project_pymod}}.views.public.ping_cronitor')
+    def test_health_check(self, m_ping_cronitor):
         # Use this for cronitor.
         resp = self.client.get('/health-check')
         assert resp.text == '{{cookiecutter.project_pymod}} ok'
-        m_ctasks.ping_url.apply_async.assert_called_once_with(('keep-celery-alive',), priority=10)
+        assert m_ping_cronitor.apply_async.mock_calls == [call(('celery-alive',), priority=1)]
 
     def test_exception(self):
         # This tests the app exception route, not Kegs.

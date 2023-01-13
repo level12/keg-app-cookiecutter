@@ -1,7 +1,5 @@
 app_environment: beta
 
-app_celery_alive_key: '{{ cookiecutter.celery_alive_key_beta }}'
-
 {% raw %}
 app_flask_secret_key: "{{ app_flask_secret_key_beta }}"
 app_db_pass: "{{ app_db_pass_beta }}"
@@ -15,4 +13,9 @@ pyapp3_wsgi_extras_beta:
   -
 
 pyapp3_wsgi_extras: "{{ pyapp3_wsgi_extras_all + pyapp3_wsgi_extras_beta }}"
+
+app_cronitor_group: "{{project_ident_env}}"
+app_cronitor_notification_group: "{{project_ident_env}}"
+
 {% endraw %}
+

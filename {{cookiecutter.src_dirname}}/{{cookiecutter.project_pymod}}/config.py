@@ -36,6 +36,9 @@ class DefaultProfile(object):
         KEGAUTH_FORGOT_ATTEMPT_LOCKOUT
     ) = KEGAUTH_LOGIN_ATTEMPT_LOCKOUT = (60 * 60)
 
+    # Monitor keys
+    CRONITOR_CELERY_ALIVE = ''
+
 
 class TestProfile(object):
     # These settings reflect what is needed in CI.  For local development, use
@@ -53,4 +56,4 @@ class TestProfile(object):
         'broker_url': 'amqp://guest@localhost:5672//',
     }
 
-    CELERY_ALIVE_URL = 'keep-celery-alive'
+    CRONITOR_CELERY_ALIVE = 'keep-celery-alive'

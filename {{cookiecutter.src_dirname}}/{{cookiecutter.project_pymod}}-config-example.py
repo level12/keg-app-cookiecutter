@@ -27,6 +27,8 @@ class DevProfile:
 
     CELERY = celery_config(broker_url='amqp://guest@localhost:12672//')
 
+    CRONITOR_ENV = 'developer'
+
 
 class TestProfile:
     SQLALCHEMY_DATABASE_URI = '{{cookiecutter.sa_db_uri_prefix.rstrip("/")}}/{{cookiecutter.project_dashed}}-tests'

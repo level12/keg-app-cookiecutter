@@ -1,7 +1,7 @@
 import logging
-
 import requests
 
+from ..libs.cronitor import get_monitor
 from .app import celery_app as app
 
 log = logging.getLogger(__name__)
@@ -16,6 +16,12 @@ def ping_url(self, url, retry_wait_secs=1):
     except requests.RequestException:
         log.exception('ping_url() encountered an exception')
         raise self.retry(countdown=retry_wait_secs)
+
+
+@app.task
+def ping_cronitor(key: str):
+    monitor = get_monitor(key)
+    monitor.ping(state='complete')
 
 
 @app.task

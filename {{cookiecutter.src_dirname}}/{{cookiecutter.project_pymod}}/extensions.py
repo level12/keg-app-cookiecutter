@@ -6,6 +6,7 @@ from flask_mail import Mail as FlaskMail
 from flask_wtf.csrf import CSRFProtect
 from keg_auth import AuthEntityRegistry, AuthMailManager, AuthManager
 
+from .libs.cronitor import Cronitor
 from .libs.grids import Grid
 from .libs.sentry import Sentry
 
@@ -32,3 +33,5 @@ csrf = CSRFProtect()
 sentry = Sentry()
 
 bootstrap = Bootstrap4()
+
+cronitor = Cronitor()

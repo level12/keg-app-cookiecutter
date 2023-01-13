@@ -35,4 +35,7 @@ varmap = {
     'pyapp3_sentry_dsn': 'sentry_dsn',
     # App config file only
     # --------------------
+
+    # Cronitor
+    'cronitor_api_key': 'Cronitor API Key',
 }
