@@ -4,7 +4,7 @@ from keg.web import BaseView as _BaseView
 
 
 class BaseView(_BaseView):
-    def calc_class_fname(self):
+    def calc_class_fname(self, **kwargs):
         return strings.case_cw2dash(self.__class__.__name__)
 
 
