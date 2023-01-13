@@ -20,12 +20,6 @@ class TestPublic:
         # anonymous user
         cls.client = webtest.TestApp(flask.current_app)
 
-    def test_ping(self):
-        # This only tests the view layer, provided by Keg. Don't use this for cronitor.
-        # Refs: https://github.com/level12/keg-app-cookiecutter/issues/130
-        resp = self.client.get('/ping')
-        assert resp.text == '{{cookiecutter.project_pymod}} ok'
-
     @mock_patch('{{cookiecutter.project_pymod}}.views.public.ping_cronitor')
     def test_health_check(self, m_ping_cronitor):
         # Use this for cronitor.
@@ -35,15 +29,16 @@ class TestPublic:
 
 
 def test_exception(self):
-        # This tests the app exception route, not Kegs.
-        # Refs: https://github.com/level12/keg-app-cookiecutter/issues/130
-        with pytest.raises(Exception) as excinfo:
-            self.client.get('/exception')
-        assert str(excinfo.value) == 'Deliberate exception for testing purposes'
+    # This tests the app exception route, not Kegs.
+    # Refs: https://github.com/level12/keg-app-cookiecutter/issues/130
+    with pytest.raises(Exception) as excinfo:
+        self.client.get('/exception')
+    assert str(excinfo.value) == 'Deliberate exception for testing purposes'
 
-    def test_home(self, auth_client):
-        resp = self.client.get('/')
-        assert resp.pyquery('main p').text() == 'You need to login.'
 
-        resp = auth_client.get('/')
-        assert resp.pyquery('main p').text() == 'This is the home page. :)'
+def test_home(self, auth_client):
+    resp = self.client.get('/')
+    assert resp.pyquery('main p').text() == 'You need to login.'
+
+    resp = auth_client.get('/')
+    assert resp.pyquery('main p').text() == 'This is the home page. :)'

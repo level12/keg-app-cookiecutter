@@ -40,7 +40,6 @@ class DefaultProfile(object):
     CRONITOR_CELERY_ALIVE = ''
 
 
-
 class TestProfile(object):
     # These settings reflect what is needed in CI.  For local development, use
     # {{cookiecutter.project_dashed}}-config.py to override.
