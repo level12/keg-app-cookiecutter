@@ -2,6 +2,7 @@ import flask
 import flask_webtest as webtest
 import pytest
 from keg_auth.testing import AuthTestApp
+from unittest.mock import call
 
 from ..libs.testing import mock_patch
 from ..model import entities as ents
@@ -25,20 +26,15 @@ class TestPublic:
         resp = self.client.get('/ping')
         assert resp.text == '{{cookiecutter.project_pymod}} ok'
 
-    @mock_patch('{{cookiecutter.project_pymod}}.views.public.ctasks.cronitor_ping')
-    def test_health_check(self, m_cronitor_ping):
+    @mock_patch('{{cookiecutter.project_pymod}}.views.public.ping_cronitor')
+    def test_health_check(self, m_ping_cronitor):
         # Use this for cronitor.
         resp = self.client.get('/health-check')
         assert resp.text == '{{cookiecutter.project_pymod}} ok'
-        m_cronitor_ping.assert_called_once_with('CRONITOR_CELERY_ALIVE', 'complete')
+        assert m_ping_cronitor.apply_async.mock_calls == [call(('celery-alive',), priority=1)]
 
-    # def test_health_check(self, m_ctasks):
-    #     # Use this for cronitor.
-    #     resp = self.client.get('/health-check')
-    #     assert resp.text == '{{cookiecutter.project_pymod}} ok'
-    #     m_ctasks.ping_url.apply_async.assert_called_once_with(('keep-celery-alive',), priority=10)
 
-    def test_exception(self):
+def test_exception(self):
         # This tests the app exception route, not Kegs.
         # Refs: https://github.com/level12/keg-app-cookiecutter/issues/130
         with pytest.raises(Exception) as excinfo:

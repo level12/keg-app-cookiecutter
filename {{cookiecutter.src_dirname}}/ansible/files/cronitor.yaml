@@ -24,7 +24,7 @@ checks:
       url: "https://{{nginx_vhost_server_name}}/health-check"
       timeout_seconds: 10
     assertions:
-      - response.body contains vortex ok
+      - response.body contains {{project_ident}} ok
       - "ssl_certificate.expires_in > 9"
     grace_seconds: 60
     realert_interval: 2 hours

@@ -3,7 +3,7 @@ import logging
 import flask
 from keg.db import db
 
-from ..celery import tasks as ctasks
+from ..celery.tasks import ping_cronitor
 from ..libs.views import BaseView
 
 log = logging.getLogger(__name__)
@@ -29,7 +29,7 @@ class HealthCheck(BaseView):
         # something like Cronitor is hitting this URL repeatedly to monitor uptime.
         log.info('ping-db ok')
 
-        ctasks.cronitor_ping('CRONITOR_CELERY_ALIVE', 'complete')
+        ping_cronitor.apply_async(('celery-alive',), priority=1)
 
         return '{} ok'.format(flask.current_app.name)
 
