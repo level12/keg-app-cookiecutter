@@ -32,5 +32,7 @@ class DeployedProfile(object):
     # but by the time that would fire, the key would have already been sent in the URL.
     PREFERRED_URL_SCHEME = 'https'
 
+    CRONITOR_API_KEY = "{{ app_cronitor_api_key }}"
+    CRONITOR_MONITOR_SUFFIX = "{{ app_cronitor_monitor_suffix }}"
     CRONITOR_ENV = '{{ "production" if app_environment == "prod" else "beta" }}'
 {% endraw %}
