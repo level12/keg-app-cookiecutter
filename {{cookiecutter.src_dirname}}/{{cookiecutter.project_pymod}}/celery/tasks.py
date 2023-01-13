@@ -1,8 +1,8 @@
 import logging
 import requests
 
-from .app import celery_app as app
 from ..libs.cronitor import get_monitor
+from .app import celery_app as app
 
 log = logging.getLogger(__name__)
 

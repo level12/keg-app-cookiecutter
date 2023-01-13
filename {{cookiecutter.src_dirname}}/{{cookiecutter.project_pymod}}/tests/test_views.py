@@ -1,8 +1,9 @@
+from unittest.mock import call
+
 import flask
 import flask_webtest as webtest
 import pytest
 from keg_auth.testing import AuthTestApp
-from unittest.mock import call
 
 from ..libs.testing import mock_patch
 from ..model import entities as ents

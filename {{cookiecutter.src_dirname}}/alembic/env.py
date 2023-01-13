@@ -3,8 +3,8 @@ from keg.db import db
 from keg_auth.model import KAPasswordType
 from sqlalchemy_utils import ArrowType, EmailType
 
-from alembic import context
 from {{cookiecutter.project_pymod}}.app import {{cookiecutter.project_class}}
+from alembic import context
 
 if keg.current_app:
     app = keg.current_app
