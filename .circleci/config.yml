@@ -32,4 +32,6 @@ jobs:
             - run:
                 name: run the tests
                 working_directory: /tmp/keg-app-ci-src
-                command: tox
+                # Skip pre-commit in CI because it will always reformat code
+                # after cookiecutter substitutions
+                command: TOX_SKIP_ENV=pre-commit tox

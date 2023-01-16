@@ -1,11 +1,10 @@
-from alembic import context
 import keg
 from keg.db import db
 from keg_auth.model import KAPasswordType
 from sqlalchemy_utils import ArrowType, EmailType
 
+from alembic import context
 from {{cookiecutter.project_pymod}}.app import {{cookiecutter.project_class}}
-
 
 if keg.current_app:
     app = keg.current_app
@@ -64,8 +63,7 @@ def run_migrations_offline():
 
     """
     url = config.get_main_option("sqlalchemy.url")
-    context.configure(
-        url=url, target_metadata=target_metadata, literal_binds=True)
+    context.configure(url=url, target_metadata=target_metadata, literal_binds=True)
 
     with context.begin_transaction():
         context.run_migrations()

@@ -13,7 +13,7 @@ Project Setup Checklist
 =======================
 
 * `tox`
-* setup git hooks from /scripts
+* setup git hooks via pre-commit
 * create project on
 
   * GitHub
@@ -117,6 +117,9 @@ Quickstart
    the result.
 
 #. You will have to install the project separately with `pip install -e .`
+
+#. Set up pre-commit by running `pre-commit install`. Change when hooks run by passing the `--hook-type` flag
+   (see https://pre-commit.com/#pre-commit-during-push).
 
 #. Set up the database tables with `{{cookiecutter.project_cli_bin}} develop db init`
 

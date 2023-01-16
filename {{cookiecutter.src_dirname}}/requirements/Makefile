@@ -14,4 +14,3 @@ all: $(outputs)
 
 # Dependency chain
 dev.txt: common.txt
-

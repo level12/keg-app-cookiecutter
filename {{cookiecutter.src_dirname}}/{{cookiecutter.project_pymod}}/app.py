@@ -1,6 +1,6 @@
+import keg.db
 from blazeutils import numbers
 from keg import Keg
-import keg.db
 
 from . import extensions, navigation
 from .celery.app import celery_app  # noqa
@@ -15,12 +15,9 @@ class {{cookiecutter.project_class}}(Keg):
     use_blueprints = blueprints
     db_enabled = True
 
-    json_encoder = _app_json.JSONEncoder
-    json_decoder = _app_json.JSONDecoder
+    json_provider_class = _app_json.JSONProvider
 
-    template_filters = {
-        'decimalfmt': numbers.decimalfmt
-    }
+    template_filters = {'decimalfmt': numbers.decimalfmt}
 
     def db_manager_cls(self):
         return DatabaseManager
@@ -42,9 +39,9 @@ class {{cookiecutter.project_class}}(Keg):
 
 class DatabaseManager(keg.db.DatabaseManager):
     """
-        Customized DB manage to support:
-        1) Running tests without clearing the DB schema.  This is used when you want to run
-            tests on a database restore + Alembic migration.
+    Customized DB manage to support:
+    1) Running tests without clearing the DB schema.  This is used when you want to run
+        tests on a database restore + Alembic migration.
     """
 
     def on_testing_start(self, app):
@@ -58,6 +55,7 @@ class DatabaseManager(keg.db.DatabaseManager):
         # If all the developer variables are set, then create our first user.
         try:
             from .model.entities import User
+
             User.add(
                 name=self.app.config['DEVELOPER_NAME'],
                 email=self.app.config['DEVELOPER_EMAIL'],

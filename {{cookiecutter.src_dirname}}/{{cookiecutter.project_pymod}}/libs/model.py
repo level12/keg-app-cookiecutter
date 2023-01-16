@@ -5,7 +5,6 @@ from sqlalchemy.inspection import inspect
 
 
 class EntityMixin(DefaultColsMixin, MethodsMixin):
-
     @classmethod
     def upsert(cls, values=None, on_conflict_do='update', index_elements=None, **kwargs):
         if index_elements is None:

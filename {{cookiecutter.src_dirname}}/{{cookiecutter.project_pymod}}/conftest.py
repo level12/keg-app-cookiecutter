@@ -1,13 +1,14 @@
-import keg
-from keg.db import db
 import _pytest.config.findpaths
+import keg
 import pytest
+from keg.db import db
 
 import {{cookiecutter.project_pymod}}
 import {{cookiecutter.project_pymod}}.celery.testing as ct
+import {{cookiecutter.project_pymod}}.libs.db as libs_db
+
 # important to import from .cli so that the commands get attached
 from {{cookiecutter.project_pymod}}.cli import {{cookiecutter.project_class}}
-import {{cookiecutter.project_pymod}}.libs.db as libs_db
 
 # You can uncomment this if you end up with asserts in libraries outside tests.
 # pytest.register_assert_rewrite('{{cookiecutter.project_pymod}}.libs.testing')
@@ -31,7 +32,7 @@ def pytest_runtest_setup():
 
 @pytest.fixture(scope='session')
 def celery_config():
-    """ Need to setup custom task annotations so the task tracker works correctly. """
+    """Need to setup custom task annotations so the task tracker works correctly."""
     config = keg.current_app.config['CELERY'].copy()
     annotations = {'*': {'after_return': ct.after_return_handler}}
     config['task_annotations'] = annotations
@@ -40,7 +41,7 @@ def celery_config():
 
 @pytest.fixture(scope='session')
 def celery_worker_parameters():
-    """ Need a custom Worker class that initializes the Keg app in the worker's thread. """
+    """Need a custom Worker class that initializes the Keg app in the worker's thread."""
     return {'WorkController': ct.TestWorkController}
 
 
@@ -57,14 +58,14 @@ def pytest_addoption(parser):
 
 def add_ci_filterwarnings(pytest_config):
     """
-        When running tests, devs should have the same pytest warning configuration as is setup
-        in CI.  Pytest does not permit multiple pytest.ini config files.  Furthermore, if we set
-        a pytest.ini at the project level then a dev's personal pytest.ini options get ignored.
-        This function grabs the filterwarnings from .ci/pytest.ini and adds them to the pytest
-        config (if they aren't there already).
-        This is defined here and not in .libs.testing because we use register_assert_rewrite()
-        on .libs.testing and importing from that module at the top level of this file will
-        cause the assert rewrite to fail.
+    When running tests, devs should have the same pytest warning configuration as is setup
+    in CI.  Pytest does not permit multiple pytest.ini config files.  Furthermore, if we set
+    a pytest.ini at the project level then a dev's personal pytest.ini options get ignored.
+    This function grabs the filterwarnings from .ci/pytest.ini and adds them to the pytest
+    config (if they aren't there already).
+    This is defined here and not in .libs.testing because we use register_assert_rewrite()
+    on .libs.testing and importing from that module at the top level of this file will
+    cause the assert rewrite to fail.
     """
     ci_ini_fpath = {{cookiecutter.project_pymod}}.src_dpath / '.ci' / 'pytest.ini'
 
@@ -73,6 +74,7 @@ def add_ci_filterwarnings(pytest_config):
     # In CI, pytest will already be using .ci/pytest.ini
     if existing_filterwarnings != ci_ini_cfg['filterwarnings']:
         print(f'Applying filterwarnings from: {ci_ini_fpath}')
-        pytest_config.inicfg['filterwarnings'] = \
+        pytest_config.inicfg['filterwarnings'] = (
             existing_filterwarnings + ci_ini_cfg['filterwarnings']
+        )
         del pytest_config._inicache['filterwarnings']

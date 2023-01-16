@@ -7,7 +7,8 @@ References for creating a vars plugin:
 
 """
 # Next two lines came from host_group_vars.py example
-from __future__ import (absolute_import, division, print_function)
+from __future__ import absolute_import, division, print_function
+
 __metaclass__ = type
 
 import pathlib
@@ -28,14 +29,11 @@ with map_secrets_fpath.open() as fo:
 # I suspect it has something to do with lastpass_lookup() executing a lpass subprocess.  But, this
 # is good b/c it caches the variables for us.
 lp_result = lastpass_lookup(
-    map_secrets_globals['varmap'],
-    map_secrets_globals['lastpass_folder'],
-    jsonify=True
+    map_secrets_globals['varmap'], map_secrets_globals['lastpass_folder'], jsonify=True
 )
 
 
 class VarsModule(BaseVarsPlugin):
-
     def get_vars(self, loader, path, entities, cache=True):
         if lp_result.exc:
             msg = 'unhandled exception when running lookup-passwords'

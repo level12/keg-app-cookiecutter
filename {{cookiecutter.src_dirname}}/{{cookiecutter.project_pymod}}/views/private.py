@@ -7,4 +7,7 @@ class ProtectedBlueprint(flask.Blueprint):
     pass
 
 
-private_bp = ProtectedBlueprint('private', __name__,)
+private_bp = ProtectedBlueprint(
+    'private',
+    __name__,
+)

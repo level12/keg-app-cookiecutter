@@ -1,7 +1,6 @@
+import keg_elements.sentry as ke_sentry
 from sentry_sdk.integrations.celery import CeleryIntegration
 from sentry_sdk.integrations.sqlalchemy import SqlalchemyIntegration
-
-import keg_elements.sentry as ke_sentry
 
 
 class SentryEventFilter(ke_sentry.SentryEventFilter):

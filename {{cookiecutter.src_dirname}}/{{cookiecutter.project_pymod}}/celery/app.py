@@ -1,8 +1,6 @@
 import logging
 
 from celery import Celery
-from celery.signals import task_postrun
-from keg.db import db
 from keg.signals import app_ready
 
 log = logging.getLogger(__name__)
@@ -10,18 +8,11 @@ log = logging.getLogger(__name__)
 
 def on_task_failure(task, exc, task_id, args, kwargs, einfo):
     """
-        Log any task failures.  We will also get email notifications which is handled directly by
-        celery and setup in the workers module.
+    Log any task failures.  We will also get email notifications which is handled directly by
+    celery and setup in the workers module.
     """
     message = 'Task {} failed w/ args: {}, {}\n{}'
     log.error(message.format(task.name, args, kwargs, einfo.traceback))
-
-
-@task_postrun.connect
-def on_task_postrun(task_id, task, args, kwargs, retval, state, **extra):
-    # Remove the db session to avoid memory problems and to clear out any failed DB
-    # transactions so future tasks in this process don't get hung up.
-    db.session.remove()
 
 
 @app_ready.connect

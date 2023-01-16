@@ -1,4 +1,5 @@
 import logging
+
 import requests
 
 from .app import celery_app as app

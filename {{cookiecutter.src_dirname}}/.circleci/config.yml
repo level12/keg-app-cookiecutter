@@ -4,6 +4,7 @@ jobs:
         docker:
             - image: level12/python-test-multi
             - image: rabbitmq:{{cookiecutter.rabbitmq_version}}
+            - image: mailhog:{{cookiecutter.mailhog_version}}
             - image: postgres:{{cookiecutter.db_postgres_version}}
               environment:
                   POSTGRES_USER: postgres
@@ -35,4 +36,4 @@ jobs:
 
             - run:
                 name: push code coverage
-                command: bash scripts/codecov-verify && bash codecov -X coveragepy -t {{cookiecutter.codecov_upload_token}}
+                command: bash scripts/codecov-verify && codecov -X coveragepy -t {{cookiecutter.codecov_upload_token}}

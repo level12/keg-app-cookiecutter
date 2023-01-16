@@ -22,10 +22,8 @@ varmap = {
     # Variables that do not start with "app_" are expected to only be used in
     # the Python config file.  If they are used in Ansible directly, then they
     # should have the prefix.
-
     # Ansible Only:
     # -------------
-
     # App and Ansible
     # ---------------
     'app_db_pass_beta': 'db_pass_beta',
@@ -35,7 +33,6 @@ varmap = {
     'app_rabbitmq_pass_beta': 'rabbitmq_pass_beta',
     'app_rabbitmq_pass_prod': 'rabbitmq_pass_prod',
     'pyapp3_sentry_dsn': 'sentry_dsn',
-
     # App config file only
     # --------------------
 }

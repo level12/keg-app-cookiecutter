@@ -6,7 +6,7 @@ import markdown_it
 
 @functools.cache
 def _init():
-    """ Use a common function for init so the whole app uses the same config """
+    """Use a common function for init so the whole app uses the same config"""
     return markdown_it.MarkdownIt('gfm-like'), html_sanitizer.Sanitizer()
 
 

@@ -2,18 +2,22 @@ import logging
 
 import flask
 from keg.db import db
+from keg.web import BaseView
 
 from ..celery import tasks as ctasks
-from ..libs.views import BaseView
 
 log = logging.getLogger(__name__)
-public_bp = flask.Blueprint('public', __name__,)
+public_bp = flask.Blueprint(
+    'public',
+    __name__,
+)
 
 
 class HealthCheck(BaseView):
-    """ An endpoint our monitoring service can watch that, unlike Keg's /ping, will also
-        test connectivity to the DB and ping Celery Alive URL before returning an "ok" message.
+    """An endpoint our monitoring service can watch that, unlike Keg's /ping, will also
+    test connectivity to the DB and ping Celery Alive URL before returning an "ok" message.
     """
+
     blueprint = public_bp
 
     def get(self):

@@ -2,6 +2,7 @@
 # the tests
 -r common.txt
 
+pre-commit
 python-dotenv
 restview
 supervisor

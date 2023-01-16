@@ -1,16 +1,16 @@
 import flask
 import flask_webtest as webtest
-from keg_auth.testing import AuthTestApp
 import pytest
+from keg_auth.testing import AuthTestApp
 
-from ..model import entities as ents
 from ..libs.testing import mock_patch
+from ..model import entities as ents
 
 
 # Scope needs to be class level b/c ViewTestBase clears out users in setup_class()
 @pytest.fixture(scope='class')
 def auth_client(perms=None):
-    return AuthTestApp(flask.current_app, user=ents.User.testing_create(permissions=perms))
+    return AuthTestApp(flask.current_app, user=ents.User.fake(permissions=perms))
 
 
 class TestPublic:
@@ -18,12 +18,6 @@ class TestPublic:
     def setup_class(cls):
         # anonymous user
         cls.client = webtest.TestApp(flask.current_app)
-
-    def test_ping(self):
-        # This only tests the view layer, provided by Keg. Don't use this for cronitor.
-        # Refs: https://github.com/level12/keg-app-cookiecutter/issues/130
-        resp = self.client.get('/ping')
-        assert resp.text == '{{cookiecutter.project_pymod}} ok'
 
     @mock_patch('{{cookiecutter.project_pymod}}.views.public.ctasks')
     def test_health_check(self, m_ctasks):

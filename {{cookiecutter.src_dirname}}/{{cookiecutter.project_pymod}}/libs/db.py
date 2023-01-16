@@ -1,25 +1,24 @@
-from collections import namedtuple
-from contextlib import contextmanager
-from decimal import Decimal as D
 import logging
 import os
 import os.path as osp
-from pathlib import Path
 import subprocess
+from collections import namedtuple
+from contextlib import contextmanager
+from decimal import Decimal as D
+from pathlib import Path
 from sys import platform
 
-from keg_elements.db.mixins import MethodsMixin
+import sqlalchemy as sa
+import sqlalchemy.engine.url
+import sqlalchemy.orm as sa_orm
 from keg import current_app
 from keg.db import db
 from keg.utils import classproperty
-import sqlalchemy as sa
-import sqlalchemy.engine.url
+from keg_elements.db.mixins import MethodsMixin
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.ext.declarative import declarative_base
-import sqlalchemy.orm as sa_orm
 
 from .alembic import alembic_upgrade
-
 
 log = logging.getLogger(__name__)
 
@@ -48,9 +47,10 @@ class PostgresBase:
         return a list of table names from the current
         databases public schema
         """
-        sql = "select table_name from information_schema.tables "\
-            "where table_schema='{}'".format(schema)
-        return [name for (name, ) in self.db_engine.execute(sql)]
+        sql = "select table_name from information_schema.tables " "where table_schema='{}'".format(
+            schema
+        )
+        return [name for (name,) in self.db_engine.execute(sql)]
 
     def pg_sub_run(self, pg_cmd, pg_cmd_args):
         url = self.db_engine.url
@@ -73,8 +73,7 @@ class PostgresBase:
 
         log.debug('run subprocess: {}'.format(call_args))
         completed = subprocess.run(
-            call_args, env=env, stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE
+            call_args, env=env, stdout=subprocess.PIPE, stderr=subprocess.PIPE
         )
         log.debug('stdout: %s', completed.stdout)
         log.debug('stderr: %s', completed.stderr)
@@ -119,6 +118,8 @@ class PostgresRestore(PostgresBase):
     * Our method of clearing assumes the restoring user has permission to delete everything.
     """
 
+    extensions = []
+
     def __init__(self, db_name=None, db_engine=None, db_manager=None, jobs=None):
         super().__init__(db_engine)
         self.db_manager = db_manager or current_app.db_manager
@@ -137,15 +138,17 @@ class PostgresRestore(PostgresBase):
 
     def get_seq_list_from_db(self, schema):
         """return a list of the sequence names from the current
-           databases public schema
+        databases public schema
         """
-        sql = "select sequence_name from information_schema.sequences " \
+        sql = (
+            "select sequence_name from information_schema.sequences "
             "where sequence_schema='{}'".format(schema)
-        return [name for (name, ) in self.db_engine.execute(sql)]
+        )
+        return [name for (name,) in self.db_engine.execute(sql)]
 
     def get_type_list_from_db(self, schema):
         """return a list of the sequence names from the current
-           databases public schema
+        databases public schema
         """
         sql = """
             SELECT t.typname as type
@@ -167,8 +170,10 @@ class PostgresRestore(PostgresBase):
                         AND el.typarray = t.oid
                 )
                 AND n.nspname = '{}'
-        """.format(schema)
-        return [name for (name, ) in self.db_engine.execute(sql)]
+        """.format(
+            schema
+        )
+        return [name for (name,) in self.db_engine.execute(sql)]
 
     def get_function_list_from_db(self, schema):
         sql = """
@@ -181,10 +186,17 @@ class PostgresRestore(PostgresBase):
         return [row for row in self.db_engine.execute(sql)]
 
     def drop_schema(self, schema):
+        for extension in self.extensions:
+            try:
+                self.db_engine.execute('DROP EXTENSION IF EXISTS "{}" CASCADE'.format(extension))
+            except Exception as e:
+                self.errors.append(str(e))
+
         for funcname, funcargs in self.get_function_list_from_db(schema):
             try:
-                self.db_engine.execute('DROP FUNCTION "{}"."{}" ({}) CASCADE'
-                                       .format(schema, funcname, funcargs))
+                self.db_engine.execute(
+                    'DROP FUNCTION "{}"."{}" ({}) CASCADE'.format(schema, funcname, funcargs)
+                )
             except Exception as e:
                 self.errors.append(str(e))
 
@@ -226,8 +238,11 @@ class PostgresRestore(PostgresBase):
         self.drop_all(self.db_manager)
         if not self.errors:
             for fpath in restore_fpaths:
-                log.info('Restoring {2} to {0.host}:{0.port}/{1}'.format(
-                    self.db_url, self.db_name, fpath))
+                log.info(
+                    'Restoring {2} to {0.host}:{0.port}/{1}'.format(
+                        self.db_url, self.db_name, fpath
+                    )
+                )
                 if fpath.endswith('.sql'):
                     self.restore_sql(fpath)
                 elif fpath.endswith('.bak'):
@@ -239,7 +254,7 @@ class PostgresRestore(PostgresBase):
         return self.errors
 
     def restore_date_dir(self, dpath):
-        """ Restore a directory path which was created by our date backup.  """
+        """Restore a directory path which was created by our date backup."""
         bak_dpath = Path(dpath)
         db_exec = self.db_engine.execute
         conn = self.db_engine.raw_connection()

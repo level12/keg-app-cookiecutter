@@ -7,8 +7,10 @@ DEFAULT_PROFILE = 'DeployedProfile'
 class DeployedProfile(object):
     SECRET_KEY = '{{app_flask_secret_key}}'
 
-    SQLALCHEMY_DATABASE_URI = 'postgresql://{{app_db_user}}:{{app_db_pass|urlencode()}}' \
+    SQLALCHEMY_DATABASE_URI = (
+        'postgresql://{{app_db_user}}:{{app_db_pass|urlencode()}}'
         '@{{app_db_host}}/{{app_db_name}}'
+    )
 
     SENTRY_DSN = '{{pyapp3_sentry_dsn}}'
     SENTRY_ENVIRONMENT = '{{ app_environment }}'

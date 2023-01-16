@@ -13,7 +13,7 @@ def init_navigation(app):
                 NavItem('Bundles', NavURL('auth.bundle:list')),
                 NavItem('Groups', NavURL('auth.group:list')),
                 NavItem('Users', NavURL('auth.user:list')),
-                NavItem('Logout', NavURL('auth.logout', requires_user=True)),
+                NavItem('Logout', NavURL('auth.logout')),
             ),
-        )
+        ),
     )

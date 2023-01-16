@@ -5,28 +5,25 @@ from ..libs import sentry
 
 
 class TestSentryEventFilter:
-    @pytest.mark.parametrize('key', [
-        'token',
-        'password',
-        'secret',
-        'passwd',
-        'authorization',
-        'sentry_dsn',
-        'xsrf',
-        'some_key',
-    ])
+    @pytest.mark.parametrize(
+        'key',
+        [
+            'token',
+            'password',
+            'secret',
+            'passwd',
+            'authorization',
+            'sentry_dsn',
+            'xsrf',
+            'some_key',
+        ],
+    )
     def test_sanitize(self, key):
         event = {
             'exception': {
                 'stacktrace': {
                     'frames': [
-                        {
-                            'module': 'foo.bar',
-                            'vars': {
-                                'notfiltered': 'foo',
-                                key: 'abc'
-                            }
-                        },
+                        {'module': 'foo.bar', 'vars': {'notfiltered': 'foo', key: 'abc'}},
                     ]
                 },
             }
@@ -41,17 +38,20 @@ class TestSentryEventFilter:
                             'vars': {
                                 'notfiltered': 'foo',
                                 key: '<Filtered str>',
-                            }
+                            },
                         },
                     ]
                 },
             }
         }
 
-    @pytest.mark.parametrize('key', [
-        'SECRET_KEY',
-        'DEVELOPER_PASSWORD',
-    ])
+    @pytest.mark.parametrize(
+        'key',
+        [
+            'SECRET_KEY',
+            'DEVELOPER_PASSWORD',
+        ],
+    )
     def test_sanitize_config_value(self, key, monkeypatch):
         monkeypatch.setitem(keg.current_app.config, key, 'filtered-value')
         event = {
@@ -60,10 +60,7 @@ class TestSentryEventFilter:
                     'frames': [
                         {
                             'module': 'foo.bar',
-                            'vars': {
-                                'notfiltered': 'foo',
-                                'filtered': '**filtered-value**'
-                            }
+                            'vars': {'notfiltered': 'foo', 'filtered': '**filtered-value**'},
                         },
                     ]
                 },
@@ -79,7 +76,7 @@ class TestSentryEventFilter:
                             'vars': {
                                 'notfiltered': 'foo',
                                 'filtered': '**<Filtered str>**',
-                            }
+                            },
                         },
                     ]
                 },
