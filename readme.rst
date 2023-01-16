@@ -32,7 +32,7 @@ config file with a `default_context` section.  Example:
     database_host: circus
     lastpass_secrets_folder: Shared-GB-EPR
     circle_badge_token: [fill in]
-    codecov_graphing_token: [fill in]]
+    codecov_graphing_token: [fill in]
     codecov_upload_token: [fill in]
     celery_alive_key_beta: [fill in]
     celery_alive_key_prod: [fill in]
