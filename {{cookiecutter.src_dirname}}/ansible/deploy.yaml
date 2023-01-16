@@ -40,12 +40,4 @@
         name: SENTRY_DSN
         value: '{{ pyapp3_sentry_dsn }}'
       tags: cron
-
-    - name: Setup heartbeat cron job
-      cron:
-        name: run celery ping/log command every minute
-        minute: "*"
-        job: "{{ sentry_cron_cmd }} --quiet celery --quiet ping-alive"
-      when: app_celery_alive_url is defined
-      tags: cron
 {% endraw %}
