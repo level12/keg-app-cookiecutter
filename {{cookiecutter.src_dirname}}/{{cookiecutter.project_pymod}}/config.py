@@ -26,7 +26,6 @@ class DefaultProfile(object):
 
     SENTRY_USER_ATTRS = ['email', 'name']
 
-
     KEG_LOG_SYSLOG_IDENT = '{{cookiecutter.project_ident}}'
 
 
