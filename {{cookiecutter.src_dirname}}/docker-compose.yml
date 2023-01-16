@@ -19,19 +19,27 @@
 version: '2'
 services:
   {{ cookiecutter.project_dashed }}-pg:
-      image: postgres:{{cookiecutter.db_postgres_version}}-alpine
-      container_name: {{ cookiecutter.project_dashed }}-pg
-      ports:
-        - '${KEG_APP_POSTGRES_IP:-127.0.0.1}:${KEG_APP_POSTGRES_PORT:-12432}:5432'
-      environment:
-        POSTGRES_MULTIPLE_DATABASES: {{cookiecutter.project_dashed}},{{cookiecutter.project_dashed}}-tests
-        # Ok for local dev, potentially UNSAFE in other applications.  Don't blindly copy & paste
-        # without considering implications.
-        POSTGRES_HOST_AUTH_METHOD: trust
-      volumes:
-        - ./docker/pg-init-scripts:/docker-entrypoint-initdb.d
+    image: postgres:{{cookiecutter.db_postgres_version}}-alpine
+    container_name: {{ cookiecutter.project_dashed }}-pg
+    ports:
+      - '${KEG_APP_POSTGRES_IP:-127.0.0.1}:${KEG_APP_POSTGRES_PORT:-12432}:5432'
+    environment:
+      POSTGRES_MULTIPLE_DATABASES: {{cookiecutter.project_dashed}},{{cookiecutter.project_dashed}}-tests
+      # Ok for local dev, potentially UNSAFE in other applications.  Don't blindly copy & paste
+      # without considering implications.
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - ./docker/pg-init-scripts:/docker-entrypoint-initdb.d
   {{ cookiecutter.project_dashed }}-rabbitmq:
-      image: rabbitmq:{{cookiecutter.rabbitmq_version}}-alpine
-      container_name: {{ cookiecutter.project_dashed }}-rabbitmq
-      ports:
-        - '${KEG_APP_RABBITMQ_IP:-127.0.0.1}:${KEG_APP_RABBITMQ_PORT:-12672}:5672'
+    image: rabbitmq:{{cookiecutter.rabbitmq_version}}-alpine
+    container_name: {{ cookiecutter.project_dashed }}-rabbitmq
+    ports:
+      - '${KEG_APP_RABBITMQ_IP:-127.0.0.1}:${KEG_APP_RABBITMQ_PORT:-12672}:5672'
+  {{ cookiecutter.project_dashed }}-mailhog:
+    image: mailhog/mailhog:{{cookiecutter.mailhog_version}}
+    container_name: {{ cookiecutter.project_dashed }}-mailhog
+    logging:
+      driver: 'none'  # disable saving logs
+    ports:
+      - '${KEG_APP_MAILHOG_IP:-127.0.0.1}:${KEG_APP_MAILHOG_PORT_1:-12825}:8025'
+      - '${KEG_APP_MAILHOG_IP:-127.0.0.1}:${KEG_APP_MAILHOG_PORT_2:-12125}:1025'
