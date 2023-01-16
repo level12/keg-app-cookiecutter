@@ -9,7 +9,7 @@ from ..model import entities as ents
 
 
 class TestCLI(CLIBase):
-    def setup(self):
+    def setup_method(self):
         ents.User.delete_cascaded()
 
     def test_add_user(self):
@@ -24,7 +24,7 @@ class TestCLI(CLIBase):
 
 
 class TestCelerySetup:
-    def setup(self):
+    def setup_method(self):
         task_tracker.reset()
 
     @mock.patch.object(tasks, 'requests', autospec=True, spec_set=True)

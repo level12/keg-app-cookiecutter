@@ -13,7 +13,7 @@ class TestJSONCustomization:
     """
 
     def test_datetime_serialization(self):
-        user = ents.User.testing_create(
+        user = ents.User.fake(
             settings={
                 'datetime': dt.datetime(2016, 1, 1),
                 'date': dt.date(2016, 1, 2),
@@ -28,7 +28,7 @@ class TestJSONCustomization:
         assert user.settings['arrow'] == '2016-01-03T10:11:12+00:00'
 
     def test_decimal_roundtrip(self):
-        user = ents.User.testing_create(settings={'foo': D('123.45')})
+        user = ents.User.fake(settings={'foo': D('123.45')})
 
         user_id = user.id
 
