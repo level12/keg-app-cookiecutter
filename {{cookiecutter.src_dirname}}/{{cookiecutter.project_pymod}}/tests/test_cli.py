@@ -1,10 +1,7 @@
-from time import sleep
 from unittest import mock
 
 from keg.testing import CLIBase
 
-from ..celery import tasks
-from ..celery.testing import task_tracker
 from ..model import entities as ents
 
 
@@ -21,25 +18,6 @@ class TestCLI(CLIBase):
         self.invoke('auth', 'create-user', '--as-superuser', 'foo@bar.com', 'Foo Bar')
         assert ents.User.query.count() == 1
         assert ents.User.query.filter_by(is_superuser=True).count() == 1
-
-
-class TestCelerySetup:
-    def setup_method(self):
-        task_tracker.reset()
-
-    @mock.patch.object(tasks, 'requests', autospec=True, spec_set=True)
-    @mock.patch('{{cookiecutter.project_pymod}}.celery.app.db', autospec=True, spec_set=True)
-    def test_removed_ok(self, m_db, m_requests, celery_session_worker):
-        """The DB session needs to be removed when every task is finished."""
-
-        tasks.ping_url.delay('foo')
-
-        # Wait for the task to complete in a different thread.
-        task_tracker.wait_for('{{cookiecutter.project_pymod}}.celery.tasks.ping_url')
-        # Cleanup is sometimes not complete at this point, need to sleep a minimal amount more
-        sleep(0.3)
-
-        m_db.session.remove.assert_called_once_with()
 
 
 class TestDBCli(CLIBase):

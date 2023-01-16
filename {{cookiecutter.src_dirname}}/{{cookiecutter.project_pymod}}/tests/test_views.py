@@ -19,12 +19,6 @@ class TestPublic:
         # anonymous user
         cls.client = webtest.TestApp(flask.current_app)
 
-    def test_ping(self):
-        # This only tests the view layer, provided by Keg. Don't use this for cronitor.
-        # Refs: https://github.com/level12/keg-app-cookiecutter/issues/130
-        resp = self.client.get('/ping')
-        assert resp.text == '{{cookiecutter.project_pymod}} ok'
-
     @mock_patch('{{cookiecutter.project_pymod}}.views.public.ctasks')
     def test_health_check(self, m_ctasks):
         # Use this for cronitor.

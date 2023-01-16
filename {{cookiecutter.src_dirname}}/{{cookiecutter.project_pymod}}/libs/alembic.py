@@ -97,7 +97,7 @@ class EnumUpdate:
 
         self.columns.append((table_name, col_name, default))
 
-        ac_kwargs = {'type_': sa.String,}
+        ac_kwargs = {'type_': sa.String}
         if default:
             ac_kwargs['server_default'] = None
 

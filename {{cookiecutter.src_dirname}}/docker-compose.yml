@@ -16,7 +16,7 @@
 # https://docs.docker.com/compose/environment-variables/
 # https://docs.docker.com/compose/extends/
 
-version: '2'
+version: '2.1'
 services:
   {{ cookiecutter.project_dashed }}-pg:
     image: postgres:{{cookiecutter.db_postgres_version}}-alpine
