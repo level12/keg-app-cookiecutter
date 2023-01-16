@@ -26,6 +26,8 @@ class DefaultProfile(object):
 
     SENTRY_USER_ATTRS = ['email', 'name']
 
+    KEG_LOG_SYSLOG_IDENT = '{{cookiecutter.project_ident}}'
+
 
 class TestProfile(object):
     # These settings reflect what is needed in CI.  For local development, use
