@@ -3,6 +3,7 @@ from blazeutils import numbers
 from keg import Keg
 
 from . import extensions, navigation
+from .assets import environment as assets
 from .celery.app import celery_app  # noqa
 from .libs import json as _app_json
 from .libs.db import testing_db_restore
@@ -28,6 +29,7 @@ class {{cookiecutter.project_class}}(Keg):
         extensions.csrf.init_app(self)
         extensions.mail.init_app(self)
         extensions.bootstrap.init_app(self)
+        assets.init_app(self)
 
         if self.config.get('SENTRY_DSN'):
             extensions.sentry.init_app(self)

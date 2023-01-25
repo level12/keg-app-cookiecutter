@@ -5,10 +5,12 @@ bootstrap-flask
 celery>=5.0
 email_validator
 flake8
+Flask-Assets
 Flask-Mail
 flask-sqlalchemy
 flask-webtest
 html-sanitizer
+libsass
 # linkify required for "gfm-like" configuration
 markdown-it-py[linkify]
 psycopg2-binary
