@@ -8,6 +8,8 @@
   vars:
     first_run: false
     app_cli_bin: "{{ pyapp3_venv_bin_dpath }}/{{cookiecutter.project_cli_bin}}"
+    pyapp3_refresh_venv: false
+    pyapp3_force_venv_refresh: false
     sentry_cron_cmd: "/usr/local/bin/cron-sentry --quiet {{ app_cli_bin }} --quiet"
   remote_user: "{{project_user}}"
   tags:

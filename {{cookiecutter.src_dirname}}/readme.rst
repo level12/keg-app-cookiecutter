@@ -86,13 +86,13 @@ Tools/concepts included in this app:
 Secrets
 =========
 
-All sensitive information should be stored in LastPass: {{cookiecutter.lastpass_secrets_folder}}
+All sensitive information should be stored in 1Password: {{cookiecutter.onepass_secrets_vault}}
 
-Secrets are pulled in from from LastPass using the `lpass cli`_ binary for both development usage
-and ansible.  Make sure you have the binary installed to a location on your PATH.  The first time
-you use the lpass binary, it will pop up a dialogue asking for you LastPass password.
+Secrets are pulled in from from 1Password using the `1Password CLI`_ binary for both development usage
+and ansible.  Make sure you have the binary installed to a location on your PATH.  For each session
+using the `op` binary, you will need to sign in to have an active token.
 
-.. _lpass cli: https://github.com/lastpass/lastpass-cli
+.. _1Password CLI: https://1password.com/downloads/command-line/
 
 Quickstart
 ==========

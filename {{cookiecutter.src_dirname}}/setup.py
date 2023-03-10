@@ -23,7 +23,7 @@ setup(
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
         'Operating System :: OS Independent',
-        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
     ],
     packages=['{{cookiecutter.project_pymod}}'],
     include_package_data=True,

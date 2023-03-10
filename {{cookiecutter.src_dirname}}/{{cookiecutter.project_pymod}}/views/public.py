@@ -1,6 +1,7 @@
 import logging
 
 import flask
+import sqlalchemy as sa
 from keg.db import db
 from keg.web import BaseView
 
@@ -23,7 +24,8 @@ class HealthCheck(BaseView):
     def get(self):
         # We are happy if this doesn't throw an exception.  Nothing to test b/c we aren't sure
         # there will be a user record.
-        db.engine.execute('select id from auth_users limit 1').fetchall()
+        with db.engine.begin() as conn:
+            conn.execute(sa.text('select id from auth_users limit 1')).fetchall()
 
         # Log aggregator (e.g. Loggly) can alert on this as a "heartbeat" for the app assuming
         # something like Cronitor is hitting this URL repeatedly to monitor uptime.

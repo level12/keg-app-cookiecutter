@@ -30,7 +30,7 @@ config file with a `default_context` section.  Example:
     gh_repo_org: level12
     gh_repo_name: gb-epr
     database_host: circus
-    lastpass_secrets_folder: Shared-GB-EPR
+    onepass_secrets_vault: client-gb-epr-deploy
     circle_badge_token: [fill in]
     codecov_graphing_token: [fill in]
     codecov_upload_token: [fill in]

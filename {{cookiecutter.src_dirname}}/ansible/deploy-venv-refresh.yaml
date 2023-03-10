@@ -1,0 +1,5 @@
+- name: Deploy python app, recreate virtual env
+  import_playbook: deploy.yaml
+  vars:
+    pyapp3_refresh_venv: true
+    pyapp3_force_venv_refresh: true
