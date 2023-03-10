@@ -6,11 +6,11 @@
   "project_class": "{{ cookiecutter.project_name|replace(' ', '') }}",
   "project_cli_bin": "{{ cookiecutter.project_ident }}",
   "src_dirname": "{{ cookiecutter.project_dashed }}-src",
-  "python_version": "3.9",
+  "python_version": "3.10",
   "python_tox": "py{{cookiecutter.python_version|replace('.', '') }}",
   "python_executable": "python{{cookiecutter.python_version}}",
   "db_url_env_name": "{{ cookiecutter.project_ident|upper }}_DB_URL",
-  "db_postgres_version": "13",
+  "db_postgres_version": "14",
   "sa_db_uri_prefix": "postgresql://postgres@localhost:12432/",
   "rabbitmq_version": "3.8",
   "mailhog_version": "v1.0.1",
@@ -26,5 +26,5 @@
   "database_host": "circus",
   "celery_alive_key_beta": "",
   "celery_alive_key_prod": "",
-  "lastpass_secrets_folder": ""
+  "onepass_secrets_vault": ""
 }

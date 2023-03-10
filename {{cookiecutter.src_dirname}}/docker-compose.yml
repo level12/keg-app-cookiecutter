@@ -21,6 +21,8 @@ services:
   {{ cookiecutter.project_dashed }}-pg:
     image: postgres:{{cookiecutter.db_postgres_version}}-alpine
     container_name: {{ cookiecutter.project_dashed }}-pg
+    # uncomment below and restart container to log all queries
+    # command: ["postgres", "-c", "log_statement=all"]
     ports:
       - '${KEG_APP_POSTGRES_IP:-127.0.0.1}:${KEG_APP_POSTGRES_PORT:-12432}:5432'
     environment:

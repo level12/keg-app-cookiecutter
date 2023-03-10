@@ -1,8 +1,7 @@
-Keg>=0.9.1
 Keg-Auth
 alembic
 bootstrap-flask
-celery>=5.0
+celery
 email_validator
 flake8
 Flask-Mail
@@ -23,7 +22,6 @@ sqlalchemy
 sqlalchemy-utils
 tox
 wtforms
-xlsxwriter
 
 # Additional Flake8 checks
 -e git+https://github.com/level12/flake8-level12.git#egg=flake8_level12

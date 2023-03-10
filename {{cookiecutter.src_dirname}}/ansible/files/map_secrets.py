@@ -2,13 +2,13 @@
     This file exists so it can be used by the vars plugin as well as when developing locally.
 """
 
-# What LastPass folder/share can I find my results in?  Any site whose FULLNAME field has this
+# What 1Password vault can I find my results in?  Any site whose FULLNAME field has this
 # string will be available for processing (but not necessarily used).
-lastpass_folder = '{{ cookiecutter.lastpass_secrets_folder }}'
+onepass_vault = '{{ cookiecutter.onepass_secrets_vault }}'
 
-# Map expected Ansible variable names to LastPass site usernames.  Details:
+# Map expected Ansible variable names to 1Password site usernames.  Details:
 #   1) None as a value implies use the same value as the ansible variable name (just a shortcut)
-#   2) The value of each item in this dict will be looked up against the LastPass site data using
+#   2) The value of each item in this dict will be looked up against the 1Password site data using
 #       fields: name, username, and id (in that order).  It must be complete match for the field.
 #   3) There are three special suffixes that you can use on the key:
 #       - _*: two variables will be created one for the username and one for the password.
@@ -17,7 +17,7 @@ lastpass_folder = '{{ cookiecutter.lastpass_secrets_folder }}'
 #       - #: the note will be returned instead of the password
 #
 # You can list sites w/ their fields & values by running something like:
-#   lpass show -xjG --field=fullname "{{ cookiecutter.lastpass_secrets_folder }}"
+#   op item list --vault={{cookiecutter.onepass_secrets_vault}}
 varmap = {
     # Variables that do not start with "app_" are expected to only be used in
     # the Python config file.  If they are used in Ansible directly, then they

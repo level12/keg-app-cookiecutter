@@ -34,6 +34,6 @@ class TestJSONCustomization:
 
         ents.db.session.remove()
 
-        user = ents.User.query.get(user_id)
+        user = ents.User.get(user_id)
 
         assert user.settings['foo'] == D('123.45')

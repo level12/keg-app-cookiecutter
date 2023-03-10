@@ -47,10 +47,12 @@ class PostgresBase:
         return a list of table names from the current
         databases public schema
         """
-        sql = "select table_name from information_schema.tables " "where table_schema='{}'".format(
-            schema
+        sql = sa.text(
+            "select table_name from information_schema.tables "
+            "where table_schema='{}'".format(schema)
         )
-        return [name for (name,) in self.db_engine.execute(sql)]
+        with self.db_engine.begin() as conn:
+            return [name for (name,) in conn.execute(sql)]
 
     def pg_sub_run(self, pg_cmd, pg_cmd_args):
         url = self.db_engine.url
@@ -140,17 +142,18 @@ class PostgresRestore(PostgresBase):
         """return a list of the sequence names from the current
         databases public schema
         """
-        sql = (
+        sql = sa.text(
             "select sequence_name from information_schema.sequences "
             "where sequence_schema='{}'".format(schema)
         )
-        return [name for (name,) in self.db_engine.execute(sql)]
+        with self.db_engine.begin() as conn:
+            return [name for (name,) in conn.execute(sql)]
 
     def get_type_list_from_db(self, schema):
         """return a list of the sequence names from the current
         databases public schema
         """
-        sql = """
+        sql = sa.text("""
             SELECT t.typname as type
             FROM pg_type t
             LEFT JOIN pg_catalog.pg_namespace n
@@ -172,49 +175,49 @@ class PostgresRestore(PostgresBase):
                 AND n.nspname = '{}'
         """.format(
             schema
-        )
-        return [name for (name,) in self.db_engine.execute(sql)]
+        ))
+        with self.db_engine.begin() as conn:
+            return [name for (name,) in conn.execute(sql)]
 
     def get_function_list_from_db(self, schema):
-        sql = """
+        sql = sa.text("""
             select proname, oidvectortypes(proargtypes)
             from pg_proc
             inner join pg_namespace ns
                 on (pg_proc.pronamespace = ns.oid)
             where ns.nspname = 'public'
-        """
-        return [row for row in self.db_engine.execute(sql)]
+        """)
+        with self.db_engine.begin() as conn:
+            return [row for row in conn.execute(sql)]
 
     def drop_schema(self, schema):
-        for extension in self.extensions:
-            try:
-                self.db_engine.execute('DROP EXTENSION IF EXISTS "{}" CASCADE'.format(extension))
-            except Exception as e:
-                self.errors.append(str(e))
-
         for funcname, funcargs in self.get_function_list_from_db(schema):
             try:
-                self.db_engine.execute(
-                    'DROP FUNCTION "{}"."{}" ({}) CASCADE'.format(schema, funcname, funcargs)
-                )
+                with self.db_engine.begin() as conn:
+                    conn.execute(sa.text(
+                        f'DROP FUNCTION "{schema}"."{funcname}" ({funcargs}) CASCADE'
+                    ))
             except Exception as e:
                 self.errors.append(str(e))
 
         for table in self.get_table_list_from_db(schema):
             try:
-                self.db_engine.execute('DROP TABLE "{}"."{}" CASCADE'.format(schema, table))
+                with self.db_engine.begin() as conn:
+                    conn.execute(sa.text(f'DROP TABLE "{schema}"."{table}" CASCADE'))
             except Exception as e:
                 self.errors.append(str(e))
 
         for seq in self.get_seq_list_from_db(schema):
             try:
-                self.db_engine.execute('DROP SEQUENCE "{}"."{}" CASCADE'.format(schema, seq))
+                with self.db_engine.begin() as conn:
+                    conn.execute(sa.text(f'DROP SEQUENCE "{schema}"."{seq}" CASCADE'))
             except Exception as e:
                 self.errors.append(str(e))
 
         for dbtype in self.get_type_list_from_db(schema):
             try:
-                self.db_engine.execute('DROP TYPE "{}"."{}" CASCADE'.format(schema, dbtype))
+                with self.db_engine.begin() as conn:
+                    conn.execute(sa.text(f'DROP TYPE "{schema}"."{dbtype}" CASCADE'))
             except Exception as e:
                 self.errors.append(str(e))
 
@@ -247,38 +250,9 @@ class PostgresRestore(PostgresBase):
                     self.restore_sql(fpath)
                 elif fpath.endswith('.bak'):
                     self.restore_binary(fpath)
-                elif os.path.isdir(fpath):
-                    self.restore_date_dir(fpath)
                 else:
                     raise Exception('Not sure how to restore path: {}'.format(fpath))
         return self.errors
-
-    def restore_date_dir(self, dpath):
-        """Restore a directory path which was created by our date backup."""
-        bak_dpath = Path(dpath)
-        db_exec = self.db_engine.execute
-        conn = self.db_engine.raw_connection()
-        cur = conn.cursor()
-
-        def copy_from(table, fpath):
-            with fpath.open('r', encoding='utf-8') as fo:
-                cur.copy_from(fo, table)
-
-        self.restore_sql(str(bak_dpath / '_schema.sql'))
-
-        cur.execute('begin')
-
-        # We have a circular dependency between races and events on events.current_race_id.  So
-        # we need to defer checking on that constraint.
-        db_exec('alter table events alter constraint events_current_race_id_fkey deferrable;')
-        cur.execute('set constraints events_current_race_id_fkey deferred;')
-
-        copy_from('tote_sources', bak_dpath / 'tote-sources.txt')
-        copy_from('tote_source_runs', bak_dpath / 'tote-source-runs.txt')
-        copy_from('events', bak_dpath / 'events.txt')
-        copy_from('races', bak_dpath / 'races.txt')
-        copy_from('race_wagers', bak_dpath / 'race-wagers.txt')
-        cur.execute('commit')
 
 
 class PostgresBackup(PostgresBase):

@@ -2,6 +2,7 @@ import _pytest.config.findpaths
 import keg
 import pytest
 from keg.db import db
+from keg.testing import ContextManager
 
 import {{cookiecutter.project_pymod}}
 import {{cookiecutter.project_pymod}}.celery.testing as ct
@@ -25,16 +26,34 @@ def pytest_configure(config):
     )
 
 
-def pytest_runtest_setup():
-    # Avoid a messed up transaction interfering with other tests.
-    db.session.rollback()
+@pytest.fixture(scope='class', autouse=True)
+def auto_app_context():
+    with ContextManager.get_for({{cookiecutter.project_class}}).app.app_context():
+        yield
+
+
+@pytest.fixture(scope='module')
+def module_app_context():
+    with ContextManager.get_for({{cookiecutter.project_class}}).app.app_context():
+        yield
+
+
+@pytest.fixture()
+def app_context():
+    with ContextManager.get_for({{cookiecutter.project_class}}).app.app_context():
+        yield
 
 
 @pytest.fixture(scope='session')
 def celery_config():
     """Need to setup custom task annotations so the task tracker works correctly."""
-    config = keg.current_app.config['CELERY'].copy()
-    annotations = {'*': {'after_return': ct.after_return_handler}}
+    with ContextManager.get_for({{cookiecutter.project_class}}).app.app_context():
+        config = keg.current_app.config['CELERY'].copy()
+    annotations = {'*': {
+        'after_return': ct.after_return_handler,
+        'before_start': ct.before_start_handler,
+        'on_retry': ct.on_retry_handler,
+    }}
     config['task_annotations'] = annotations
     return config
 

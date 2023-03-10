@@ -1,13 +1,13 @@
 [webservers]
-vault
-bank
+vault20
+bank20
 
 [beta]
-bank
+bank20
 {{cookiecutter.database_host}}-beta
 
 [prod]
-vault
+vault20
 {{cookiecutter.database_host}}-prod
 
 [dbservers]
