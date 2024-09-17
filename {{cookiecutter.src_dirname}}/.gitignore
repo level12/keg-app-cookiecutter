@@ -8,6 +8,7 @@
 /htmlcov
 .pytest_cache
 requirements/src/flake8-level12
+.webassets-cache
 
 # .env file for Flask development server
 .flaskenv
@@ -21,3 +22,6 @@ tags
 
 # Pyenv local env declaration file
 .python-version
+
+# webassets
+{{cookiecutter.project_pymod}}/static/css/app.css
